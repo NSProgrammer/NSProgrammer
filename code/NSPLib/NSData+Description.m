@@ -8,7 +8,6 @@
 
 #import "NSData+Description.h"
 #import "NSData+Serialize.h"
-#import "NSPCommon.h"
 
 static NSDataDescriptionOptions s_options = NSDataDescriptionOption_None; // OS default
 

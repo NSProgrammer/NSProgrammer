@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 NSProgrammer.com. All rights reserved.
 //
 
-#ifndef NSPLib_NSPLib_h
-#define NSPLib_NSPLib_h
+#ifndef _NSPLib_h
+#define _NSPLib_h
 
 #import "NSPCommon.h"
 

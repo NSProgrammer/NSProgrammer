@@ -1,0 +1,9 @@
+//
+// Prefix header for all source files of the 'NSPUILib' target in the 'NSPUILib' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+
+    #import "NSPUICommon.h"
+#endif
