@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C09B837175DB9B200316FE9 /* NSData+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB7F174A6C9600AD0B7A /* NSData+Description.m */; };
+		1C09B838175DB9B200316FE9 /* NSData+Serialize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB82174A6DBA00AD0B7A /* NSData+Serialize.m */; };
+		1C09B839175DB9B200316FE9 /* NSPCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */; };
+		1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */; };
+		1C09B83B175DB9B200316FE9 /* NSPVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */; };
 		1CD8CB6C174A6A2B00AD0B7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD8CB6B174A6A2B00AD0B7A /* Foundation.framework */; };
-		1CD8CB7C174A6A9200AD0B7A /* NSPCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */; };
-		1CD8CB80174A6C9600AD0B7A /* NSData+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB7F174A6C9600AD0B7A /* NSData+Description.m */; };
-		1CD8CB83174A6DBA00AD0B7A /* NSData+Serialize.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB82174A6DBA00AD0B7A /* NSData+Serialize.m */; };
-		1CD8CB86174A6F7700AD0B7A /* NSPVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */; };
-		1CD8CB8C174A72A400AD0B7A /* NSPLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,19 +28,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1CD8CB68174A6A2B00AD0B7A /* libLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CD8CB68174A6A2B00AD0B7A /* libNSPLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNSPLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD8CB6B174A6A2B00AD0B7A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1CD8CB6F174A6A2B00AD0B7A /* Library-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Library-Prefix.pch"; sourceTree = "<group>"; };
-		1CD8CB7A174A6A9200AD0B7A /* NSPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPCommon.h; sourceTree = "<group>"; };
-		1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPCommon.m; sourceTree = "<group>"; };
-		1CD8CB7E174A6C9600AD0B7A /* NSData+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Description.h"; sourceTree = "<group>"; };
-		1CD8CB7F174A6C9600AD0B7A /* NSData+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Description.m"; sourceTree = "<group>"; };
-		1CD8CB81174A6DBA00AD0B7A /* NSData+Serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Serialize.h"; sourceTree = "<group>"; };
-		1CD8CB82174A6DBA00AD0B7A /* NSData+Serialize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Serialize.m"; sourceTree = "<group>"; };
-		1CD8CB84174A6F7700AD0B7A /* NSPVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPVersion.h; sourceTree = "<group>"; };
-		1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPVersion.m; sourceTree = "<group>"; };
-		1CD8CB8A174A72A400AD0B7A /* NSPLibraryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPLibraryLoader.h; sourceTree = "<group>"; };
-		1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPLibraryLoader.m; sourceTree = "<group>"; };
+		1CD8CB6F174A6A2B00AD0B7A /* NSPLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSPLib-Prefix.pch"; path = "NSPLib/NSPLib-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		1CD8CB7A174A6A9200AD0B7A /* NSPCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPCommon.h; path = NSPLib/NSPCommon.h; sourceTree = SOURCE_ROOT; };
+		1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPCommon.m; path = NSPLib/NSPCommon.m; sourceTree = SOURCE_ROOT; };
+		1CD8CB7E174A6C9600AD0B7A /* NSData+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Description.h"; path = "NSPLib/NSData+Description.h"; sourceTree = SOURCE_ROOT; };
+		1CD8CB7F174A6C9600AD0B7A /* NSData+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Description.m"; path = "NSPLib/NSData+Description.m"; sourceTree = SOURCE_ROOT; };
+		1CD8CB81174A6DBA00AD0B7A /* NSData+Serialize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Serialize.h"; path = "NSPLib/NSData+Serialize.h"; sourceTree = SOURCE_ROOT; };
+		1CD8CB82174A6DBA00AD0B7A /* NSData+Serialize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Serialize.m"; path = "NSPLib/NSData+Serialize.m"; sourceTree = SOURCE_ROOT; };
+		1CD8CB84174A6F7700AD0B7A /* NSPVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPVersion.h; path = NSPLib/NSPVersion.h; sourceTree = SOURCE_ROOT; };
+		1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPVersion.m; path = NSPLib/NSPVersion.m; sourceTree = SOURCE_ROOT; };
+		1CD8CB8A174A72A400AD0B7A /* NSPLibraryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPLibraryLoader.h; path = NSPLib/NSPLibraryLoader.h; sourceTree = SOURCE_ROOT; };
+		1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPLibraryLoader.m; path = NSPLib/NSPLibraryLoader.m; sourceTree = SOURCE_ROOT; };
+		1CF37177175DB6C3006636CB /* NSPLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPLib.h; path = NSPLib/NSPLib.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +59,7 @@
 		1CD8CB5F174A6A2B00AD0B7A = {
 			isa = PBXGroup;
 			children = (
-				1CD8CB6D174A6A2B00AD0B7A /* code */,
+				1CD8CB6D174A6A2B00AD0B7A /* NSPLib */,
 				1CD8CB6A174A6A2B00AD0B7A /* Frameworks */,
 				1CD8CB69174A6A2B00AD0B7A /* Products */,
 			);
@@ -67,7 +68,7 @@
 		1CD8CB69174A6A2B00AD0B7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1CD8CB68174A6A2B00AD0B7A /* libLibrary.a */,
+				1CD8CB68174A6A2B00AD0B7A /* libNSPLib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -80,20 +81,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1CD8CB6D174A6A2B00AD0B7A /* code */ = {
+		1CD8CB6D174A6A2B00AD0B7A /* NSPLib */ = {
 			isa = PBXGroup;
 			children = (
 				1CD8CB7D174A6C7300AD0B7A /* Categories */,
 				1CD8CB79174A6A6B00AD0B7A /* Common */,
 				1CD8CB6E174A6A2B00AD0B7A /* Supporting Files */,
+				1CF37177175DB6C3006636CB /* NSPLib.h */,
 			);
+			name = NSPLib;
 			path = code;
 			sourceTree = "<group>";
 		};
 		1CD8CB6E174A6A2B00AD0B7A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				1CD8CB6F174A6A2B00AD0B7A /* Library-Prefix.pch */,
+				1CD8CB6F174A6A2B00AD0B7A /* NSPLib-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -109,6 +112,7 @@
 				1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */,
 			);
 			name = Common;
+			path = ../NSPLib;
 			sourceTree = "<group>";
 		};
 		1CD8CB7D174A6C7300AD0B7A /* Categories */ = {
@@ -125,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1CD8CB67174A6A2B00AD0B7A /* Library */ = {
+		1CD8CB67174A6A2B00AD0B7A /* NSPLib */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1CD8CB76174A6A2B00AD0B7A /* Build configuration list for PBXNativeTarget "Library" */;
+			buildConfigurationList = 1CD8CB76174A6A2B00AD0B7A /* Build configuration list for PBXNativeTarget "NSPLib" */;
 			buildPhases = (
 				1CD8CB64174A6A2B00AD0B7A /* Sources */,
 				1CD8CB65174A6A2B00AD0B7A /* Frameworks */,
@@ -137,9 +141,9 @@
 			);
 			dependencies = (
 			);
-			name = Library;
+			name = NSPLib;
 			productName = code;
-			productReference = 1CD8CB68174A6A2B00AD0B7A /* libLibrary.a */;
+			productReference = 1CD8CB68174A6A2B00AD0B7A /* libNSPLib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -148,10 +152,11 @@
 		1CD8CB60174A6A2B00AD0B7A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = NSP;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = NSProgrammer.com;
 			};
-			buildConfigurationList = 1CD8CB63174A6A2B00AD0B7A /* Build configuration list for PBXProject "Library" */;
+			buildConfigurationList = 1CD8CB63174A6A2B00AD0B7A /* Build configuration list for PBXProject "NSPLib" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -163,7 +168,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1CD8CB67174A6A2B00AD0B7A /* Library */,
+				1CD8CB67174A6A2B00AD0B7A /* NSPLib */,
 			);
 		};
 /* End PBXProject section */
@@ -173,11 +178,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CD8CB7C174A6A9200AD0B7A /* NSPCommon.m in Sources */,
-				1CD8CB80174A6C9600AD0B7A /* NSData+Description.m in Sources */,
-				1CD8CB83174A6DBA00AD0B7A /* NSData+Serialize.m in Sources */,
-				1CD8CB86174A6F7700AD0B7A /* NSPVersion.m in Sources */,
-				1CD8CB8C174A72A400AD0B7A /* NSPLibraryLoader.m in Sources */,
+				1C09B837175DB9B200316FE9 /* NSData+Description.m in Sources */,
+				1C09B838175DB9B200316FE9 /* NSData+Serialize.m in Sources */,
+				1C09B839175DB9B200316FE9 /* NSPCommon.m in Sources */,
+				1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */,
+				1C09B83B175DB9B200316FE9 /* NSPVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +213,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -231,7 +236,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -242,10 +247,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/code.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "code/Library-Prefix.pch";
+				GCC_PREFIX_HEADER = "NSPLib/NSPLib-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Library;
+				PRODUCT_NAME = NSPLib;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -255,10 +260,10 @@
 			buildSettings = {
 				DSTROOT = /tmp/code.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "code/Library-Prefix.pch";
+				GCC_PREFIX_HEADER = "NSPLib/NSPLib-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Library;
+				PRODUCT_NAME = NSPLib;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -266,7 +271,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1CD8CB63174A6A2B00AD0B7A /* Build configuration list for PBXProject "Library" */ = {
+		1CD8CB63174A6A2B00AD0B7A /* Build configuration list for PBXProject "NSPLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CD8CB74174A6A2B00AD0B7A /* Debug */,
@@ -275,13 +280,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1CD8CB76174A6A2B00AD0B7A /* Build configuration list for PBXNativeTarget "Library" */ = {
+		1CD8CB76174A6A2B00AD0B7A /* Build configuration list for PBXNativeTarget "NSPLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1CD8CB77174A6A2B00AD0B7A /* Debug */,
 				1CD8CB78174A6A2B00AD0B7A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
