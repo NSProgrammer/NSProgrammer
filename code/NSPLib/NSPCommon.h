@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 NSProgrammer.com. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "NSPObjCUtils.h"
 
-BOOL NSPSwizzleInstanceMethods(Class class, SEL dstSel, SEL srcSel);
-BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel);
+#ifdef DEBUG
+#define NSPAssert(x)  NSAssert1((x), @"%@", @""#x)
+#define NSPCAssert(x) NSCAssert1((x), @"%@", @""#x)
+#else
+#define NSPAssert(x)  ((void)0)
+#define NSPCAssert(x) ((void)0)
+#endif
 
-@interface NSObject (Swizzle)
-
-+ (BOOL) swizzleInstanceMethod:(SEL)srcSelector toMethod:(SEL)dstSelector;
-+ (BOOL) swizzleClassMethod:(SEL)srcSelector toMethod:(SEL)dstSelector;
-
-@end

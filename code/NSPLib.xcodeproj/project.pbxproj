@@ -12,6 +12,8 @@
 		1C09B839175DB9B200316FE9 /* NSPCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */; };
 		1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */; };
 		1C09B83B175DB9B200316FE9 /* NSPVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */; };
+		1C8BC5D61765564E00E5D50A /* NSPObjCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */; };
+		1C8BC5DC17655C1E00E5D50A /* NSPConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5DB17655C1E00E5D50A /* NSPConversion.m */; };
 		1CD8CB6C174A6A2B00AD0B7A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CD8CB6B174A6A2B00AD0B7A /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C8BC5D41765564E00E5D50A /* NSPObjCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPObjCUtils.h; path = NSPLib/NSPObjCUtils.h; sourceTree = SOURCE_ROOT; };
+		1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPObjCUtils.m; path = NSPLib/NSPObjCUtils.m; sourceTree = SOURCE_ROOT; };
+		1C8BC5DA17655C1E00E5D50A /* NSPConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPConversion.h; path = NSPLib/NSPConversion.h; sourceTree = "<group>"; };
+		1C8BC5DB17655C1E00E5D50A /* NSPConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPConversion.m; path = NSPLib/NSPConversion.m; sourceTree = "<group>"; };
 		1CD8CB68174A6A2B00AD0B7A /* libNSPLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNSPLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD8CB6B174A6A2B00AD0B7A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1CD8CB6F174A6A2B00AD0B7A /* NSPLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSPLib-Prefix.pch"; path = "NSPLib/NSPLib-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -106,8 +112,12 @@
 			children = (
 				1CD8CB7A174A6A9200AD0B7A /* NSPCommon.h */,
 				1CD8CB7B174A6A9200AD0B7A /* NSPCommon.m */,
+				1C8BC5DA17655C1E00E5D50A /* NSPConversion.h */,
+				1C8BC5DB17655C1E00E5D50A /* NSPConversion.m */,
 				1CD8CB8A174A72A400AD0B7A /* NSPLibraryLoader.h */,
 				1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */,
+				1C8BC5D41765564E00E5D50A /* NSPObjCUtils.h */,
+				1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */,
 				1CD8CB84174A6F7700AD0B7A /* NSPVersion.h */,
 				1CD8CB85174A6F7700AD0B7A /* NSPVersion.m */,
 			);
@@ -183,6 +193,8 @@
 				1C09B839175DB9B200316FE9 /* NSPCommon.m in Sources */,
 				1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */,
 				1C09B83B175DB9B200316FE9 /* NSPVersion.m in Sources */,
+				1C8BC5D61765564E00E5D50A /* NSPObjCUtils.m in Sources */,
+				1C8BC5DC17655C1E00E5D50A /* NSPConversion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
