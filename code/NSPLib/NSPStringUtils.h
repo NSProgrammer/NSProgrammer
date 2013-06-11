@@ -51,5 +51,5 @@ NS_INLINE char decimalDigitValueForCharacter(unichar c)
     }
 
     NSPCAssert(false && "character does not equate to a digit value, must be hex");
-    return -1;
+    return 0;
 }
