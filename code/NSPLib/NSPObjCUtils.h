@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <libkern/OSAtomic.h>
 
 #pragma mark - Blocks
 
@@ -45,7 +46,7 @@ BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel);
 
 @interface NSObject (StaticMethodCheck)
 
-+ (BOOL) respondsToStaticMethodSelector(SEL sel);
++ (BOOL) respondsToStaticMethodSelector:(SEL)sel;
 
 @end
 

@@ -8,21 +8,56 @@
 
 #import "NSPConversion.h"
 
-#pragma mark - Angles
+NSString* SizeInBytesToString(unsigned long long bytes)
+{
+    static __strong NSArray* tokens = nil;
+    static dispatch_once_t   onceToken;
+    dispatch_once(&onceToken, ^{
+        tokens = @[@"bytes", @"KBs", @"MBs", @"GBs", @"TBs"];
+    });
 
-#define DEGREES_TO_RADIANS(angle)          (((angle) / 180.0) * M_PI)
-#define RADIANS_TO_DEGREES(radian)         (((radian) / M_PI) * 180.0)
+    unsigned int om = 0;
+    double newSize  = 0;
+    ConvertSize(bytes, kMAGNITUDE_BYTES, tokens.count, &newSize, &om);
+    return [NSString stringWithFormat:@"%.2f %@", newSize, [tokens objectAtIndex:om]];
+}
 
+NSString* SpeedInHzToString(uint64_t hz)
+{
+    static __strong NSArray* tokens = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        tokens = @[@"Hz", @"KHz", @"MHz", @"GHz", @"THz"];
+    });
 
-#pragma mark - Time
+    unsigned int om = 0;
+    double newSize  = 0;
+    ConvertSize(hz, kMAGNITUDE_HERTZ, tokens.count, &newSize, &om);
+    return [NSString stringWithFormat:@"%.2f %@", newSize, [tokens objectAtIndex:om]];
+}
 
-#define MINS_2_SECS(x)                     ((x) * 60)
-
-#define HOURS_2_MINS(x)                    ((x) * 60)
-#define HOURS_2_SECS(x)                    (MINS_2_SECS(HOURS_2_MINS(x)))
-
-#define DAYS_2_HOURS(x)                    ((x) * 24)
-#define DAYS_2_MINS(x)                     (HOURS_2_MINS(DAYS_2_HOURS(x)))
-#define DAYS_2_SECS(x)                     (MINS_2_SECS(DAYS_2_MINS(x)))
+void ConvertSize(unsigned long long sourceSize,
+                 unsigned int magnitudeSize,
+                 unsigned int maximumOrdersOfMagnitude,
+                 double* pDestination,
+                 unsigned int* pOrdersOfMagnitude)
+{
+    NSPCAssert(pDestination);
+    NSPCAssert(pOrdersOfMagnitude);
+    unsigned long long afterDecimal = 0;
+    unsigned int ordersOfMagnitude = 0;
+    
+    while (sourceSize > magnitudeSize &&
+           ordersOfMagnitude < maximumOrdersOfMagnitude)
+    {
+        unsigned long long converted = sourceSize / magnitudeSize;
+        afterDecimal = (sourceSize - (converted * magnitudeSize)) * 100 / magnitudeSize;
+        sourceSize = converted;
+        ordersOfMagnitude++;
+    }
+    NSPCAssert(afterDecimal < 100);
+    *pDestination = (double)sourceSize + ((double)afterDecimal / 100.0f);
+    *pOrdersOfMagnitude = ordersOfMagnitude;
+}
 
 

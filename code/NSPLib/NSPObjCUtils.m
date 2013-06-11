@@ -74,7 +74,7 @@ BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel)
 
 @implementation NSObject (StaticMethodCheck)
 
-+ (BOOL) respondsToStaticMethodSelector(SEL sel)
++ (BOOL) respondsToStaticMethodSelector:(SEL)sel
 {
     return !!class_getClassMethod(self, sel);
 }
