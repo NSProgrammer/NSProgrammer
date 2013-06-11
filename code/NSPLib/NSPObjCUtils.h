@@ -50,6 +50,17 @@ BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel);
 
 @end
 
+// Use EXTRACT_FUNCTION_POINTER when you need access to a method at a primitive level that does NOT return an object
+// If the method returns an object, just use [<object> methodForSelector:@selector(<selName>)](<object>, @selector(<selName>), ...)
+//
+// Outputs SEL <outputPrefix>Sel, Method <outputPrefix>Method, IMP <outputPrefix>IMP, and function pointer <outputPrefix>FP
+#define EXTRACT_FUNCTION_POINTER(object, selectorName, outputPrefix, retType, ...) \
+SEL outputPrefix##Sel = @selector(selectorName); \
+Method outputPrefix##Method = class_getInstanceMethod([object class], outputPrefix##Sel); \
+IMP outputPrefix##IMP = method_getImplementation(outputPrefix##Method); \
+TYPEDEF_FUNCTION_PTR(outputPrefix##FunctionPointer, retType, id, SEL, ##__VA_ARGS__); \
+outputPrefix##FunctionPointer outputPrefix##FP = (outputPrefix##FunctionPointer)outputPrefix##IMP;
+
 #pragma mark - Compilation Validation and Object Structure
 
 #if __has_feature(objc_arc)
@@ -117,6 +128,9 @@ __attribute__((unused)) NS_INLINE void Cleanup_Memory(void* ptr)
 }
 
 #pragma mark - C Level Helpers
+
+#define TYPEDEF_FUNCTION_PTR(name, retType, ...) \
+typedef retType (* name)(__VA_ARGS__)
 
 // Comparison of floats/doubles can be problematic using ==.
 // These macros help by establishing a margin of error (epsilon)

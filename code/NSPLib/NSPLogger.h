@@ -67,7 +67,7 @@ typedef enum
 
 - (NSArray*)    logFiles;
 - (NSString*)   logRootPath;
-- (NSData*)     mostRecentLogs:(NSUInteger)maxSizeInKiloBytes; // must be greater than 1 and less than (UINT32_MAX / 1024)
+- (NSData*)     mostRecentLogs:(NSUInteger)maxSizeInBytes; // must be greater than 1024 and less than UINT32_MAX
 - (unsigned long long) totalLogSize; // in Bytes
 
 @end

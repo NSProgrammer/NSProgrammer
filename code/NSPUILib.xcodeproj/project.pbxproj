@@ -95,10 +95,10 @@
 		1C09B84A175DBA3000316FE9 /* NSPUILib */ = {
 			isa = PBXGroup;
 			children = (
+				1C99BF291767A6E5007CE48F /* Categories */,
+				1C99BF2A1767A6EC007CE48F /* Common */,
 				1C09B84D175DBA3000316FE9 /* NSPUILib.h */,
 				1C09B84B175DBA3000316FE9 /* Supporting Files */,
-				1C09B856175DBAB800316FE9 /* NSPUICommon.h */,
-				1C09B857175DBAB800316FE9 /* NSPUICommon.m */,
 			);
 			path = NSPUILib;
 			sourceTree = "<group>";
@@ -117,6 +117,22 @@
 				1C09B85E175DBB1B00316FE9 /* libNSPLib.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1C99BF291767A6E5007CE48F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		1C99BF2A1767A6EC007CE48F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1C09B856175DBAB800316FE9 /* NSPUICommon.h */,
+				1C09B857175DBAB800316FE9 /* NSPUICommon.m */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

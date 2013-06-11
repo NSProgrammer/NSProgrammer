@@ -7,18 +7,20 @@
 //
 
 #import "NSPLogger.h"
-#import "NSString+Extensions.h"
+#import "NSPConversion.h"
 #import "NSFileManager+Extensions.h"
+#import "NSString+Extensions.h"
 
-NSUInteger const kNSPLoggerDefaultRolloverSize   =  500;
-NSUInteger const kNSPLoggerDefaultMaxFiles       =  10;
+NSUInteger const kNSPLoggerDefaultRolloverSize   = 500;
+NSUInteger const kNSPLoggerDefaultMaxFiles       = 10;
 NSUInteger const kNSPLoggerDefaultWritesPerFlush = 10;
-NSString*  const kNSPLoggerDefaultFilePrefix     = @"log.";
+NSString* const  kNSPLoggerDefaultFilePrefix     = @"log.";
 
 NS_INLINE UInt64 GenerateLogFileId(void);
 NS_INLINE UInt64 GenerateLogFileId(void)
 {
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceReferenceDate];
+
     return (UInt64)ti;
 }
 
@@ -34,9 +36,9 @@ NS_INLINE NSString* GenerateLogFileName(NSString* prefix, UInt64 fileId)
 - (BOOL) rolloverIfNeeded;
 - (BOOL) purgeOldLogsIfNeeded;
 
-- (void) write:(NSString*)message
-         level:(NSPLogLevel)level
- withTimestamp:(NSDate*)timestamp; // must ONLY be executed on s_logQ!
+- (void)    write:(NSString*)message
+            level:(NSPLogLevel)level
+    withTimestamp:(NSDate*)timestamp; // must ONLY be executed on s_logQ!
 - (void) writeBOM;
 - (void) writeByte:(const char)byte;
 - (void) writeBytes:(const char*)bytes length:(size_t)length;
@@ -47,42 +49,43 @@ NS_INLINE NSString* GenerateLogFileName(NSString* prefix, UInt64 fileId)
 
 @implementation NSPLogger
 {
-@private
-    NSUInteger  _writesPerFlush;
-    NSUInteger  _logWritesMade;
-    NSUInteger  _newlinesWritten;
-    NSUInteger  _writesBeforeRollover;
-    NSUInteger  _maxFileCount;
-    NSPLogLevel _level;
-    FILE*       _logFile;
+    @private
+    NSUInteger         _writesPerFlush;
+    NSUInteger         _logWritesMade;
+    NSUInteger         _newlinesWritten;
+    NSUInteger         _writesBeforeRollover;
+    NSUInteger         _maxFileCount;
+    NSPLogLevel        _level;
+    FILE*              _logFile;
     __strong NSString* _logFilePath;
     __strong NSString* _logFileNamePrefix;
 }
 
-static __strong NSPLogger* s_log = nil;
-static dispatch_queue_t s_logSharingQ = 0;
-static dispatch_queue_t s_logQ = 0;
+static __strong NSPLogger* s_log         = nil;
+static dispatch_queue_t    s_logSharingQ = 0;
+static dispatch_queue_t    s_logQ        = 0;
 
 + (void) initialize
 {
     s_logSharingQ = dispatch_queue_create("NSPLoggerSharingQ", DISPATCH_QUEUE_CONCURRENT);
-    s_logQ = dispatch_queue_create("NSPLoggerQ", DISPATCH_QUEUE_SERIAL);
+    s_logQ        = dispatch_queue_create("NSPLoggerQ", DISPATCH_QUEUE_SERIAL);
 }
 
 + (NSPLogger*) sharedLog
 {
     __block NSPLogger* logger;
+
     dispatch_sync(s_logSharingQ, ^() {
-        logger = s_log;
-    });
+                      logger = s_log;
+                  });
     return logger;
 }
 
 + (void) setSharedLog:(NSPLogger*)log
 {
     dispatch_barrier_async(s_logSharingQ, ^() {
-        s_log = log;
-    });
+                               s_log = log;
+                           });
 }
 
 - (void) dealloc
@@ -102,28 +105,28 @@ static dispatch_queue_t s_logQ = 0;
 }
 
 - (id) initWithDirectory:(NSString*)root
-               filePrefix:(NSString*)prefix
-                 logLevel:(NSPLogLevel)level
-     writesBeforeRollover:(NSUInteger)writesBeforeRollover
-             maxFileCount:(NSUInteger)fileCount
+              filePrefix:(NSString*)prefix
+                logLevel:(NSPLogLevel)level
+    writesBeforeRollover:(NSUInteger)writesBeforeRollover
+            maxFileCount:(NSUInteger)fileCount
 {
     if (self = [super init])
     {
         NSFileManager* fm = [NSFileManager defaultManager];
         if (root)
         {
-            [fm createDirectoryAtPath:root
-          withIntermediateDirectories:YES
-                           attributes:nil
-                                error:NULL];
+            [fm    createDirectoryAtPath:root
+             withIntermediateDirectories:YES
+                              attributes:nil
+                                   error:NULL];
         }
         BOOL isDir = NO;
         if (![fm fileExistsAtPath:root isDirectory:&isDir] ||
             !isDir)
         {
             @throw [NSException exceptionWithName:NSDestinationInvalidException
-                                           reason:@"InvalidPath: the root path provided does not exist!"
-                                         userInfo:(root ? @{ @"rootPath" : root } : nil)];
+                    reason:@"InvalidPath: the root path provided does not exist!"
+                    userInfo:(root ? @{ @"rootPath" : root } : nil)];
         }
 
         if (!prefix)
@@ -131,11 +134,11 @@ static dispatch_queue_t s_logQ = 0;
             prefix = kNSPLoggerDefaultFilePrefix;
         }
 
-        self.logLevel       = level;
-        self.writesPerFlush = 0; // default;
+        self.logLevel             = level;
+        self.writesPerFlush       = 0; // default;
         self.writesBeforeRollover = writesBeforeRollover;
-        self.maxFileCount = fileCount;
-        _logFileNamePrefix = [prefix copy];
+        self.maxFileCount         = fileCount;
+        _logFileNamePrefix        = [prefix copy];
 
         UInt64    fileId      = GenerateLogFileId();
         NSString* logFilePath = [root stringByAppendingPathComponent:GenerateLogFileName(_logFileNamePrefix, fileId)];
@@ -149,9 +152,9 @@ static dispatch_queue_t s_logQ = 0;
         FILE* file = fopen(logFilePath.UTF8String, "w");
         if (!file)
         {
-            @throw [NSException exceptionWithName:NSObjectInaccessibleException
-                                           reason:@"Could not create file for logging to!"
-                                         userInfo:(logFilePath ? @{ @"filePath" : logFilePath } : nil)];
+            @throw [NSException exceptionWithName : NSObjectInaccessibleException
+ reason:@"Could not create file for logging to!"
+ userInfo:(logFilePath ? @{ @"filePath" : logFilePath } : nil)];
         }
 
         _logFile         = file;
@@ -248,29 +251,29 @@ static dispatch_queue_t s_logQ = 0;
     _logWritesMade = 0;
 }
 
-- (void) writeSync:(NSString *)message level:(NSPLogLevel)level
+- (void) writeSync:(NSString*)message level:(NSPLogLevel)level
 {
     NSDate* date = [NSDate date];
 
     dispatch_sync(s_logQ, ^() {
-        [self write:message level:level withTimestamp:date];
-    });
+                      [self write:message level:level withTimestamp:date];
+                  });
 }
 
-- (void) writeASync:(NSString *)message level:(NSPLogLevel)level
+- (void) writeASync:(NSString*)message level:(NSPLogLevel)level
 {
     NSDate* date = [NSDate date];
 
     dispatch_async(s_logQ, ^() {
-        dispatch_async(s_logQ, ^() {
-            [self write:message level:level withTimestamp:date];
-        });
-    });
+                       dispatch_async(s_logQ, ^() {
+                                          [self write:message level:level withTimestamp:date];
+                                      });
+                   });
 }
 
 - (NSArray*) logFiles
 {
-    NSError* err = nil;
+    NSError*        err  = nil;
     NSMutableArray* logs = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logRootPath
                                                                                 error:&err] mutableCopy];
 
@@ -293,35 +296,35 @@ static dispatch_queue_t s_logQ = 0;
 
     @autoreleasepool {
         NSUInteger prefixLength = _logFileNamePrefix.length;
-        [logs sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            NSString*  logFile1     = [obj1 stringByDeletingPathExtension];
-            NSString*  logFile2     = [obj2 stringByDeletingPathExtension];
-            
-            if (logFile1.length <= prefixLength ||
-                logFile2.length <= prefixLength)
-            {
-                return [logFile1 compare:logFile2];
-            }
-            
-            logFile1 = [logFile1 substringFromIndex:prefixLength];
-            logFile2 = [logFile2 substringFromIndex:prefixLength];
-            
-            unsigned long long stamp1 = logFile1.unsignedLongLongValue;
-            unsigned long long stamp2 = logFile2.unsignedLongLongValue;
+        [logs sortUsingComparator:^NSComparisonResult (id obj1, id obj2) {
+             NSString* logFile1 = [obj1 stringByDeletingPathExtension];
+             NSString* logFile2 = [obj2 stringByDeletingPathExtension];
 
-            if (stamp1 < stamp2)
-            {
-                return NSOrderedAscending;
-            }
-            else if (stamp1 > stamp2)
-            {
-                return NSOrderedDescending;
-            }
-            
-            return NSOrderedSame;
-        }];
+             if (logFile1.length <= prefixLength ||
+                 logFile2.length <= prefixLength)
+             {
+                 return [logFile1 compare:logFile2];
+             }
+
+             logFile1 = [logFile1 substringFromIndex:prefixLength];
+             logFile2 = [logFile2 substringFromIndex:prefixLength];
+
+             unsigned long long stamp1 = logFile1.unsignedLongLongValue;
+             unsigned long long stamp2 = logFile2.unsignedLongLongValue;
+
+             if (stamp1 < stamp2)
+             {
+                 return NSOrderedAscending;
+             }
+             else if (stamp1 > stamp2)
+             {
+                 return NSOrderedDescending;
+             }
+
+             return NSOrderedSame;
+         }];
     }
-    
+
     return [logs copy];
 }
 
@@ -332,17 +335,13 @@ static dispatch_queue_t s_logQ = 0;
 
 - (NSData*) mostRecentLogs:(NSUInteger)maxSize
 {
-    if (maxSize < 1)
-        maxSize = 1024;
-    else if (maxSize > UINT32_MAX / 1024)
-        maxSize = UINT32_MAX;
-    else
-        maxSize *= 1024;
-    
+    if (maxSize < kMAGNITUDE_BYTES)
+        maxSize = kMAGNITUDE_BYTES;
+
     [self flush];
-    NSArray*       logs = self.logFiles;
+    NSArray*       logs        = self.logFiles;
     NSString*      logRootPath = self.logRootPath;
-    NSMutableData* data = nil;
+    NSMutableData* data        = nil;
 
     if (logs.count > 0)
     {
@@ -380,7 +379,8 @@ static dispatch_queue_t s_logQ = 0;
 - (unsigned long long) totalLogSize
 {
     unsigned long long size = 0;
-    NSFileManager* fm = [NSFileManager defaultManager];
+    NSFileManager*     fm   = [NSFileManager defaultManager];
+
     for (NSString* item in self.logFiles)
     {
         size += [fm fileSize:item];
@@ -407,16 +407,17 @@ static dispatch_queue_t s_logQ = 0;
     };
 
     static __strong NSDateFormatter* s_formatter = nil;
-    static dispatch_once_t  onceToken;
+    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        s_formatter = [[NSDateFormatter alloc] init];
-        s_formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-        s_formatter.dateFormat = @"MM'/'dd'/'yy hh':'mm':'ss a z";
-        s_formatter.timeZone = [NSTimeZone localTimeZone];
-    });
+                      s_formatter = [[NSDateFormatter alloc] init];
+                      s_formatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+                      s_formatter.dateFormat = @"MM'/'dd'/'yy hh':'mm':'ss a z";
+                      s_formatter.timeZone = [NSTimeZone localTimeZone];
+                  });
+
     const char* levelName = s_logLevelNames[level];
     NSString*   timeStamp = [s_formatter stringFromDate:timestamp];
-    
+
     if (level &&
         level <= _level)
     {
@@ -429,7 +430,7 @@ static dispatch_queue_t s_logQ = 0;
             [self writeString:message];
             [self writeByte:'\n'];
             [self performMaintenance:YES];
-            
+
 #ifdef DEBUG
             NSLog(@"%s%@", levelName, message);
 #endif
@@ -474,7 +475,7 @@ static dispatch_queue_t s_logQ = 0;
 - (void) writeBOM
 {
     static const char s_BOM[] = { 0xEF, 0xBB, 0xBF };
-    
+
     [self writeBytes:s_BOM length:3];
 }
 
@@ -513,25 +514,25 @@ static dispatch_queue_t s_logQ = 0;
         [self writeByte:'\n'];
         [self writeString:@"Single log limit reached..."];
 
-        NSString* oldFilePath = _logFilePath;
-        NSString* oldFileDir  = oldFilePath.stringByDeletingLastPathComponent;
-        UInt64    fileId      = GenerateLogFileId();
-        NSString* newFilePath = [oldFileDir stringByAppendingPathComponent:GenerateLogFileName(_logFileNamePrefix, fileId)];
-        NSFileManager* fm     = [NSFileManager defaultManager];
-        
+        NSString*      oldFilePath = _logFilePath;
+        NSString*      oldFileDir  = oldFilePath.stringByDeletingLastPathComponent;
+        UInt64         fileId      = GenerateLogFileId();
+        NSString*      newFilePath = [oldFileDir stringByAppendingPathComponent:GenerateLogFileName(_logFileNamePrefix, fileId)];
+        NSFileManager* fm = [NSFileManager defaultManager];
+
         // fileId is based on the current second, here's code to handle super edge case of resusing the same file id.
         while ([fm fileExistsAtPath:newFilePath])
         {
             fileId++;
             newFilePath = [oldFileDir stringByAppendingPathComponent:GenerateLogFileName(_logFileNamePrefix, fileId)];
         }
-        
+
         FILE* newLogFile = fopen(newFilePath.UTF8String, "w");
-        
+
         NSPAssert(![newFilePath isEqualToString:oldFilePath]);
-        
+
         _newlinesWritten = _logWritesMade = 0;
-        
+
         if (!newLogFile)
         {
             [self writeByte:'\n'];
@@ -549,7 +550,7 @@ static dispatch_queue_t s_logQ = 0;
             fclose(_logFile);
             _logFile         = newLogFile;
             _newlinesWritten = 0;
-            
+
 #ifdef START_LOG_WITH_BOM
             [self writeBOM];
 #endif
@@ -557,13 +558,13 @@ static dispatch_queue_t s_logQ = 0;
             [self writeString:oldFilePath];
             [self writeByte:'\n'];
             [self writeByte:'\n'];
-            
+
             didAddLog = YES;
         }
-        
+
         _logWritesMade = _newlinesWritten;
     }
-    
+
     return didAddLog;
 }
 
@@ -571,31 +572,30 @@ static dispatch_queue_t s_logQ = 0;
 {
     NSArray* logs      = self.logFiles;
     BOOL     purgeMade = NO;
-    
+
     if (logs.count > _maxFileCount &&
         _maxFileCount < UINT32_MAX)
     {
         NSPAssert(_maxFileCount > 0);
-        
+
         [self writeByte:'\n'];
-        [self writeString:@"Total logging file limit reached, need to purge old log files..."];
-        [self writeByte:'\n'];
-        
-        NSString*  root = self.logRootPath;
-        NSUInteger filesToDelete = logs.count - _maxFileCount;
+        [self writeString:@"Total logging file limit reached, need to purge old log files...\n"];
+
+        NSFileManager* fm   = [NSFileManager defaultManager];
+        NSString*      root = self.logRootPath;
+        NSUInteger     filesToDelete = logs.count - _maxFileCount;
         for (NSUInteger i = 0; i < logs.count && 0 != filesToDelete; i++)
         {
             NSString* nextLog = [root stringByAppendingPathComponent:[logs objectAtIndex:i]];
             if ([nextLog isEqualToString:_logFilePath])
             {
-                [self writeString:@"Cannot purge our current log file."];
-                [self writeByte:'\n'];
+                [self writeString:@"Cannot purge our current log file.\n"];
                 break;
             }
-            
+
             NSString* msg = nil;
             NSError*  err = nil;
-            if ([[NSFileManager defaultManager] removeItemAtPath:nextLog error:&err])
+            if ([fm removeItemAtPath:nextLog error:&err])
             {
                 msg = [NSString stringWithFormat:@"Purged an old log file: %@", nextLog];
                 filesToDelete--;
@@ -608,16 +608,15 @@ static dispatch_queue_t s_logQ = 0;
             [self writeString:msg];
             [self writeByte:'\n'];
         }
-        
+
         if (filesToDelete > 0)
         {
-            [self writeString:@"Could not purge enough logs to return to below total logging limit size."];
-            [self writeByte:'\n'];
+            [self writeString:@"Could not purge enough logs to return to below total logging limit size.\n"];
         }
-        
+
         [self writeByte:'\n'];
     }
-    
+
     return purgeMade;
 }
 

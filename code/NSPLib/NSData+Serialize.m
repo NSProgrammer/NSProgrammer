@@ -7,7 +7,9 @@
 //
 
 #import "NSData+Serialize.h"
+#import "NSPObjCUtils.h"
 #import "NSPStringUtils.h"
+#include <objc/message.h>
 
 // can change the base char to be 'a' for lowercase hex strings
 #define HEX_ALPHA_BASE_CHAR 'A'
@@ -69,7 +71,8 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
             hexCharsPtr += getCharsRng.length;
         }
 
-        byteToHexComponents(bytes[i], hexCharsPtr++, hexCharsPtr++);
+        byteToHexComponents(bytes[i], hexCharsPtr, hexCharsPtr+1);
+        hexChars += 2;
     }
 
     assert(hexCharsPtr - newLength == hexChars);
@@ -99,9 +102,11 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
     char*     pByte = dataBytes;
     pByte += dataBytesLength;
 
+    EXTRACT_FUNCTION_POINTER(hexString, characterAtIndex:, cai, unichar, NSUInteger)
+
     for (NSInteger i = length-1; i >= 0 ; i--)
     {
-        c = [hexString characterAtIndex:i];
+        c = caiFP(hexString, caiSel, i);
         if (isHexCharacter(c))
         {
             if (!hasSmallHalf)
