@@ -7,6 +7,7 @@
 //
 
 #import "NSData+Serialize.h"
+#import "NSPStringUtils.h"
 
 // can change the base char to be 'a' for lowercase hex strings
 #define HEX_ALPHA_BASE_CHAR 'A'
@@ -79,3 +80,45 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
 
 @end
 
+@implementation NSData (Deserialize)
+
++ (NSData*) dataWithHexString:(NSString*)hexString
+{
+    return [[NSData alloc] initWithHexString:hexString];
+}
+
+- (id) initWithHexString:(NSString*)hexString
+{
+    NSMutableData* data = [NSMutableData data];
+    NSInteger length = hexString.length;
+    unichar   c;
+    char      byte;
+    BOOL      hasSmallHalf = NO;
+
+    for (NSInteger i = length-1; i >= 0 ; i--)
+    {
+        c = [hexString characterAtIndex:i];
+        if (isHexCharacter(c))
+        {
+            if (!hasSmallHalf)
+            {
+                byte = decimalDigitValueForCharacter(c);
+            }
+            else
+            {
+                byte |= decimalDigitValueForCharacter(c) << 4;
+                [data appendBytes:&byte length:1];
+            }
+            hasSmallHalf = !hasSmallHalf;
+        }
+    }
+
+    if (hasSmallHalf)
+    {
+        [data appendBytes:&byte length:1];
+    }
+
+    return [self initWithData:data];
+}
+
+@end

@@ -14,3 +14,11 @@
 - (NSString*) hexStringValueWithDelimeter:(NSString*)delim everyNBytes:(NSUInteger)nBytes;
 
 @end
+
+@interface NSData (Deserialize)
+
+// ignores all non-hex characters
++ (NSData*) dataWithHexString:(NSString*)hexString;
+- (id) initWithHexString:(NSString*)hexString;
+
+@end
