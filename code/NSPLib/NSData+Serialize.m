@@ -89,11 +89,15 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
 
 - (id) initWithHexString:(NSString*)hexString
 {
-    NSMutableData* data = [NSMutableData data];
+    size_t dataBytesLength = hexString.length;
+    dataBytesLength = (dataBytesLength / 2) + (dataBytesLength % 2); // max possible bytes
+    char* dataBytes = (char*)malloc(dataBytesLength);
     NSInteger length = hexString.length;
     unichar   c;
     char      byte;
     BOOL      hasSmallHalf = NO;
+    char*     pByte = dataBytes;
+    pByte += dataBytesLength;
 
     for (NSInteger i = length-1; i >= 0 ; i--)
     {
@@ -107,7 +111,9 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
             else
             {
                 byte |= decimalDigitValueForCharacter(c) << 4;
-                [data appendBytes:&byte length:1];
+                pByte--;
+                NSPAssert(pByte >= dataBytes);
+                *pByte = byte;
             }
             hasSmallHalf = !hasSmallHalf;
         }
@@ -115,10 +121,21 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
 
     if (hasSmallHalf)
     {
-        [data appendBytes:&byte length:1];
+        pByte--;
+        NSPAssert(pByte >= dataBytes);
+        *pByte = byte;
     }
 
-    return [self initWithData:data];
+    size_t diff = pByte - dataBytes;
+    if (!diff)
+    {
+        // for optimal strings that are just HEX characters
+        return [self initWithBytesNoCopy:dataBytes length:dataBytesLength freeWhenDone:YES];
+    }
+
+    self = [self initWithBytes:pByte length:dataBytesLength - diff];
+    free(dataBytes);
+    return self;
 }
 
 @end
