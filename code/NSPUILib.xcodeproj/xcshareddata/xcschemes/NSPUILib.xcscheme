@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0460"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1CD8CB67174A6A2B00AD0B7A"
-               BuildableName = "libNSPLib.a"
-               BlueprintName = "NSPLib"
-               ReferencedContainer = "container:NSPLib.xcodeproj">
+               BlueprintIdentifier = "1C09B844175DBA3000316FE9"
+               BuildableName = "libNSPUILib.a"
+               BlueprintName = "NSPUILib"
+               ReferencedContainer = "container:NSPUILib.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
