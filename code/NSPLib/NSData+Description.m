@@ -9,7 +9,7 @@
 #import "NSData+Description.h"
 #import "NSData+Serialize.h"
 
-static NSDataDescriptionOptions s_options = NSDataDescriptionOption_None; // OS default
+static NSDataDescriptionOptions s_options = NSDataDescriptionOption_Default;
 
 @implementation NSData (Description)
 
@@ -25,8 +25,8 @@ static NSDataDescriptionOptions s_options = NSDataDescriptionOption_None; // OS 
     @synchronized(self) {
         if (s_options != options)
         {
-            if (NSDataDescriptionOption_None == s_options ||
-                NSDataDescriptionOption_None == options)
+            if (NSDataDescriptionOption_Default == s_options ||
+                NSDataDescriptionOption_Default == options)
             {
                 // Swizzle - either to the custom description or back to the native description
                 NSPSwizzleInstanceMethods([NSData class], @selector(description), @selector(_configuredDescription));

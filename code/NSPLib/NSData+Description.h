@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+    Enum of the possible description options that can be set.  Multiple options can be ORed together.
+ */
 typedef enum
 {
-    NSDataDescriptionOption_None       = 0,     // behaves as OS default
-    NSDataDescriptionOption_ObjectInfo = 1 << 0,
-    NSDataDescriptionOption_Length     = 1 << 1,
-    NSDataDescriptionOption_Data       = 1 << 2,
+    NSDataDescriptionOption_Default    = 0,         /**< When 0 is used, description behaves as OS Default */
+    NSDataDescriptionOption_ObjectInfo = 1 << 0,    /**< Put object informatino into the description (class name and object pointer) */
+    NSDataDescriptionOption_Length     = 1 << 1,    /**< Put \a length of NSData into description */
+    NSDataDescriptionOption_Data       = 1 << 2,    /**< Put \a data as a hex string into the description @warning can be very expensive (just like OS Default) */
 
     NSDataDescriptionOption_ObjectInfoAndLength = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length,
     NSDataDescriptionOption_ObjectInfoAndData   = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Data,
@@ -24,7 +27,19 @@ typedef enum
 
 @interface NSData (Description)
 
+/**
+    Thread safe retrieval of the current \a NSDataDescriptionOptions.
+    @see setDescriptionOptions:
+    @see NSDataDescriptionOptions
+ */
 + (NSDataDescriptionOptions) descriptionOptions;
+/**
+    Thread safe setting of the current \a NSDataDescriptionOptions.
+    @param options the description options to set.  \a NSDataDescriptionOption_Default reverts to the OS version, anything else changes out the \fn description method to return a configured description string.
+    @return the \a NSDataDescriptionOptions that existed before being replaced by this method call.
+    @see descriptionOptions
+    @see NSDataDescriptionOptions
+ */
 + (NSDataDescriptionOptions) setDescriptionOptions:(NSDataDescriptionOptions)options; // returns the previous options
 
 @end

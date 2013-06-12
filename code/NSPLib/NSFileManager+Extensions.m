@@ -24,11 +24,11 @@
     return [[attributes objectForKey:NSFileSize] unsignedLongLongValue];
 }
 
-- (unsigned long long) directorySize:(NSString*)directoryPath
+- (unsigned long long) directorySize:(NSString*)directoryPath recursive:(BOOL)recursive
 {
     unsigned long long size = 0;
     BOOL isDir = NO;
-    
+
     if ([self fileExistsAtPath:directoryPath isDirectory:&isDir] && isDir)
     {
         NSArray* contents = [self contentsOfDirectoryAtPath:directoryPath error:nil];
@@ -37,9 +37,9 @@
             NSString* fullItem = [directoryPath stringByAppendingPathComponent:item];
             if ([self fileExistsAtPath:fullItem isDirectory:&isDir])
             {
-                if (isDir)
+                if (isDir && recursive)
                 {
-                    size += [self directorySize:fullItem];
+                    size += [self directorySize:fullItem recursive:YES];
                 }
                 else
                 {

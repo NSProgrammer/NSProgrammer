@@ -10,15 +10,35 @@
 
 @interface NSData (Serialize)
 
+/**
+    Same as hexStringValueWithDelimeter:everyNBytes: with \a delim as nil and \a nBytes as 0.
+    @return a string representing the NSData target with hexadecimal characters.  Ex// \@"ABCDEF0123456789"
+    @see hexStringValueWithDelimeter:everyNBytes:
+ */
 - (NSString*) hexStringValue;
+/**
+    Serialize the data into a hex string with a configurable delimiting.
+    @param delim the string to delimit chunks of bytes by.  Provide \a nil or an empty string to have no delimiter.
+    @param nBytes how many bytes between each delimiter.  Provide \a 0 to have no delimiter.
+    @return a string representing the NSData target with hexadecimal characters with an optional delimiting string. Ex// \@"ABCD EF01 2345 6789" for \@" " \a delim and 2 \a nBytes
+ */
 - (NSString*) hexStringValueWithDelimeter:(NSString*)delim everyNBytes:(NSUInteger)nBytes;
 
 @end
 
 @interface NSData (Deserialize)
 
-// ignores all non-hex characters
+/**
+    Deserialize a hex string into an \a NSData object.
+    @param a hex string representation of data.
+    @return the data representation of the provided \a hexString
+    @note all characters that are not hex characters are ignored - "0123456789ABCDEF"
+ */
 + (NSData*) dataWithHexString:(NSString*)hexString;
+/**
+    Initialize an NSData object with a hex string.
+    @see dataWithHexString:
+ */
 - (id) initWithHexString:(NSString*)hexString;
 
 @end
