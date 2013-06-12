@@ -12,14 +12,14 @@
 
 - (id) init;
 - (id) initWithString:(NSString*)versionStr;
-- (id) initWithComponents:(NSArray*)components; // components can be either NSNumbers or NSStrings that are integers (mixing is ok)
+- (id) initWithComponents:(NSArray*)components; // components can be either NSNumbers or respond to @selector(integerValue)/@selector(intValue) otherwise the component will be treated as 0
 - (id) initWithMajorVersion:(NSUInteger)major
                minorVersion:(NSUInteger)minor
             revisionVersion:(NSUInteger)revision
               bugFixVersion:(NSUInteger)bugFix;
 
 + (NSPVersion*) versionWithString:(NSString*)versionStr;
-+ (NSPVersion*) versionWithComponents:(NSArray*)components;  // components can be either NSNumbers or NSStrings that are integers (mixing is ok)
++ (NSPVersion*) versionWithComponents:(NSArray*)components;  // components can be either NSNumbers or respond to @selector(integerValue)/@selector(intValue) otherwise the component will be treated as 0
 + (NSPVersion*) versionWithMajorVersion:(NSUInteger)major
                            minorVersion:(NSUInteger)minor
                         revisionVersion:(NSUInteger)revision

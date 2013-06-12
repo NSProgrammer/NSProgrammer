@@ -29,44 +29,31 @@
 
 - (id) initWithComponents:(NSArray*)components
 {
-    BOOL success = YES;
-    if ((success = !!components))
+    if (!components)
+        return [self init];
+
+    NSMutableArray* mutComponents = [[NSMutableArray alloc] init];
+    for (id val in components)
     {
-        NSMutableArray* mutComponents = [NSMutableArray array];
-        for (id val in components)
+        if ([val isKindOfClass:[NSNumber class]])
         {
-            if ([val isKindOfClass:[NSNumber class]])
-            {
-                [mutComponents addObject:val];
-            }
-            else if ([val isKindOfClass:[NSString class]])
-            {
-                [mutComponents addObject:@([val integerValue])];
-            }
-            else
-            {
-                success = NO;
-                break;
-            }
+            [mutComponents addObject:val];
         }
-        
-        if (success && mutComponents.count == 0)
+        else if ([val respondsToSelector:@selector(integerValue)])
         {
-            success = NO;
+            [mutComponents addObject:@([val integerValue])];
+        }
+        else if ([val respondsToSelector:@selector(intValue)])
+        {
+            [mutComponents addObject:@([val intValue])];
         }
         else
         {
-            components = mutComponents;
+            [mutComponents addObject:@0];
         }
     }
 
-    if (success)
-    {
-        return [self initWithComponentsPure:components];
-    }
-
-    self = nil;
-    return self;
+    return [self initWithComponentsPure:mutComponents];
 }
 
 - (id) initWithString:(NSString*)versionStr
@@ -79,7 +66,7 @@
     return [self initWithComponentsPure:@[@(major), @(minor), @(revision), @(bugFix)]];
 }
 
-- (id) initWithComponentsPure:(NSArray *)components
+- (id) initWithComponentsPure:(NSArray*)components
 {
     if (self = [super init])
     {
