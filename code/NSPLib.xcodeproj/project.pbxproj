@@ -291,6 +291,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/code.dst;
+				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NSPLib/NSPLib-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

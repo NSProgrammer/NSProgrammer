@@ -125,8 +125,8 @@ static dispatch_queue_t    s_logQ        = 0;
             !isDir)
         {
             @throw [NSException exceptionWithName:NSDestinationInvalidException
-                    reason:@"InvalidPath: the root path provided does not exist!"
-                    userInfo:(root ? @{ @"rootPath" : root } : nil)];
+                                           reason:@"InvalidPath: the root path provided does not exist!"
+                                         userInfo:(root ? @{ @"rootPath" : root } : nil)];
         }
 
         if (!prefix)
@@ -152,9 +152,9 @@ static dispatch_queue_t    s_logQ        = 0;
         FILE* file = fopen(logFilePath.UTF8String, "w");
         if (!file)
         {
-            @throw [NSException exceptionWithName : NSObjectInaccessibleException
- reason:@"Could not create file for logging to!"
- userInfo:(logFilePath ? @{ @"filePath" : logFilePath } : nil)];
+            @throw [NSException exceptionWithName:NSObjectInaccessibleException
+                                           reason:@"Could not create file for logging to!"
+                                         userInfo:(logFilePath ? @{ @"filePath" : logFilePath } : nil)];
         }
 
         _logFile         = file;
@@ -274,7 +274,7 @@ static dispatch_queue_t    s_logQ        = 0;
 - (NSArray*) logFiles
 {
     NSError*        err  = nil;
-    NSMutableArray* logs = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logRootPath
+    NSMutableArray* logs = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.logDirectoryPath
                                                                                 error:&err] mutableCopy];
 
     if (err)
@@ -328,7 +328,7 @@ static dispatch_queue_t    s_logQ        = 0;
     return [logs copy];
 }
 
-- (NSString*) logRootPath
+- (NSString*) logDirectoryPath
 {
     return _logFilePath.stringByDeletingLastPathComponent;
 }
@@ -339,9 +339,9 @@ static dispatch_queue_t    s_logQ        = 0;
         maxSize = kMAGNITUDE_BYTES;
 
     [self flush];
-    NSArray*       logs        = self.logFiles;
-    NSString*      logRootPath = self.logRootPath;
-    NSMutableData* data        = nil;
+    NSArray*       logs             = self.logFiles;
+    NSString*      logDirectoryPath = self.logDirectoryPath;
+    NSMutableData* data             = nil;
 
     if (logs.count > 0)
     {
@@ -351,7 +351,7 @@ static dispatch_queue_t    s_logQ        = 0;
             @autoreleasepool {
                 // keep this loop tight with an autorelease pool
                 NSString* logPath = [logs objectAtIndex:logs.count - 1 - i];
-                logPath = [logRootPath stringByAppendingPathComponent:logPath];
+                logPath = [logDirectoryPath stringByAppendingPathComponent:logPath];
                 NSMutableData* fileData = [NSMutableData dataWithContentsOfFile:logPath];
                 if (data)
                 {
@@ -582,7 +582,7 @@ static dispatch_queue_t    s_logQ        = 0;
         [self writeString:@"Total logging file limit reached, need to purge old log files...\n"];
 
         NSFileManager* fm   = [NSFileManager defaultManager];
-        NSString*      root = self.logRootPath;
+        NSString*      root = self.logDirectoryPath;
         NSUInteger     filesToDelete = logs.count - _maxFileCount;
         for (NSUInteger i = 0; i < logs.count && 0 != filesToDelete; i++)
         {
