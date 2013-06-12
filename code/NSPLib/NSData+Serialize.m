@@ -45,7 +45,7 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
 {
     NSUInteger     len       = self.length;
     NSUInteger     newLength = 0;
-    BOOL           doDelim   = nBytes > 0 && delim.length;
+    BOOL           doDelim   = nBytes > 0 && delim.length > 0;
     if (doDelim)
     {
         newLength = (len / nBytes) * delim.length;
@@ -58,7 +58,7 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
     unichar*       hexChars    = (unichar*)malloc(sizeof(unichar) * newLength);
     unichar*       hexCharsPtr = hexChars;
     unsigned char* bytes       = (unsigned char*)self.bytes;
-    
+
     // By pulling out the implementation of getCharacters:range: for reuse, we optimize out the ObjC class hierarchy traversal for the implementation while in our loop
     SEL            getCharsSel = @selector(getCharacters:range:);
     IMP            getCharsImp = [delim methodForSelector:getCharsSel];
@@ -72,7 +72,7 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
         }
 
         byteToHexComponents(bytes[i], hexCharsPtr, hexCharsPtr+1);
-        hexChars += 2;
+        hexCharsPtr += 2;
     }
 
     assert(hexCharsPtr - newLength == hexChars);
