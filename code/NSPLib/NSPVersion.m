@@ -61,9 +61,9 @@
     return [self initWithComponents:[versionStr componentsSeparatedByString:@"."]];
 }
 
-- (id) initWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision bugFixVersion:(NSUInteger)bugFix
+- (id) initWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
 {
-    return [self initWithComponentsPure:@[@(major), @(minor), @(revision), @(bugFix)]];
+    return [self initWithComponentsPure:@[@(major), @(minor), @(revision), @(build)]];
 }
 
 - (id) initWithComponentsPure:(NSArray*)components
@@ -90,9 +90,9 @@
     return [[NSPVersion alloc] initWithComponents:components];
 }
 
-+ (NSPVersion*) versionWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision bugFixVersion:(NSUInteger)bugFix
++ (NSPVersion*) versionWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
 {
-    return [[NSPVersion alloc] initWithMajorVersion:major minorVersion:minor revisionVersion:revision bugFixVersion:bugFix];
+    return [[NSPVersion alloc] initWithMajorVersion:major minorVersion:minor revisionVersion:revision buildVersion:build];
 }
 
 + (NSPVersion*) appVersion
@@ -135,7 +135,7 @@
     return [self versionComponentAtIndex:2];
 }
 
-- (NSUInteger) bugFixVersion
+- (NSUInteger) buildVersion
 {
     return [self versionComponentAtIndex:3];
 }
