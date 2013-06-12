@@ -31,8 +31,29 @@
 #define kMAGNITUDE_BYTES                    (1024)
 #define kMAGNITUDE_HERTZ                    (1000)
 
+/**
+    Convert the provided quantity in bytes into a human readable string.
+    @param bytes number of bytes to convert.
+    @return human readable string for size.  Example: @"128.24 GBs"
+ */
 NSString* SizeInBytesToString(unsigned long long bytes);
+/**
+     Convert the provided quantity in hertz into a human readable string.
+     @param hertz number of bytes to convert.
+     @return human readable string for speed.  Example: @"128.24 MHz"
+ */
 NSString* SpeedInHzToString(uint64_t hz);
+/**
+    Generic function for converting a size quantity to a refined size quantity based on orders of magnitude
+    @param sourceSize the size of the source quantity
+    @param magnitudeSize the magnitude of the size; that is, the size before the quantity rolls over to the next order of magnitude
+    @param maximumOrdersOfMagnitude as we compute the orders of, the limit that can be reached
+    @param pDestination the output pointer for the resulting equivalent size at the determined order of magnitude returned in \a pOrdersOfMagnitude
+    @param pOrdersOfMagnitude the number of orders of magnitude that the source size contained as we broke down the size to the new output size returned in \a pOrdersOfMagnitude
+    @note this is the generic function used by \fn SizeInBytesToString and \fn SpeedInHzToString
+    @see SizeInBytesToString implementation
+    @see SpeedInHzToString implementation
+ */
 void ConvertSize(unsigned long long sourceSize,
                  unsigned int magnitudeSize,
                  unsigned int maximumOrdersOfMagnitude,
