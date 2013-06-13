@@ -10,7 +10,7 @@
 
 /**
     @def DLOG(format, ...)
-    A convenience macro for logging directly to \fn NSLog in \c DEBUG builds. No-op in \c non-DEBUG builds. Log by providing the \c NSPLogLevel. Provide a format string followed by any format arguments.
+    A convenience macro for logging directly to \c NSLog in \c DEBUG builds. No-op in \c non-DEBUG builds. Log by providing the \c NSPLogLevel. Provide a format string followed by any format arguments.
  */
 #if !defined(DEBUG)
 #define DLOG(format, ...)     ((void)0)
@@ -52,7 +52,7 @@
 
 /**
     @def NSPLOG
-    Helper macro for easy access to the \c NSPLogger class' \fn sharedLog
+    Helper macro for easy access to the \c NSPLogger class' \c sharedLog
  */
 #define NSPLOG [NSPLogger sharedLog]
 
@@ -67,13 +67,13 @@ FOUNDATION_EXPORT NSString*  const kNSPLoggerDefaultFilePrefix;       /*!< \c \@
 /**
     Enum of Log Levels that can be set in \c NSPLogger
  */
-typedef enum
+typedef NS_ENUM(NSUInteger, NSPLogLevel)
 {
     NSPLogLevel_Off = 0,    /**< level to indicate logging is off */
     NSPLogLevel_HighLevel,  /**< level for important logs (errors, warnings) */
     NSPLogLevel_MidLevel,   /**< level for un-important logs (status, state changes, information) */
     NSPLogLevel_LowLevel    /**< level for verbose logs that released builds will likely not log (debug logs) */
-} NSPLogLevel;
+};
 
 /**
     @class NSPLogger
@@ -154,7 +154,7 @@ typedef enum
 - (void) writeASync:(NSString*)message level:(NSPLogLevel)level;
 /**
     one of the two write methods for writing a log message.  Writes the log synchronously.  This method adds the provided log message to the \c NSPLogger object's writing queue and wait until is finished being written.
-    @note It is recommended that any logging made at shutdown time use this method followed by \fn flush.
+    @note It is recommended that any logging made at shutdown time use this method followed by \c flush.
     @param message the string to write to disk.
     @param level the log level for the message.  The message will be filtered based on the \c NSPLogger object's \a logLevel.
     @see writeASync:level:

@@ -102,11 +102,11 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
     char*     pByte = dataBytes;
     pByte += dataBytesLength;
 
-    EXTRACT_FUNCTION_POINTER(hexString, characterAtIndex:, cai, unichar, NSUInteger)
+    EXTRACT_FUNCTION_POINTER(hexString, @selector(characterAtIndex:), cai, unichar, NSUInteger)
 
     for (NSInteger i = length-1; i >= 0 ; i--)
     {
-        c = caiFP(hexString, caiSel, i);
+        c = caiFP(hexString, caiSEL, i);
         if (isHexCharacter(c))
         {
             if (!hasSmallHalf)

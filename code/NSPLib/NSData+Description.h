@@ -11,7 +11,7 @@
 /**
     Enum of the possible description options that can be set.  Multiple options can be ORed together.
  */
-typedef enum
+typedef NS_OPTIONS(NSUInteger, NSDataDescriptionOptions)
 {
     NSDataDescriptionOption_Default    = 0,         /**< When 0 is used, description behaves as OS Default */
     NSDataDescriptionOption_ObjectInfo = 1 << 0,    /**< Put object informatino into the description (class name and object pointer) */
@@ -22,8 +22,7 @@ typedef enum
     NSDataDescriptionOption_ObjectInfoAndData   = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Data,
     NSDataDescriptionOption_LengthAndData       = NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
     NSDataDescriptionOption_AllOptions          = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
-} NSDataDescriptionOptions;
-
+};
 
 @interface NSData (Description)
 
@@ -35,7 +34,7 @@ typedef enum
 + (NSDataDescriptionOptions) descriptionOptions;
 /**
     Thread safe setting of the current \c NSDataDescriptionOptions.
-    @param options the description options to set.  \c NSDataDescriptionOption_Default reverts to the OS version, anything else changes out the \fn description method to return a configured description string.
+    @param options the description options to set.  \c NSDataDescriptionOption_Default reverts to the OS version, anything else changes out the \c description method to return a configured description string.
     @return the \c NSDataDescriptionOptions that existed before being replaced by this method call.
     @see descriptionOptions
     @see NSDataDescriptionOptions

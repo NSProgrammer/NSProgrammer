@@ -50,7 +50,7 @@ NSString* SpeedInHzToString(uint64_t hz);
     @param maximumOrdersOfMagnitude as we compute the orders of, the limit that can be reached
     @param pDestination the output pointer for the resulting equivalent size at the determined order of magnitude returned in \a pOrdersOfMagnitude
     @param pOrdersOfMagnitude the number of orders of magnitude that the source size contained as we broke down the size to the new output size returned in \a pOrdersOfMagnitude
-    @note this is the generic function used by \fn SizeInBytesToString and \fn SpeedInHzToString
+    @note this is the generic function used by \c SizeInBytesToString and \c SpeedInHzToString
     @see SizeInBytesToString implementation
     @see SpeedInHzToString implementation
  */

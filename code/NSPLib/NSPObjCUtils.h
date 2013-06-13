@@ -11,17 +11,39 @@
 
 #pragma mark - Blocks
 
+/**
+    Easy to use typedef for \c void \c void blocks
+ */
 typedef void(^GenericBlock)(void);
 
 #pragma mark - syncronization
 
+/**
+    Run a block synchronously on the main queue.
+ */
 void dispatch_sync_on_main_queue(void (^block)(void));
 
-// dispatch_once requires it's predicate token to be static or global,
-// this function can use transient memory, hence trans(ient)_dispatch_once
+/**
+    The type for the token used in the \c trans_dispatch_once function
+ */
 typedef volatile int32_t trans_dispatch_once_t;
-DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
-void trans_dispatch_once(trans_dispatch_once_t* pPredicate, GenericBlock block)
+
+#define SHRT_DPTCH_PRFX DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
+/**
+    the OS provided \c dispatch_once requires it's predicate token to be static or global.  \c trans_dispatch_once offers a way to use a token in transient memory for dispatch once within the context of that transient memory's scope.  This is highly effective for dispatching once per object instance vs once globally.
+    @code
+    - (void) viewWillAppear:(BOOL)animated
+    {
+        [super viewWillAppear:animated];
+        trans_dispatch_once(&_memberTransDispatchOnceToken, ^() {
+            // ... dispatch once on first appearance code ...
+        });
+    }
+    @endcode
+    @param pPredicate a reference to the predicate token for single use dispatch.  Initialize this value to 0 before using \c trans_dispatch_once.
+    @param block the block to execute only once for the instance of \a pPredicate
+ */
+SHRT_DPTCH_PRFX void trans_dispatch_once(trans_dispatch_once_t* pPredicate, GenericBlock block)
 {
     if (OSAtomicCompareAndSwap32(0, 1, pPredicate)) {
         block();
@@ -32,13 +54,42 @@ void trans_dispatch_once(trans_dispatch_once_t* pPredicate, GenericBlock block)
 
 #pragma mark Swizzling
 
+/**
+    Swizzle an instance method on a target class
+    @param class the class to swizzle
+    @param dstSel the destination selector to swizzle "out".  Must not be \c NULL.  If \a dstSel is not a valid selector on \a class, \a srcSel will be duplicated onto the class as \a dstSel causing there to be two methods for \a srcSel located at both \a srcSel and \a dstSel.
+    @param srcSel the source selector to swizzle "in".  Must not be \c NULL.  Does not need to actually exist for the class.
+    @return \c YES on success, \c NO on failure
+    @warning throws \c NSInvalidArgumentException if \a class, \a dstSel, or \a srcSel are \c NULL.
+    @warning throws \c NSInvalidArgumentException if \a srcSel is not implemented on \a class.
+    @see NSPSwizzleStaticMethods
+ */
 BOOL NSPSwizzleInstanceMethods(Class class, SEL dstSel, SEL srcSel);
-BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel);
+/**
+    Swizzle an instance method on a target class
+    @param class the class to swizzle
+    @param dstSel - same as in \c NSPSwizzleInstanceMethods, but for a static method
+    @param srcSel - same as in \c NSPSwizzleInstanceMethods, but for a static method
+    @return \c YES on success, \c NO on failure
+    @warning throws \c NSInvalidArgumentException if \a class, \a dstSel, or \a srcSel are \c NULL.
+    @warning throws \c NSInvalidArgumentException if \a srcSel is not implemented on \a class.
+    @warning throws \c NSInvalidArgumentException if \a class class is a \a meta \a class (Ex: [[NSString class] class]).
+    @see NSPSwizzleInstanceMethods
+ */
+BOOL NSPSwizzleStaticMethods(Class class, SEL dstSel, SEL srcSel);
 
 @interface NSObject (Swizzle)
 
+/**
+    Object oriented exposure of \c NSPSwizzleInstanceMethods.
+    @see NSPSwizzleInstanceMethods
+ */
 + (BOOL) swizzleInstanceMethod:(SEL)srcSelector toMethod:(SEL)dstSelector;
-+ (BOOL) swizzleClassMethod:(SEL)srcSelector toMethod:(SEL)dstSelector;
+/**
+    Object oriented exposure of \c NSPSwizzleStaticMethods.
+    @see NSPSwizzleStaticMethods
+ */
++ (BOOL) swizzleStaticMethod:(SEL)srcSelector toMethod:(SEL)dstSelector;
 
 @end
 
@@ -46,17 +97,53 @@ BOOL NSPSwizzleClassMethods(Class class, SEL dstSel, SEL srcSel);
 
 @interface NSObject (StaticMethodCheck)
 
+/**
+    Determine if a class has a static method
+    @param sel the selector to check is implemented as a static method on the target \c class
+    @return \c YES if \a sel exists, \c NO if not
+ */
 + (BOOL) respondsToStaticMethodSelector:(SEL)sel;
 
 @end
 
-// Use EXTRACT_FUNCTION_POINTER when you need access to a method at a primitive level that does NOT return an object
-// If the method returns an object, just use [<object> methodForSelector:@selector(<selName>)](<object>, @selector(<selName>), ...)
-//
-// Outputs SEL <outputPrefix>Sel, Method <outputPrefix>Method, IMP <outputPrefix>IMP, and function pointer <outputPrefix>FP
-#define EXTRACT_FUNCTION_POINTER(object, selectorName, outputPrefix, retType, ...) \
-SEL outputPrefix##Sel = @selector(selectorName); \
-Method outputPrefix##Method = class_getInstanceMethod([object class], outputPrefix##Sel); \
+/**
+    @def EXTRACT_FUNCTION_POINTER(object, selector, outputPrefix, retType, ...)
+    A helper macro for when you need access to a method at a primitive level that does NOT return an object  ( i.e. \c id )
+    @par Input:
+    @code
+    object - the target object
+    selector - the selector to extract as a function pointer
+    outputPrefix - the unique prefix for pulling out the necessary variables
+    retType - the return type of the desired function pointer
+    ... - the argument types of the desired function pointer (excluding the self and selector arguments)
+    @endcode
+    @par Output:
+    @code
+    SEL <outputPrefix>SEL;
+    Method <outputPrefix>Method;
+    IMP <outputPrefix>IMP;
+    function pointer <outputPrefix>FP;
+    @endcode
+    @par Example:
+    @code
+    \@implementation NSString (Example)
+    - (NSUInteger) badExampleOfFindIndexOfCharacter:(unichar)c
+    {
+        EXTRACT_FUNCTION_POINTER(self, @selector(characterAtIndex:), characterAtIndex_, unichar, NSUInteger)
+ 
+        for (NSUInteger i = 0; i < self.length; i++)
+        {
+            if (c == characterAtIndex_FP(self, characterAtIndex_SEL, i)
+                return i;
+        }
+        return NSNotFound;
+    }
+    @endcode
+    @note If the method returns an object, just use [<object> methodForSelector:@selector(<selName>)](<object>, @selector(<selName>), ...)
+ */
+#define EXTRACT_FUNCTION_POINTER(object, selector, outputPrefix, retType, ...) \
+SEL outputPrefix##SEL = selector; \
+Method outputPrefix##Method = class_getInstanceMethod([object class], outputPrefix##SEL); \
 IMP outputPrefix##IMP = method_getImplementation(outputPrefix##Method); \
 TYPEDEF_FUNCTION_PTR(outputPrefix##FunctionPointer, retType, id, SEL, ##__VA_ARGS__); \
 outputPrefix##FunctionPointer outputPrefix##FP = (outputPrefix##FunctionPointer)outputPrefix##IMP;
@@ -67,10 +154,21 @@ outputPrefix##FunctionPointer outputPrefix##FP = (outputPrefix##FunctionPointer)
 #define ARC_ENABLED 1
 #endif
 
-// if a class requires a subclass to implement a method, have the class (not the subclass) use
-// UNRECOGNIZED_SELECTOR instead of an implementation.
-// Example: void methodToOverride UNRECOGNIZED_SELECTOR <newline> (you can add a ';' at the end without fear too)
-#define UNRECOGNIZED_SELECTOR { ThrowUnrecognizedSelector(self, _cmd); }
+/**
+    @def NS_UNRECOGNIZED_SELECTOR
+    An easy to use macro to replace boylerplate code for implementing a method that wants to be overridden so it throws an \c NSInvalidArgumentException.
+    @par Example:
+    @code
+    - (void) methodToOverride NS_UNRECOGNIZED_SELECTOR; // ';' is optional but can help with auto code alignement
+    @endcode
+ */
+#define NS_UNRECOGNIZED_SELECTOR { ThrowUnrecognizedSelector(self, _cmd); }
+NS_INLINE void ThrowUnrecognizedSelector(NSObject* obj, SEL cmd) __attribute__((noreturn));
+NS_INLINE void ThrowUnrecognizedSelector(NSObject* obj, SEL cmd)
+{
+    [obj doesNotRecognizeSelector:cmd];
+    abort(); // will never be reached, but prevents compiler warning
+}
 
 // Defines a yet undocumented method to add a warning if super isn't called.
 // Only use this during static analyzer though since compilater can lead to false warnings at the moment.
@@ -82,25 +180,33 @@ outputPrefix##FunctionPointer outputPrefix##FP = (outputPrefix##FunctionPointer)
 #endif
 #endif
 
-NS_INLINE void ThrowUnrecognizedSelector(NSObject* obj, SEL cmd) __attribute__((noreturn));
-NS_INLINE void ThrowUnrecognizedSelector(NSObject* obj, SEL cmd)
-{
-    [obj doesNotRecognizeSelector:cmd];
-    abort(); // will never be reached, but prevents compiler warning
-}
 
 #pragma mark - KVO
 
-// Easier to use KVO
+/**
+    @def KVO_BEGIN(key)
+    easy to use beginning of KVO
+    @param key the name of the key to begin the KVO flow: i.e. \c willChangeValueForKey:
+ */
 #define KVO_BEGIN(key) [self willChangeValueForKey:@"" #key]
+/**
+    @def KVO_END(key)
+    easy to use ending of KVO
+    @param key the name of the key to end the KVO flow: i.e. \c didChangeValueForKey:
+ */
 #define KVO_END(key)   [self didChangeValueForKey:@"" #key]
 
 #pragma mark - stack memory cleanup
 
 #ifndef ARC_ENABLED
-// Instead of using autorelease, you can do a stack released object
-// Just declare the variable with this macro
-// Ex: STACK_CLEANUP_NSOBJECT(NSString*) tmp = [[NSString alloc] init];
+/**
+    @def STACK_CLEANUP_NSOBJECT(type)
+    Simple macro for using the stack to cleanup an Objective-C object instead of the autorelease pool.
+    @par Example:
+    @code
+    STACK_CLEANUP_NSOBJECT(NSString*) tmp = [[NSString alloc] init];
+    @endcode
+ */
 #define STACK_CLEANUP_NSOBJECT(type) __attribute__((cleanup(Cleanup_NSObject))) __attribute__((unused)) type
 __attribute__((unused)) NS_INLINE void Cleanup_NSObject(void* o)
 {
@@ -108,19 +214,28 @@ __attribute__((unused)) NS_INLINE void Cleanup_NSObject(void* o)
 }
 #endif
 
-// Instead of keeping track of a temporary CFTypeRef object
-// Just declare the variable with this macro
-// Ex: STACK_CLEANUP_CFOBJECT(CFStringRef) tmp = CFStringCreateCopy(NULL, otherCFString);
+/**
+     @def STACK_CLEANUP_CFTYPE(type)
+     Simple macro for using the stack to cleanup a Core Foundation object
+     @par Example:
+     @code
+     STACK_CLEANUP_CFTYPE(CFStringRef) tmp = CFStringCreateCopy(NULL, otherCFString);
+     @endcode
+ */
 #define STACK_CLEANUP_CFTYPE(type) __attribute__((cleanup(Cleanup_CFType))) __attribute__((unused)) type
 __attribute__((unused)) NS_INLINE void Cleanup_CFType(void* ptr)
 {
     if (*(CFTypeRef*)ptr) { CFRelease(*(CFTypeRef*)ptr); } // CFRelease(0) == crash
 }
 
-// Instead of keeping track of you temporarily allocated memory
-// you can do a stack freed memory pointer
-// Just declare the variable with this macro
-// Ex: STACK_CLEANUP_CMEMORY(char*) tmp = (char*)malloc(sizeof(char)*SIZE);
+/**
+     @def STACK_CLEANUP_CMEMORY(type)
+     Simple macro for using the stack to cleanup \c C allocated memory
+     @par Example:
+     @code
+     STACK_CLEANUP_CMEMORY(char*) tmp = (char*)malloc(sizeof(char)*SIZE);
+     @endcode
+ */
 #define STACK_CLEANUP_CMEMORY(type) __attribute__((cleanup(Cleanup_Memory))) __attribute__((unused)) type
 __attribute__((unused)) NS_INLINE void Cleanup_Memory(void* ptr)
 {
@@ -129,12 +244,17 @@ __attribute__((unused)) NS_INLINE void Cleanup_Memory(void* ptr)
 
 #pragma mark - C Level Helpers
 
+/**
+    @def TYPEDEF_FUNCTION_PTR(name, retType, ...)
+    Easy to use macro for decalring a function pointer type
+ */
 #define TYPEDEF_FUNCTION_PTR(name, retType, ...) \
 typedef retType (* name)(__VA_ARGS__)
 
-// Comparison of floats/doubles can be problematic using ==.
-// These macros help by establishing a margin of error (epsilon)
 
+/**
+    @section Floatin Point Comparison Macros
+ */
 #define FLOAT_EQ(floatA, floatB, epsilon)  (fabsf(floatA - floatB) < epsilon)
 #define FLOAT_LT(floatA, floatB, epsilon)  (!FLOAT_EQ(floatA, floatB, epsilon) && floatA < floatB)
 #define FLOAT_GT(floatA, floatB, epsilon)  (!FLOAT_EQ(floatA, floatB, epsilon) && floatA > floatB)
