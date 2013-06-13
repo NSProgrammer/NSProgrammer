@@ -253,7 +253,7 @@ typedef retType (* name)(__VA_ARGS__)
 
 
 /**
-    @section Floatin Point Comparison Macros
+    @section Floating Point Comparison Macros
  */
 #define FLOAT_EQ(floatA, floatB, epsilon)  (fabsf(floatA - floatB) < epsilon)
 #define FLOAT_LT(floatA, floatB, epsilon)  (!FLOAT_EQ(floatA, floatB, epsilon) && floatA < floatB)

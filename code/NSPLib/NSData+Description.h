@@ -14,14 +14,14 @@
 typedef NS_OPTIONS(NSUInteger, NSDataDescriptionOptions)
 {
     NSDataDescriptionOption_Default    = 0,         /**< When 0 is used, description behaves as OS Default */
-    NSDataDescriptionOption_ObjectInfo = 1 << 0,    /**< Put object informatino into the description (class name and object pointer) */
-    NSDataDescriptionOption_Length     = 1 << 1,    /**< Put \c length of NSData into description */
-    NSDataDescriptionOption_Data       = 1 << 2,    /**< Put \c data as a hex string into the description @warning can be very expensive (just like OS Default) */
+    NSDataDescriptionOption_ObjectInfo = (1 << 0),    /**< Put object informatino into the description (class name and object pointer) */
+    NSDataDescriptionOption_Length     = (1 << 1),    /**< Put \c length of NSData into description */
+    NSDataDescriptionOption_Data       = (1 << 2),    /**< Put \c data as a hex string into the description @warning can be very expensive (just like OS Default) */
 
-    NSDataDescriptionOption_ObjectInfoAndLength = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length,
-    NSDataDescriptionOption_ObjectInfoAndData   = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Data,
-    NSDataDescriptionOption_LengthAndData       = NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
-    NSDataDescriptionOption_AllOptions          = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
+    NSDataDescriptionOptions_ObjectInfoAndLength = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length,
+    NSDataDescriptionOptions_ObjectInfoAndData   = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Data,
+    NSDataDescriptionOptions_LengthAndData       = NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
+    NSDataDescriptionOptions_AllOptions          = NSDataDescriptionOption_ObjectInfo | NSDataDescriptionOption_Length | NSDataDescriptionOption_Data,
 };
 
 @interface NSData (Description)

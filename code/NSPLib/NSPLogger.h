@@ -57,7 +57,11 @@
 #define NSPLOG [NSPLogger sharedLog]
 
 /**
-    @name NSPLogger Defaults
+    @enum kNSPLoggerDefault Value Contants
+    @constant kNSPLoggerDefaultRolloverSize
+    @constant kNSPLoggerDefaultMaxFiles
+    @constant kNSPLoggerDefaultWritesPerFlush
+    @constant kNSPLoggerDefaultFilePrefix
  */
 FOUNDATION_EXPORT NSUInteger const kNSPLoggerDefaultRolloverSize;     /*!< \c 500 writes, not bytes */
 FOUNDATION_EXPORT NSUInteger const kNSPLoggerDefaultMaxFiles;         /*!< \c 10 files */
@@ -65,6 +69,7 @@ FOUNDATION_EXPORT NSUInteger const kNSPLoggerDefaultWritesPerFlush;   /*!< \c 10
 FOUNDATION_EXPORT NSString*  const kNSPLoggerDefaultFilePrefix;       /*!< \c \@"log." */
 
 /**
+    @enum NSPLogLevel
     Enum of Log Levels that can be set in \c NSPLogger
  */
 typedef NS_ENUM(NSUInteger, NSPLogLevel)
@@ -99,7 +104,7 @@ typedef NS_ENUM(NSUInteger, NSPLogLevel)
 
 /**
     Same as initWithDirectory:filePrefix:logLevel:writesBeforeRollover:maxFileCount: but with \a prefix, \a writesBeforeRollover and \a fileCount set to default values.
-    @see NSPLogger Defaults
+    @see kNSPLoggerDefault Value Contants
     @see initWithDirectory:filePrefix:logLevel:writesBeforeRollover:maxFileCount:
  */
 - (id) initWithDirectory:(NSString*)logsDirectory
@@ -126,18 +131,18 @@ typedef NS_ENUM(NSUInteger, NSPLogLevel)
     The number of write calls made to the \c NSPLogger before it is flushed to disk.  The less the logs are flushed, the more efficient the logger, however if the logs are not flushed prior to the app terminating (via crash or normally) they will not be availble on disk for future access.
     @see flush
  */
-@property (nonatomic, assign) NSUInteger  writesPerFlush;
+@property (nonatomic, assign) NSUInteger writesPerFlush;
 /**
     The number of write calls made to the \c NSPLogger before the log file rolls over.
     @param writesBeforeRollover provide \c UINT32_MAX for unlimited log files.
     @see logFiles
  */
-@property (nonatomic, assign) NSUInteger  writesBeforeRollover;
+@property (nonatomic, assign) NSUInteger writesBeforeRollover;
 /**
     The number of log files that can be written to disk before the eldest log file is purged.
     @see logFiles
  */
-@property (nonatomic, assign) NSUInteger  maxFileCount;
+@property (nonatomic, assign) NSUInteger maxFileCount;
 
 /**
     flush the logs to disk.  It is recommended to flush the logs on app exit, either via normal termination or crash.
