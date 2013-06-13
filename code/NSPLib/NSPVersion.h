@@ -15,20 +15,24 @@
  */
 @interface NSPVersion : NSObject <NSCoding>
 
-/** init NSPVersion with an empty set of version components (versionComponentCount == 0) */
+///** 
+//    @overload init
+//    init NSPVersion with an empty set of version components (versionComponentCount == 0)
+// */
 - (id) init;
-/** init NSPVersion with a string decomposed by "." */
+/** 
+    init NSPVersion with a string decomposed by "." 
+ */
 - (id) initWithString:(NSString*)versionStr;
 /** 
     @brief init NSPVersion with an array of components.
-
- 
-    If a component is an NSNumber, it's unsignedIntegerValue will be used.  
-    If a component has an integerValue or intValue method, that will be used.   
-    Otherwise the component will be treated as zero (0).
+    @par If a component is an NSNumber, it's unsignedIntegerValue will be used.
+    @par If a component has an integerValue or intValue method, that will be used.
+    @par Otherwise the component will be treated as zero (0).
  */
 - (id) initWithComponents:(NSArray*)components;
-/** init NSPVersion with 4 version components
+/** 
+    init NSPVersion with 4 version components
     @param major The major version.  The 6 of 6.0.1.2
     @param minor The minor version.  The 0 of 6.0.1.2
     @param revision The revision version.  The 1 of 6.0.1.2
@@ -65,7 +69,7 @@
  */
 - (NSUInteger) versionComponentCount;
 /** 
-    @param the index of the version component
+    @param index the index of the version component
     @return the value of the version component at the provided index.  0 if index is out of bounds. 
  */
 - (NSUInteger) versionComponentAtIndex:(NSUInteger)index;

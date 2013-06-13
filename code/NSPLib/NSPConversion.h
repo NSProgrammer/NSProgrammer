@@ -34,13 +34,13 @@
 /**
     Convert the provided quantity in bytes into a human readable string.
     @param bytes number of bytes to convert.
-    @return human readable string for size.  Example: @"128.24 GBs"
+    @return human readable string for size.  Example: \c @"128.24 GBs"
  */
 NSString* SizeInBytesToString(unsigned long long bytes);
 /**
      Convert the provided quantity in hertz into a human readable string.
      @param hertz number of bytes to convert.
-     @return human readable string for speed.  Example: @"128.24 MHz"
+     @return human readable string for speed.  Example: \c @"128.24 MHz"
  */
 NSString* SpeedInHzToString(uint64_t hz);
 /**

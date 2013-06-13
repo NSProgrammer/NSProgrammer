@@ -12,15 +12,15 @@
 /**
     @def NSPAssert(cond)
     
-    On \a DEBUG builds, asserts using NSAssert function with the condition being used as the logged message.
-    No-op \a non-DEBUG builds
+    @par On \c DEBUG builds, asserts using \c NSAssert function with the condition being used as the logged message.
+    @par No-op \c non-DEBUG builds
     @see NSPCAssert(cond)
  */
 /**
     @def NSPCAssert(cond)
 
-    On \a DEBUG builds, asserts using NSCAssert function with the condition being used as the logged message.
-    No-op \a non-DEBUG builds
+    @par On \c DEBUG builds, asserts using \c NSCAssert function with the condition being used as the logged message.
+    @par No-op \c non-DEBUG builds
     @see NSPAssert(cond)
  */
 
