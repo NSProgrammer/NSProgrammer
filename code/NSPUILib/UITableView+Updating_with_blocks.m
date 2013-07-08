@@ -102,37 +102,31 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                     [self beginUpdates];
                     if (deleteSections.count > 0)
                     {
-//                        DLOG(@"deleteSections: %@", deleteSections);
                         [self deleteSections:deleteSections
                             withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
                     if (deleteRows.count > 0)
                     {
-//                        DLOG(@"deleteRows: %@", deleteRows);
                         [self deleteRowsAtIndexPaths:deleteRows
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
                     if (reloadSections.count > 0)
                     {
-//                        DLOG(@"reloadSections: %@", reloadSections);
                         [self reloadSections:reloadSections
                             withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
                     if (reloadRows.count > 0)
                     {
-//                        DLOG(@"reloadRows: %@", reloadRows);
                         [self reloadRowsAtIndexPaths:reloadRows
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
                     if (insertSections.count > 0)
                     {
-//                        DLOG(@"insertSections: %@", insertSections);
                         [self insertSections:insertSections
                             withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
                     if (insertRows.count > 0)
                     {
-//                        DLOG(@"insertRows: %@", insertRows);
                         [self insertRowsAtIndexPaths:insertRows
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                     }
@@ -286,19 +280,19 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                     {
                         newObj = newKey = nil;
                     }
-                    if (!repeatOld && oldIndex < oldCount)
+                    if (!oldObj && oldIndex < oldCount)
                     {
                         oldObj = getPreviousObjectBlock(oldIndex);
                     }
-                    if (!repeatNew && newIndex < newCount)
+                    if (!newObj && newIndex < newCount)
                     {
                         newObj = getObjectBlock(newIndex);
                     }
-                    if (!repeatOld && oldObj)
+                    if (!oldKey && oldObj)
                     {
                         oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
                     }
-                    if (!repeatNew && newObj)
+                    if (!newKey && newObj)
                     {
                         newKey = [updatingDataSource tableView:self keyForObject:newObj];
                     }

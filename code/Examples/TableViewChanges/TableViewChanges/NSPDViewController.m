@@ -548,14 +548,14 @@ static volatile int32_t s_total = 0;
     if (NSPDDataEntryModificationType_Random == type)
         type = arc4random() % NSPDDataEntryModificationType_Random;
 
-    if (5 == rowLocation)
+    if (5 == (NSInteger)rowLocation)
         rowLocation = arc4random() % 5;
 
     switch (type)
     {
         case NSPDDataEntryModificationType_Insert:
         {
-            if (4 == rowLocation)
+            if (4 == (NSInteger)rowLocation)
             {
                 [self createSection:sectionLocation];
             }
@@ -567,7 +567,7 @@ static volatile int32_t s_total = 0;
         }
         case NSPDDataEntryModificationType_Delete:
         {
-            if (4 == rowLocation)
+            if (4 == (NSInteger)rowLocation)
             {
                 [self deleteSection:sectionLocation];
             }
@@ -579,7 +579,7 @@ static volatile int32_t s_total = 0;
         }
         case NSPDDataEntryModificationType_Modify:
         {
-            if (4 == rowLocation)
+            if (4 == (NSInteger)rowLocation)
             {
                 [self modifySection:sectionLocation];
             }

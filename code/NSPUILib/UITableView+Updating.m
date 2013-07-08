@@ -100,13 +100,13 @@
                             oldObj = oldKey = nil;
                         if (!repeatNew)
                             newObj = newKey = nil;
-                        if (!repeatOld && oldIndex < oldSectionCount)
+                        if (!oldObj && oldIndex < oldSectionCount)
                             oldObj = [updatingDataSource tableView:self objectForPreviousSection:oldIndex];
-                        if (!repeatNew && newIndex < newSectionCount)
+                        if (!newObj && newIndex < newSectionCount)
                             newObj = [updatingDataSource tableView:self objectForSection:newIndex];
-                        if (!repeatOld && oldObj)
+                        if (!oldKey && oldObj)
                             oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
-                        if (!repeatNew && newObj)
+                        if (!newKey && newObj)
                             newKey = [updatingDataSource tableView:self keyForObject:newObj];
                         
                         repeatOld = repeatNew = NO;
@@ -188,37 +188,31 @@
                             [self beginUpdates];
                             if (deleteSections.count > 0)
                             {
-//                                DLOG(@"deleteSections: %@", deleteSections);
                                 [self deleteSections:deleteSections
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
                             if (deleteRows.count > 0)
                             {
-//                                DLOG(@"deleteRows: %@", deleteRows);
                                 [self deleteRowsAtIndexPaths:deleteRows
                                             withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
                             if (reloadSections.count > 0)
                             {
-//                                DLOG(@"reloadSections: %@", reloadSections);
                                 [self reloadSections:reloadSections
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
                             if (reloadRows.count > 0)
                             {
-//                                DLOG(@"reloadRows: %@", reloadRows);
                                 [self reloadRowsAtIndexPaths:reloadRows
                                             withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
                             if (insertSections.count > 0)
                             {
-//                                DLOG(@"insertSections: %@", insertSections);
                                 [self insertSections:insertSections
                                     withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
                             if (insertRows.count > 0)
                             {
-//                                DLOG(@"insertRows: %@", insertRows);
                                 [self insertRowsAtIndexPaths:insertRows
                                             withRowAnimation:UITableViewRowAnimationAutomatic];
                             }
@@ -307,15 +301,15 @@
                         oldObj = oldKey = nil;
                     if (!repeatNew)
                         newObj = newKey = nil;
-                    if (!repeatOld && oldIndex < oldRowCount)
+                    if (!oldObj && oldIndex < oldRowCount)
                         oldObj = [updatingDataSource tableView:self objectAtPreviousIndexPath:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
-                    if (!repeatNew && newIndex < newRowCount)
+                    if (!newObj && newIndex < newRowCount)
                         newObj = [updatingDataSource tableView:self objectAtIndexPath:[NSIndexPath indexPathForRow:newIndex inSection:newSection]];
-                    if (!repeatOld && oldObj)
+                    if (!oldKey && oldObj)
                         oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
-                    if (!repeatNew && newObj)
+                    if (!newKey && newObj)
                         newKey = [updatingDataSource tableView:self keyForObject:newObj];
-                    
+
                     repeatOld = repeatNew = NO;
                     
                     if (!oldKey && !newKey)
@@ -346,7 +340,7 @@
                             continue;
                         }
                     }
-                    
+
                     if (newKey && oldKey)
                     {
                         // The order of items was manipulated beyond just additions and removals
@@ -356,7 +350,7 @@
                             reload = YES;
                             break;
                         }
-                        
+
                         BOOL didChange = NO;
                         if (delegateHasEqualSelector)
                         {
@@ -366,14 +360,14 @@
                         {
                             didChange = ![oldObj isEqual:newObj];
                         }
-                        
+
                         if (didChange)
                         {
                             [reloadRows addObject:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
                             reloads++;
                         }
                     }
-                    
+
                     oldIndex++;
                     newIndex++;
                 }
@@ -383,6 +377,7 @@
 
     if (reload)
     {
+        // Cleanup our modified lists of changes
         if (deletes)
         {
             [deleteRows removeObjectsInRange:NSMakeRange(deleteRows.count - deletes, deletes)];
