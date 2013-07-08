@@ -4,6 +4,10 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
 
+#define UITABLEVIEW_UPDATING_WITH_BLOCK_ABSTRACTION 0
+
+    #import "NSPLib.h"
     #import "NSPUICommon.h"
 #endif

@@ -11,6 +11,10 @@
 		1C09B84E175DBA3000316FE9 /* NSPUILib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1C09B84D175DBA3000316FE9 /* NSPUILib.h */; };
 		1C09B858175DBAB800316FE9 /* NSPUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C09B857175DBAB800316FE9 /* NSPUICommon.m */; };
 		1C09B85F175DBB7A00316FE9 /* libNSPLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B85E175DBB1B00316FE9 /* libNSPLib.a */; };
+		1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D60531789F77300680663 /* UITableView+Updating.m */; };
+		1C2D605C178A8AE500680663 /* UITableView+Updating_with_blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D605B178A8AE500680663 /* UITableView+Updating_with_blocks.m */; };
+		1C557DA51777F66D0012B90F /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C557DA41777F66D0012B90F /* UIView+Extensions.m */; };
+		1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C557DA61777F6CE0012B90F /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,12 @@
 		1C09B856175DBAB800316FE9 /* NSPUICommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPUICommon.h; sourceTree = "<group>"; };
 		1C09B857175DBAB800316FE9 /* NSPUICommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPUICommon.m; sourceTree = "<group>"; };
 		1C09B859175DBB1A00316FE9 /* NSPLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NSPLib.xcodeproj; sourceTree = "<group>"; };
+		1C2D60521789F77300680663 /* UITableView+Updating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Updating.h"; sourceTree = "<group>"; };
+		1C2D60531789F77300680663 /* UITableView+Updating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Updating.m"; sourceTree = "<group>"; };
+		1C2D605B178A8AE500680663 /* UITableView+Updating_with_blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Updating_with_blocks.m"; sourceTree = "<group>"; };
+		1C557DA31777F66D0012B90F /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
+		1C557DA41777F66D0012B90F /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
+		1C557DA61777F6CE0012B90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */,
 				1C09B85F175DBB7A00316FE9 /* libNSPLib.a in Frameworks */,
 				1C09B849175DBA3000316FE9 /* Foundation.framework in Frameworks */,
 			);
@@ -88,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				1C09B848175DBA3000316FE9 /* Foundation.framework */,
+				1C557DA61777F6CE0012B90F /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -122,6 +134,11 @@
 		1C99BF291767A6E5007CE48F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				1C2D60521789F77300680663 /* UITableView+Updating.h */,
+				1C2D60531789F77300680663 /* UITableView+Updating.m */,
+				1C2D605B178A8AE500680663 /* UITableView+Updating_with_blocks.m */,
+				1C557DA31777F66D0012B90F /* UIView+Extensions.h */,
+				1C557DA41777F66D0012B90F /* UIView+Extensions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -204,6 +221,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C09B858175DBAB800316FE9 /* NSPUICommon.m in Sources */,
+				1C557DA51777F66D0012B90F /* UIView+Extensions.m in Sources */,
+				1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */,
+				1C2D605C178A8AE500680663 /* UITableView+Updating_with_blocks.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,25 +294,31 @@
 		1C09B854175DBA3000316FE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/NSPUILib.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NSPUILib/NSPUILib-Prefix.pch";
+				HEADER_SEARCH_PATHS = NSPLib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		1C09B855175DBA3000316FE9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/NSPUILib.dst;
 				GCC_OPTIMIZATION_LEVEL = fast;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NSPUILib/NSPUILib-Prefix.pch";
+				HEADER_SEARCH_PATHS = NSPLib;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

@@ -43,6 +43,7 @@ NSString* SizeInBytesToString(unsigned long long bytes);
      @return human readable string for speed.  Example: \c @"128.24 MHz"
  */
 NSString* SpeedInHzToString(uint64_t hz);
+
 /**
     Generic function for converting a size quantity to a refined size quantity based on orders of magnitude
     @param sourceSize the size of the source quantity

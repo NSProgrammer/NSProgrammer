@@ -1,5 +1,5 @@
 //
-//  NSPObjCUtils.h
+//  NSPRuntime.h
 //  NSPLib
 //
 //  Created by Nolan O'Brien on 6/9/13.
@@ -147,6 +147,34 @@ Method outputPrefix##Method = class_getInstanceMethod([object class], outputPref
 IMP outputPrefix##IMP = method_getImplementation(outputPrefix##Method); \
 TYPEDEF_FUNCTION_PTR(outputPrefix##FunctionPointer, retType, id, SEL, ##__VA_ARGS__); \
 outputPrefix##FunctionPointer outputPrefix##FP = (outputPrefix##FunctionPointer)outputPrefix##IMP;
+
+#pragma mark - Properties
+
+@interface NSObject (Properties)
+
+/**
+    @returns all property names declared by the receiving class.
+ */
++ (NSArray*) instanceDeclaredPropertyNames;
+/**
+    @returns all property names inherited by the receiving class.
+ */
++ (NSArray*) instanceInheritedPropertyNames;
+/**
+    @returns all property names declared AND inherited by the receiving class.
+ */
++ (NSArray*) instanceAllPropertyNames;
+
+/**
+    @returns \c YES iff the the receiving class' instances have the provided \a property.
+ */
++ (BOOL) instanceHasPropertyNamed:(NSString*)property;
+/**
+    @returns \c YES iff the the receiving object has the provided \a property.
+ */
+- (BOOL) hasPropertyNamed:(NSString*)property; // returns YES if the instance has a declared or inherited property name
+
+@end
 
 #pragma mark - Compilation Validation and Object Structure
 

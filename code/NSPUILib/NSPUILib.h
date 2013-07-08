@@ -11,4 +11,8 @@
 
 #import "NSPUICommon.h"
 
+// Categories
+#import "UIView+Extensions.h"
+#import "UITableView+Updating.h"
+
 #endif

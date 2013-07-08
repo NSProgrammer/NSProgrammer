@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSPObjCUtils.h"
+#import "NSPRuntime.h"
 
 /**
     @def NSPAssert(cond)

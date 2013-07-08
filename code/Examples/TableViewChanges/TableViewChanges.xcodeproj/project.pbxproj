@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C2D604D1787CE7F00680663 /* libNSPUILib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C2D604C1787CE7F00680663 /* libNSPUILib.a */; };
+		1C2D6051178887AD00680663 /* NSPDView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C2D6050178887AD00680663 /* NSPDView.xib */; };
+		1CA105B71787CB5800327B71 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA105B61787CB5800327B71 /* UIKit.framework */; };
+		1CA105B91787CB5800327B71 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA105B81787CB5800327B71 /* Foundation.framework */; };
+		1CA105BB1787CB5800327B71 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA105BA1787CB5800327B71 /* CoreGraphics.framework */; };
+		1CA105C31787CB5800327B71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA105C21787CB5800327B71 /* main.m */; };
+		1CA105C71787CB5800327B71 /* NSPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA105C61787CB5800327B71 /* NSPDAppDelegate.m */; };
+		1CA105C91787CB5800327B71 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA105C81787CB5800327B71 /* Default.png */; };
+		1CA105CB1787CB5800327B71 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA105CA1787CB5800327B71 /* Default@2x.png */; };
+		1CA105CD1787CB5800327B71 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CA105CC1787CB5800327B71 /* Default-568h@2x.png */; };
+		1CA105D01787CB5800327B71 /* NSPDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA105CF1787CB5800327B71 /* NSPDViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1C2D604C1787CE7F00680663 /* libNSPUILib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNSPUILib.a; path = "../../../../../../Users/noobrien/Library/Developer/Xcode/DerivedData/NSProgrammer-awacrixqkzsccleqnuqajxphjszu/Build/Products/Debug-iphoneos/libNSPUILib.a"; sourceTree = "<group>"; };
+		1C2D6050178887AD00680663 /* NSPDView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSPDView.xib; sourceTree = "<group>"; };
+		1CA105B31787CB5800327B71 /* TableViewChanges.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewChanges.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA105B61787CB5800327B71 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1CA105B81787CB5800327B71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1CA105BA1787CB5800327B71 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1CA105BE1787CB5800327B71 /* TableViewChanges-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TableViewChanges-Info.plist"; sourceTree = "<group>"; };
+		1CA105C21787CB5800327B71 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1CA105C41787CB5800327B71 /* TableViewChanges-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewChanges-Prefix.pch"; sourceTree = "<group>"; };
+		1CA105C51787CB5800327B71 /* NSPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPDAppDelegate.h; sourceTree = "<group>"; };
+		1CA105C61787CB5800327B71 /* NSPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSPDAppDelegate.m; sourceTree = "<group>"; };
+		1CA105C81787CB5800327B71 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1CA105CA1787CB5800327B71 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		1CA105CC1787CB5800327B71 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		1CA105CE1787CB5800327B71 /* NSPDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPDViewController.h; sourceTree = "<group>"; };
+		1CA105CF1787CB5800327B71 /* NSPDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSPDViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1CA105B01787CB5800327B71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C2D604D1787CE7F00680663 /* libNSPUILib.a in Frameworks */,
+				1CA105B71787CB5800327B71 /* UIKit.framework in Frameworks */,
+				1CA105B91787CB5800327B71 /* Foundation.framework in Frameworks */,
+				1CA105BB1787CB5800327B71 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1CA105AA1787CB5800327B71 = {
+			isa = PBXGroup;
+			children = (
+				1C2D604C1787CE7F00680663 /* libNSPUILib.a */,
+				1CA105BC1787CB5800327B71 /* TableViewChanges */,
+				1CA105B51787CB5800327B71 /* Frameworks */,
+				1CA105B41787CB5800327B71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1CA105B41787CB5800327B71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1CA105B31787CB5800327B71 /* TableViewChanges.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1CA105B51787CB5800327B71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1CA105B61787CB5800327B71 /* UIKit.framework */,
+				1CA105B81787CB5800327B71 /* Foundation.framework */,
+				1CA105BA1787CB5800327B71 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1CA105BC1787CB5800327B71 /* TableViewChanges */ = {
+			isa = PBXGroup;
+			children = (
+				1CA105C51787CB5800327B71 /* NSPDAppDelegate.h */,
+				1CA105C61787CB5800327B71 /* NSPDAppDelegate.m */,
+				1CA105CE1787CB5800327B71 /* NSPDViewController.h */,
+				1CA105CF1787CB5800327B71 /* NSPDViewController.m */,
+				1C2D6050178887AD00680663 /* NSPDView.xib */,
+				1CA105BD1787CB5800327B71 /* Supporting Files */,
+			);
+			path = TableViewChanges;
+			sourceTree = "<group>";
+		};
+		1CA105BD1787CB5800327B71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CA105BE1787CB5800327B71 /* TableViewChanges-Info.plist */,
+				1CA105C21787CB5800327B71 /* main.m */,
+				1CA105C41787CB5800327B71 /* TableViewChanges-Prefix.pch */,
+				1CA105C81787CB5800327B71 /* Default.png */,
+				1CA105CA1787CB5800327B71 /* Default@2x.png */,
+				1CA105CC1787CB5800327B71 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1CA105B21787CB5800327B71 /* TableViewChanges */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CA105D61787CB5800327B71 /* Build configuration list for PBXNativeTarget "TableViewChanges" */;
+			buildPhases = (
+				1CA105AF1787CB5800327B71 /* Sources */,
+				1CA105B01787CB5800327B71 /* Frameworks */,
+				1CA105B11787CB5800327B71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TableViewChanges;
+			productName = TableViewChanges;
+			productReference = 1CA105B31787CB5800327B71 /* TableViewChanges.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1CA105AB1787CB5800327B71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NSPD;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = NSProgrammer;
+			};
+			buildConfigurationList = 1CA105AE1787CB5800327B71 /* Build configuration list for PBXProject "TableViewChanges" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1CA105AA1787CB5800327B71;
+			productRefGroup = 1CA105B41787CB5800327B71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1CA105B21787CB5800327B71 /* TableViewChanges */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CA105B11787CB5800327B71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA105C91787CB5800327B71 /* Default.png in Resources */,
+				1CA105CB1787CB5800327B71 /* Default@2x.png in Resources */,
+				1CA105CD1787CB5800327B71 /* Default-568h@2x.png in Resources */,
+				1C2D6051178887AD00680663 /* NSPDView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CA105AF1787CB5800327B71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CA105C31787CB5800327B71 /* main.m in Sources */,
+				1CA105C71787CB5800327B71 /* NSPDAppDelegate.m in Sources */,
+				1CA105D01787CB5800327B71 /* NSPDViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1CA105D41787CB5800327B71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1CA105D51787CB5800327B71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1CA105D71787CB5800327B71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewChanges/TableViewChanges-Prefix.pch";
+				INFOPLIST_FILE = "TableViewChanges/TableViewChanges-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Users/noobrien/Library/Developer/Xcode/DerivedData/NSProgrammer-awacrixqkzsccleqnuqajxphjszu/Build/Products/Debug-iphoneos\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "../../NSPUILib/** ../../NSPLib/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1CA105D81787CB5800327B71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableViewChanges/TableViewChanges-Prefix.pch";
+				INFOPLIST_FILE = "TableViewChanges/TableViewChanges-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Users/noobrien/Library/Developer/Xcode/DerivedData/NSProgrammer-awacrixqkzsccleqnuqajxphjszu/Build/Products/Debug-iphoneos\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = debugging;
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "../../NSPUILib/** ../../NSPLib/**";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1CA105AE1787CB5800327B71 /* Build configuration list for PBXProject "TableViewChanges" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA105D41787CB5800327B71 /* Debug */,
+				1CA105D51787CB5800327B71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1CA105D61787CB5800327B71 /* Build configuration list for PBXNativeTarget "TableViewChanges" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CA105D71787CB5800327B71 /* Debug */,
+				1CA105D81787CB5800327B71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1CA105AB1787CB5800327B71 /* Project object */;
+}

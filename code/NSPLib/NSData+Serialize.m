@@ -7,7 +7,7 @@
 //
 
 #import "NSData+Serialize.h"
-#import "NSPObjCUtils.h"
+#import "NSPRuntime.h"
 #import "NSPStringUtils.h"
 #include <objc/message.h>
 

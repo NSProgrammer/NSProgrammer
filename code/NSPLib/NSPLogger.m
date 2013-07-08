@@ -47,9 +47,12 @@ NS_INLINE NSString* GenerateLogFileName(NSString* prefix, UInt64 fileId)
 
 @end
 
+@interface NSPConsoleLogger : NSPLogger
+@end
+
 @implementation NSPLogger
 {
-    @private
+    @protected
     NSUInteger         _writesPerFlush;
     NSUInteger         _logWritesMade;
     NSUInteger         _newlinesWritten;
@@ -61,6 +64,7 @@ NS_INLINE NSString* GenerateLogFileName(NSString* prefix, UInt64 fileId)
     __strong NSString* _logFileNamePrefix;
 }
 
+static __strong NSPConsoleLogger* s_cLog = nil;
 static __strong NSPLogger* s_log         = nil;
 static dispatch_queue_t    s_logSharingQ = 0;
 static dispatch_queue_t    s_logQ        = 0;
@@ -73,10 +77,14 @@ static dispatch_queue_t    s_logQ        = 0;
 
 + (NSPLogger*) sharedLog
 {
-    __block NSPLogger* logger;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_cLog = [[NSPConsoleLogger alloc] init];
+    });
 
+    __block NSPLogger* logger;
     dispatch_sync(s_logSharingQ, ^() {
-                      logger = s_log;
+            logger = (s_log ? s_log : s_cLog);
                   });
     return logger;
 }
@@ -84,14 +92,15 @@ static dispatch_queue_t    s_logQ        = 0;
 + (void) setSharedLog:(NSPLogger*)log
 {
     dispatch_barrier_async(s_logSharingQ, ^() {
-                               s_log = log;
+                       s_log = log;
                            });
 }
 
 - (void) dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    fclose(_logFile);
+    if (_logFile)
+        fclose(_logFile);
 }
 
 - (id) initWithDirectory:(NSString*)logsDirectory
@@ -247,7 +256,8 @@ static dispatch_queue_t    s_logQ        = 0;
 
 - (void) flush
 {
-    fflush(_logFile);
+    if (_logFile)
+        fflush(_logFile);
     _logWritesMade = 0;
 }
 
@@ -618,6 +628,86 @@ static dispatch_queue_t    s_logQ        = 0;
     }
 
     return purgeMade;
+}
+
+@end
+
+@implementation NSPConsoleLogger
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    fclose(_logFile);
+}
+
+- (id) initWithDirectory:(NSString*)logsDirectory
+                logLevel:(NSPLogLevel)level
+{
+    return [self initWithDirectory:logsDirectory
+                        filePrefix:nil
+                          logLevel:level
+              writesBeforeRollover:0 /*default*/
+                      maxFileCount:0 /*default*/];
+}
+
+- (id) init
+{
+    if (self = [super init])
+    {
+#ifndef RELEASE
+        self.logLevel = NSPLogLevel_LowLevel;
+#else
+        self.logLevel = NSPLogLevel_HighLevel;
+#endif
+
+        _logFile         = 0;
+    }
+    return self;
+}
+
+- (NSArray*) logFiles
+{
+    return nil;
+}
+
+- (NSString*) logDirectoryPath
+{
+    return nil;
+}
+
+- (NSData*) mostRecentLogs:(NSUInteger)maxSize
+{
+    return nil;
+}
+
+- (unsigned long long) totalLogSize
+{
+    return 0;
+}
+
+- (void) performMaintenance:(BOOL)didAddLine
+{
+    // No-op
+}
+
+- (void) writeByte:(const char)byte
+{
+    // No-op
+}
+
+- (void) writeBytes:(const char*)bytes length:(size_t)length
+{
+    // No-op
+}
+
+- (BOOL) rolloverIfNeeded
+{
+    return NO;
+}
+
+- (BOOL) purgeOldLogsIfNeeded
+{
+    return NO;
 }
 
 @end

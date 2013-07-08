@@ -1,12 +1,12 @@
 //
-//  NSPObjCUtils.m
+//  NSPRuntime.m
 //  NSPLib
 //
 //  Created by Nolan O'Brien on 6/9/13.
 //  Copyright (c) 2013 NSProgrammer.com. All rights reserved.
 //
 
-#import "NSPObjCUtils.h"
+#import "NSPRuntime.h"
 #include <objc/runtime.h>
 
 void dispatch_sync_on_main_queue(void (^block)(void))
@@ -84,6 +84,69 @@ BOOL NSPSwizzleStaticMethods(Class class, SEL dstSel, SEL srcSel)
 + (BOOL) respondsToStaticMethodSelector:(SEL)sel
 {
     return !!class_getClassMethod(self, sel);
+}
+
+@end
+
+@implementation NSObject (Properties)
+
++ (NSArray*) instanceDeclaredPropertyNames
+{
+    unsigned int propC = 0;
+    objc_property_t* propList = class_copyPropertyList(self, &propC);
+    NSMutableArray* propArray = [NSMutableArray arrayWithCapacity:propC];
+
+    for (unsigned int i = 0; i < propC; i++)
+    {
+        [propArray addObject:[NSString stringWithUTF8String:property_getName(propList[i])]];
+    }
+
+    free(propList);
+    return [propArray copy];
+}
+
++ (NSArray*) instanceInheritedPropertyNames
+{
+    Class c = self;
+    Class s = class_getSuperclass(c);
+    NSMutableArray* array = [NSMutableArray array];
+    while (c != s &&
+           s != NULL)
+    {
+        [array addObjectsFromArray:[s instanceDeclaredPropertyNames]];
+        c = s;
+        s = class_getSuperclass(s);
+    }
+    return [array copy];
+}
+
++ (NSArray*) instanceAllPropertyNames
+{
+    return [[self instanceInheritedPropertyNames] arrayByAddingObjectsFromArray:[self instanceDeclaredPropertyNames]];
+}
+
++ (BOOL) instanceHasPropertyNamed:(NSString*)property
+{
+    Class c = self;
+    Class s = class_getSuperclass(c);
+    const char* name = property.UTF8String;
+    while (c != s &&
+           c != NULL)
+    {
+        if (class_getProperty(c, name))
+        {
+            return YES;
+        }
+
+        c = s;
+        s = class_getSuperclass(s);
+    }
+    return NO;
+}
+
+- (BOOL) hasPropertyNamed:(NSString*)property
+{
+    return [[self class] instanceHasPropertyNamed:property];
 }
 
 @end

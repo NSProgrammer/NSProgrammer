@@ -12,7 +12,8 @@
 		1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */; };
 		1C192345176788E70087F3F7 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C192344176788E70087F3F7 /* NSString+Extensions.m */; };
 		1C19234D176790FE0087F3F7 /* NSFileManager+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C19234C176790FE0087F3F7 /* NSFileManager+Extensions.m */; };
-		1C8BC5D61765564E00E5D50A /* NSPObjCUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */; };
+		1C8BC5D61765564E00E5D50A /* NSPRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5D51765564E00E5D50A /* NSPRuntime.m */; };
+		1CA105A9178767F700327B71 /* NSPTiming.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CA105A8178767F700327B71 /* NSPTiming.m */; };
 		1CC411321768F45B00F90D0B /* NSPVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5E117655E3F00E5D50A /* NSPVersion.m */; };
 		1CC411341768F4C200F90D0B /* NSPLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5E017655E3F00E5D50A /* NSPLogger.m */; };
 		1CC411351768F4E400F90D0B /* NSPConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8BC5DB17655C1E00E5D50A /* NSPConversion.m */; };
@@ -38,12 +39,14 @@
 		1C1923471767894E0087F3F7 /* NSPStringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPStringUtils.m; path = NSPLib/NSPStringUtils.m; sourceTree = SOURCE_ROOT; };
 		1C19234B176790FE0087F3F7 /* NSFileManager+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+Extensions.h"; path = "NSPLib/NSFileManager+Extensions.h"; sourceTree = SOURCE_ROOT; };
 		1C19234C176790FE0087F3F7 /* NSFileManager+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+Extensions.m"; path = "NSPLib/NSFileManager+Extensions.m"; sourceTree = SOURCE_ROOT; };
-		1C8BC5D41765564E00E5D50A /* NSPObjCUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPObjCUtils.h; path = NSPLib/NSPObjCUtils.h; sourceTree = SOURCE_ROOT; };
-		1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPObjCUtils.m; path = NSPLib/NSPObjCUtils.m; sourceTree = SOURCE_ROOT; };
+		1C8BC5D41765564E00E5D50A /* NSPRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPRuntime.h; path = NSPLib/NSPRuntime.h; sourceTree = SOURCE_ROOT; };
+		1C8BC5D51765564E00E5D50A /* NSPRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPRuntime.m; path = NSPLib/NSPRuntime.m; sourceTree = SOURCE_ROOT; };
 		1C8BC5DA17655C1E00E5D50A /* NSPConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPConversion.h; path = NSPLib/NSPConversion.h; sourceTree = SOURCE_ROOT; };
 		1C8BC5DB17655C1E00E5D50A /* NSPConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPConversion.m; path = NSPLib/NSPConversion.m; sourceTree = SOURCE_ROOT; };
 		1C8BC5E017655E3F00E5D50A /* NSPLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPLogger.m; path = NSPLib/NSPLogger.m; sourceTree = SOURCE_ROOT; };
 		1C8BC5E117655E3F00E5D50A /* NSPVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPVersion.m; path = NSPLib/NSPVersion.m; sourceTree = SOURCE_ROOT; };
+		1CA105A7178767F700327B71 /* NSPTiming.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSPTiming.h; path = NSPLib/NSPTiming.h; sourceTree = SOURCE_ROOT; };
+		1CA105A8178767F700327B71 /* NSPTiming.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSPTiming.m; path = NSPLib/NSPTiming.m; sourceTree = SOURCE_ROOT; };
 		1CD8CB68174A6A2B00AD0B7A /* libNSPLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNSPLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CD8CB6B174A6A2B00AD0B7A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1CD8CB6F174A6A2B00AD0B7A /* NSPLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSPLib-Prefix.pch"; path = "NSPLib/NSPLib-Prefix.pch"; sourceTree = SOURCE_ROOT; };
@@ -128,10 +131,12 @@
 				1CD8CB8B174A72A400AD0B7A /* NSPLibraryLoader.m */,
 				1CD8CB85174A6F7700AD0B7A /* NSPLogger.h */,
 				1C8BC5E017655E3F00E5D50A /* NSPLogger.m */,
-				1C8BC5D41765564E00E5D50A /* NSPObjCUtils.h */,
-				1C8BC5D51765564E00E5D50A /* NSPObjCUtils.m */,
+				1C8BC5D41765564E00E5D50A /* NSPRuntime.h */,
+				1C8BC5D51765564E00E5D50A /* NSPRuntime.m */,
 				1C1923461767894E0087F3F7 /* NSPStringUtils.h */,
 				1C1923471767894E0087F3F7 /* NSPStringUtils.m */,
+				1CA105A7178767F700327B71 /* NSPTiming.h */,
+				1CA105A8178767F700327B71 /* NSPTiming.m */,
 				1CD8CB84174A6F7700AD0B7A /* NSPVersion.h */,
 				1C8BC5E117655E3F00E5D50A /* NSPVersion.m */,
 			);
@@ -211,10 +216,11 @@
 				1C09B83A175DB9B200316FE9 /* NSPLibraryLoader.m in Sources */,
 				1CC411341768F4C200F90D0B /* NSPLogger.m in Sources */,
 				1CC411351768F4E400F90D0B /* NSPConversion.m in Sources */,
-				1C8BC5D61765564E00E5D50A /* NSPObjCUtils.m in Sources */,
+				1C8BC5D61765564E00E5D50A /* NSPRuntime.m in Sources */,
 				1C192345176788E70087F3F7 /* NSString+Extensions.m in Sources */,
 				1CC411321768F45B00F90D0B /* NSPVersion.m in Sources */,
 				1C19234D176790FE0087F3F7 /* NSFileManager+Extensions.m in Sources */,
+				1CA105A9178767F700327B71 /* NSPTiming.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +240,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -264,6 +271,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
