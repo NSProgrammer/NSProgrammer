@@ -92,7 +92,8 @@ static dispatch_queue_t    s_logQ        = 0;
 + (void) setSharedLog:(NSPLogger*)log
 {
     dispatch_barrier_async(s_logSharingQ, ^() {
-                       s_log = log;
+                               [s_log flush];
+                               s_log = log;
                            });
 }
 
@@ -100,7 +101,10 @@ static dispatch_queue_t    s_logQ        = 0;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (_logFile)
+	{
+        [self flush];
         fclose(_logFile);
+	}
 }
 
 - (id) initWithDirectory:(NSString*)logsDirectory
@@ -416,6 +420,7 @@ static dispatch_queue_t    s_logQ        = 0;
         "[LOW]  : "
     };
 
+    // Creating NSDateFormatters is slow, create a dedicated one for our NSPLogger(s)
     static __strong NSDateFormatter* s_formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -589,7 +594,7 @@ static dispatch_queue_t    s_logQ        = 0;
         NSPAssert(_maxFileCount > 0);
 
         [self writeByte:'\n'];
-        [self writeString:@"Total logging file limit reached, need to purge old log files...\n"];
+        [self writeString:[NSString stringWithFormat:@"Reached log file limit of %d.  Need to purge old log files...\n", _maxFileCount]];
 
         NSFileManager* fm   = [NSFileManager defaultManager];
         NSString*      root = self.logDirectoryPath;
@@ -599,7 +604,7 @@ static dispatch_queue_t    s_logQ        = 0;
             NSString* nextLog = [root stringByAppendingPathComponent:[logs objectAtIndex:i]];
             if ([nextLog isEqualToString:_logFilePath])
             {
-                [self writeString:@"Cannot purge our current log file.\n"];
+                [self writeString:@"Ran out of logs to purge.\n"];
                 break;
             }
 
@@ -607,13 +612,13 @@ static dispatch_queue_t    s_logQ        = 0;
             NSError*  err = nil;
             if ([fm removeItemAtPath:nextLog error:&err])
             {
-                msg = [NSString stringWithFormat:@"Purged an old log file: %@", nextLog];
+                msg = [NSString stringWithFormat:@"Purged old log file: %@", nextLog];
                 filesToDelete--;
                 purgeMade = YES;
             }
             else
             {
-                msg = [NSString stringWithFormat:@"Failed to delete an old log file: %@\n%@", nextLog, err];
+                msg = [NSString stringWithFormat:@"Failed to purge old log file: %@\n%@", nextLog, err];
             }
             [self writeString:msg];
             [self writeByte:'\n'];
@@ -621,7 +626,7 @@ static dispatch_queue_t    s_logQ        = 0;
 
         if (filesToDelete > 0)
         {
-            [self writeString:@"Could not purge enough logs to return to below total logging limit size.\n"];
+            [self writeString:@"Could not purge enough log files to reach log file limit.\n"];
         }
 
         [self writeByte:'\n'];
