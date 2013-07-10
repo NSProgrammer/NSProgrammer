@@ -308,12 +308,22 @@ static volatile int32_t s_total = 0;
     return [[[_oldDataSource objectAtIndex:indexPath.section] entries] objectAtIndex:indexPath.row];
 }
 
-- (NSObject<NSCopying>*) tableView:(UITableView *)tableView keyForObject:(NSObject *)object
+- (NSObject<NSCopying>*) tableView:(UITableView *)tableView keyForSectionObject:(NSObject *)object
+{
+    return @([(NSPDDataSection*)object unchangeableProperty]);
+}
+
+- (NSObject<NSCopying>*) tableView:(UITableView *)tableView keyForRowObject:(NSObject *)object
 {
     return @([(NSPDDataEntry*)object unchangeableProperty]);
 }
 
-- (BOOL) tableView:(UITableView *)tableView isPreviousObject:(NSObject*)previousObject equalToObject:(NSObject*)object
+- (BOOL) tableView:(UITableView *)tableView isPreviousSectionObject:(NSObject*)previousObject equalToSectionObject:(NSObject*)object
+{
+    return [(NSPDDataSection*)previousObject changeableProperty] == [(NSPDDataSection*)object changeableProperty];
+}
+
+- (BOOL) tableView:(UITableView *)tableView isPreviousRowObject:(NSObject*)previousObject equalToRowObject:(NSObject*)object
 {
     return [(NSPDDataEntry*)previousObject changeableProperty] == [(NSPDDataEntry*)object changeableProperty];
 }
@@ -603,47 +613,5 @@ static volatile int32_t s_total = 0;
                                           otherButtonTitles:nil];
     [alert show];
 }
-
-//- (id) oldObjectAtIndex:(NSInteger)index
-//{
-//    return (index < _oldDataSource.count ? [_oldDataSource objectAtIndex:index] : nil);
-//}
-//
-//- (id) newObjectAtIndex:(NSInteger)index NS_RETURNS_NOT_RETAINED
-//{
-//    return (index < _dataSource.count ? [_dataSource objectAtIndex:index] : nil);
-//}
-//
-//- (id<NSCopying>) uniqueIdForObject:(id)obj
-//{
-//    return @([(NSPDDataSection*)obj unchangeableProperty]);
-//}
-//
-//- (BOOL) wasChangeFromOldObject:(id)oldObj toNewObject:(id)newObj
-//{
-//    return [(NSPDDataSection*)oldObj changeableProperty] != [(NSPDDataSection*)newObj changeableProperty];
-//}
-//
-//- (id<UITableViewChangesDelegate>) changesDelegateForRowsInSectionWithOldIndex:(NSInteger)oldSectionIndex
-//                                                                      newIndex:(NSInteger)newSectionIndex
-//{
-//    NSArray* oldSectionEntries = [[_oldDataSource objectAtIndex:oldSectionIndex] entries];
-//    NSArray* newSectionEntries = [[_dataSource objectAtIndex:newSectionIndex] entries];
-//
-//    UITableViewGenericChangesDelegate* changeDelegate = [[UITableViewGenericChangesDelegate alloc] init];
-//    changeDelegate.getOldObjectBlock = ^id(NSInteger index) {
-//        return (index < oldSectionEntries.count ? [oldSectionEntries objectAtIndex:index] : nil);
-//    };
-//    changeDelegate.getNewObjectBlock = ^id(NSInteger index) {
-//        return (index < newSectionEntries.count ? [newSectionEntries objectAtIndex:index] : nil);
-//    };
-//    changeDelegate.getUniqueIdBlock = ^id<NSCopying>(id obj) {
-//        return @([(NSPDDataEntry*)obj unchangeableProperty]);
-//    };
-//    changeDelegate.didObjectChangeBlock = ^BOOL(id oldObj, id newObj) {
-//        return [(NSPDDataEntry*)oldObj changeableProperty] != [(NSPDDataEntry*)newObj changeableProperty];
-//    };
-//    return changeDelegate;
-//}
 
 @end

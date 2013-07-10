@@ -55,7 +55,7 @@
             for (NSInteger i = 0; i < oldSectionCount; i++)
             {
                 NSObject* obj = [updatingDataSource tableView:self objectForPreviousSection:i];
-                NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+                NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForSectionObject:obj];
                 [oldSectionMap setObject:@(i) forKey:key];
             }
             if (oldSectionCount != oldSectionMap.count)
@@ -69,7 +69,7 @@
                 for (NSInteger i = 0; i < newSectionCount; i++)
                 {
                     NSObject* obj = [updatingDataSource tableView:self objectForSection:i];
-                    NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+                    NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForSectionObject:obj];
                     [newSectionMap setObject:@(i) forKey:key];
                 }
                 if (newSectionCount != newSectionMap.count)
@@ -105,9 +105,9 @@
                         if (!newObj && newIndex < newSectionCount)
                             newObj = [updatingDataSource tableView:self objectForSection:newIndex];
                         if (!oldKey && oldObj)
-                            oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
+                            oldKey = [updatingDataSource tableView:self keyForSectionObject:oldObj];
                         if (!newKey && newObj)
-                            newKey = [updatingDataSource tableView:self keyForObject:newObj];
+                            newKey = [updatingDataSource tableView:self keyForSectionObject:newObj];
                         
                         repeatOld = repeatNew = NO;
                         
@@ -151,7 +151,9 @@
                             BOOL didChange = NO;
                             if (delegateHasEqualSelector)
                             {
-                                didChange = ![updatingDataSource tableView:self isPreviousObject:oldObj equalToObject:newObj];
+                                didChange = ![updatingDataSource tableView:self
+                                                   isPreviousSectionObject:oldObj
+                                                      equalToSectionObject:newObj];
                             }
                             else
                             {
@@ -258,8 +260,9 @@
         
         for (NSInteger i = 0; i < oldRowCount; i++)
         {
-            NSObject* obj = [updatingDataSource tableView:self objectAtPreviousIndexPath:[NSIndexPath indexPathForRow:i inSection:oldSection]];
-            NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+            NSObject* obj = [updatingDataSource tableView:self
+                                objectAtPreviousIndexPath:[NSIndexPath indexPathForRow:i inSection:oldSection]];
+            NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForRowObject:obj];
             [oldRowMap setObject:@(i) forKey:key];
         }
         if (oldRowCount != oldRowMap.count)
@@ -273,7 +276,7 @@
             for (NSInteger i = 0; i < newRowCount; i++)
             {
                 NSObject* obj = [updatingDataSource tableView:self objectAtIndexPath:[NSIndexPath indexPathForRow:i inSection:newSection]];
-                NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+                NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForRowObject:obj];
                 [newRowMap setObject:@(i) forKey:key];
             }
             if (newRowCount != newRowMap.count)
@@ -306,9 +309,9 @@
                     if (!newObj && newIndex < newRowCount)
                         newObj = [updatingDataSource tableView:self objectAtIndexPath:[NSIndexPath indexPathForRow:newIndex inSection:newSection]];
                     if (!oldKey && oldObj)
-                        oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
+                        oldKey = [updatingDataSource tableView:self keyForRowObject:oldObj];
                     if (!newKey && newObj)
-                        newKey = [updatingDataSource tableView:self keyForObject:newObj];
+                        newKey = [updatingDataSource tableView:self keyForRowObject:newObj];
 
                     repeatOld = repeatNew = NO;
                     
@@ -354,7 +357,9 @@
                         BOOL didChange = NO;
                         if (delegateHasEqualSelector)
                         {
-                            didChange = ![updatingDataSource tableView:self isPreviousObject:oldObj equalToObject:newObj];
+                            didChange = ![updatingDataSource tableView:self
+                                                   isPreviousRowObject:oldObj
+                                                      equalToRowObject:newObj];
                         }
                         else
                         {

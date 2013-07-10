@@ -103,22 +103,38 @@
     Called to determine the unique identification key of a table view data's object.
     @param tableView the \c UITableView.
     @param object the \c NSObject to identify.
-    @return the key used for identifying the section or row object.
-    @note is is the callee's responsibility to know if the \a object is for a section or a row.
+    @return the key used for identifying the section object.
  */
-- (NSObject<NSCopying>*) tableView:(UITableView*)tableView keyForObject:(NSObject*)object;
+- (NSObject<NSCopying>*) tableView:(UITableView*)tableView keyForSectionObject:(NSObject*)object;
+
+/**
+    Called to determine the unique identification key of a table view data's object.
+    @param tableView the \c UITableView.
+    @param object the \c NSObject to identify.
+    @return the key used for identifying the row object.
+ */
+- (NSObject<NSCopying>*) tableView:(UITableView*)tableView keyForRowObject:(NSObject*)object;
 
 @optional
 /**
     Called to determine if there was a modification to an object.  If not implemented in the implementing class, \a isEqual: will be used instead.
-    If a modification is found, the modified section or row is reloaded.
+    If a modification is found, the modified section is reloaded.
     @param tableView the \c UITableView.
-    @param previousObject an \c NSObject of the previous data's section OR row.
-    @param object an \c NSObject of the current data's section OR row.
+    @param previousObject an \c NSObject of the previous data's section.
+    @param object an \c NSObject of the current data's section.
     @return \c YES if the objects are equal, \c NO otherwise.
-    @note is is the callee's responsibility to know if the \a previousObject and \a object are for a section or a row.
  */
-- (BOOL) tableView:(UITableView *)tableView isPreviousObject:(NSObject*)previousObject equalToObject:(NSObject*)object;
+- (BOOL) tableView:(UITableView *)tableView isPreviousSectionObject:(NSObject*)previousObject equalToSectionObject:(NSObject*)object;
+
+/**
+    Called to determine if there was a modification to an object.  If not implemented in the implementing class, \a isEqual: will be used instead.
+    If a modification is found, the modified row is reloaded.
+    @param tableView the \c UITableView.
+    @param previousObject an \c NSObject of the previous data's row.
+    @param object an \c NSObject of the current data's row.
+    @return \c YES if the objects are equal, \c NO otherwise.
+ */
+- (BOOL) tableView:(UITableView *)tableView isPreviousRowObject:(NSObject*)previousObject equalToRowObject:(NSObject*)object;
 
 /**
     Called as \a updateData starts.  Once this callback is completed, the previous table data MUST be available for all previous data query calls.

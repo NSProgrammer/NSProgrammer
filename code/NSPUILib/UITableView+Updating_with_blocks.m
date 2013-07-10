@@ -1,21 +1,21 @@
 /*
- 
+
  Copyright (C) 2013 Nolan O'Brien
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
  associated documentation files (the "Software"), to deal in the Software without restriction,
  including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
  and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
  subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
  LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- 
+
  */
 
 // NOTE: set UITABLEVIEW_UPDATING_WITH_BLOCK_ABSTRACTION macro to 1 in NSPUILib-Prefix.pch if abstraction of
@@ -29,6 +29,8 @@ typedef NSObject*(^GetObjectBlock)(NSInteger index);
 typedef NSInteger(^GetObjectCountBlock)(void);
 typedef void (^IndexBlock)(NSInteger index);
 typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
+typedef NSObject<NSCopying>*(^GetObjectKeyBlock)(NSObject* obj);
+typedef BOOL(^AreEqualBlock)(NSObject* obj1, NSObject* obj2);
 
 @implementation UITableView (Updating)
 
@@ -77,6 +79,13 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                                              getObjectBlock:^NSObject *(NSInteger index) {
                           return [updatingDataSource tableView:self objectForSection:index];
                       }
+                                          getObjectKeyBlock:^NSObject<NSCopying>*(NSObject* obj) {
+                          return [updatingDataSource tableView:self keyForSectionObject:obj];
+                      }
+                                       areObjectsEqualBlock:([updatingDataSource respondsToSelector:@selector(tableView:isPreviousSectionObject:equalToSectionObject:)] ?
+                                            ^BOOL (NSObject* obj1, NSObject* obj2) {
+                                                return [updatingDataSource tableView:self isPreviousSectionObject:obj1 equalToSectionObject:obj2];
+                                            } : NULL)
                                           deleteObjectBlock:^(NSInteger index) {
                           [deleteSections addIndex:index];
                       }
@@ -179,6 +188,13 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                                          getObjectBlock:^NSObject *(NSInteger index) {
                       return [updatingDataSource tableView:self objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:newSection]];
                   }
+                                      getObjectKeyBlock:^NSObject<NSCopying>*(NSObject* obj) {
+                      return [updatingDataSource tableView:self keyForRowObject:obj];
+                  }
+                                   areObjectsEqualBlock:([updatingDataSource respondsToSelector:@selector(tableView:isPreviousRowObject:equalToRowObject:)] ?
+                                        ^BOOL (NSObject* obj1, NSObject* obj2) {
+                                            return [updatingDataSource tableView:self isPreviousRowObject:obj1 equalToRowObject:obj2];
+                                        } : NULL)
                                       deleteObjectBlock:^(NSInteger index) {
                       [deleteRows addObject:[NSIndexPath indexPathForRow:index inSection:oldSection]];
                       deletes++;
@@ -219,6 +235,8 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                       getObjectCountBlock:(GetObjectCountBlock)getObjectCountBlock
                    getPreviousObjectBlock:(GetObjectBlock)getPreviousObjectBlock
                            getObjectBlock:(GetObjectBlock)getObjectBlock
+                        getObjectKeyBlock:(GetObjectKeyBlock)getObjectKeyBlock
+                     areObjectsEqualBlock:(AreEqualBlock)areObjectsEqualBlock
                         deleteObjectBlock:(IndexBlock)deleteObjectBlock
                         reloadObjectBlock:(IndexBlock)reloadObjectBlock
                         insertObjectBlock:(IndexBlock)insertObjectBlock
@@ -234,7 +252,7 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
         for (NSInteger i = 0; i < oldCount; i++)
         {
             NSObject* obj = getPreviousObjectBlock(i);
-            NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+            NSObject<NSCopying>* key = getObjectKeyBlock(obj);
             [oldMap setObject:@(i) forKey:key];
         }
         if (oldCount != oldMap.count)
@@ -250,7 +268,7 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
             for (NSInteger i = 0; i < newCount; i++)
             {
                 NSObject* obj = getObjectBlock(i);
-                NSObject<NSCopying>* key = [updatingDataSource tableView:self keyForObject:obj];
+                NSObject<NSCopying>* key = getObjectKeyBlock(obj);
                 [newMap setObject:@(i) forKey:key];
             }
             if (newCount != newMap.count)
@@ -268,7 +286,6 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                 // Optimize redundant object retrieval
                 BOOL repeatOld = NO;
                 BOOL repeatNew = NO;
-                BOOL delegateHasEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousObject:equalToObject:)];
 
                 for (NSInteger i = 0;; i++)
                 {
@@ -290,11 +307,11 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                     }
                     if (!oldKey && oldObj)
                     {
-                        oldKey = [updatingDataSource tableView:self keyForObject:oldObj];
+                        oldKey = getObjectKeyBlock(oldObj);
                     }
                     if (!newKey && newObj)
                     {
-                        newKey = [updatingDataSource tableView:self keyForObject:newObj];
+                        newKey = getObjectKeyBlock(newObj);
                     }
 
                     repeatOld = repeatNew = NO;
@@ -339,9 +356,9 @@ typedef BOOL(^BoolReturnIndexedBlock)(NSInteger oldIndex, NSInteger newIndex);
                         }
 
                         BOOL didChange = NO;
-                        if (delegateHasEqualSelector)
+                        if (areObjectsEqualBlock)
                         {
-                            didChange = ![updatingDataSource tableView:self isPreviousObject:oldObj equalToObject:newObj];
+                            didChange = !areObjectsEqualBlock(oldObj, newObj);
                         }
                         else
                         {
