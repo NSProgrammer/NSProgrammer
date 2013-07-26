@@ -173,7 +173,8 @@
     // Optimize redundant object retrieval
     BOOL repeatOld = NO;
     BOOL repeatNew = NO;
-    BOOL delegateHasEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousObject:equalToObject:)];
+    BOOL delegateHasSectionEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousSectionObject:equalToSectionObject:)];
+    BOOL delegateHasRowEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousRowObject:equalToRowObject:)];
     
     while (true)
     {
@@ -230,7 +231,7 @@
             }
             
             BOOL didChange = NO;
-            if (delegateHasEqualSelector)
+            if (delegateHasSectionEqualSelector)
             {
                 didChange = ![updatingDataSource tableView:self
                                    isPreviousSectionObject:oldObj
@@ -250,6 +251,7 @@
                 // check row changes
                 if ([self _detectRowUpdates:updates
                              withDataSource:updatingDataSource
+                         usingEqualSelector:delegateHasRowEqualSelector
                          forPreviousSection:oldIndex
                                     section:newIndex])
                 {
@@ -302,6 +304,7 @@
 
 - (BOOL) _detectRowUpdates:(UITableViewUpdates*)updates
             withDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
+        usingEqualSelector:(BOOL)dataSourceHasEqualSelector
         forPreviousSection:(NSInteger)oldSection
                    section:(NSInteger)newSection
 {
@@ -350,7 +353,6 @@
                 // Optimize redundant object retrieval
                 BOOL repeatOld = NO;
                 BOOL repeatNew = NO;
-                BOOL delegateHasEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousObject:equalToObject:)];
 
                 while (true)
                 {
@@ -409,7 +411,7 @@
                         }
 
                         BOOL didChange = NO;
-                        if (delegateHasEqualSelector)
+                        if (dataSourceHasEqualSelector)
                         {
                             didChange = ![updatingDataSource tableView:self
                                                    isPreviousRowObject:oldObj
