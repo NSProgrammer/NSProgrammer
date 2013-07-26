@@ -22,6 +22,45 @@
 
 #import "UITableView+Updating.h"
 
+@interface UITableViewUpdates : NSObject
+@property (nonatomic, readonly) NSMutableIndexSet* deleteSections;
+@property (nonatomic, readonly) NSMutableIndexSet* reloadSections;
+@property (nonatomic, readonly) NSMutableIndexSet* insertSections;
+@property (nonatomic, readonly) NSMutableArray* deleteRows;
+@property (nonatomic, readonly) NSMutableArray* reloadRows;
+@property (nonatomic, readonly) NSMutableArray* insertRows;
+@end
+
+@implementation UITableViewUpdates
+
+- (id) init
+{
+    if (self = [super init])
+    {
+        _deleteSections = [[NSMutableIndexSet alloc] init];
+        _reloadSections = [[NSMutableIndexSet alloc] init];
+        _insertSections = [[NSMutableIndexSet alloc] init];
+        _deleteRows = [[NSMutableArray alloc] init];
+        _reloadRows = [[NSMutableArray alloc] init];
+        _insertRows = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+#ifdef DEBUG
+- (NSString*) description
+{
+    return [@{  @"deleteSections" : _deleteSections,
+                @"deleteRows" : _deleteRows,
+                @"reloadSections" : _reloadSections,
+                @"reloadRows" : _reloadRows,
+                @"insertSections" : _insertSections,
+                @"insertRows" : _insertRows } description];
+}
+#endif
+
+@end
+
 @implementation UITableView (Updating)
 
 - (void) updateData
@@ -34,10 +73,10 @@
         return;
     }
 
-    [self updateDataWithDataSource:updatingDataSource];
+    [self _updateDataWithDataSource:updatingDataSource];
 }
 
-- (void) updateDataWithDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
+- (void) _updateDataWithDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
 {
     @autoreleasepool
     {
@@ -77,148 +116,19 @@
 
                 if (!reload)
                 {
-                    NSMutableIndexSet* deleteSections = [[NSMutableIndexSet alloc] init];
-                    NSMutableIndexSet* reloadSections = [[NSMutableIndexSet alloc] init];
-                    NSMutableIndexSet* insertSections = [[NSMutableIndexSet alloc] init];
-                    NSMutableArray*    deleteRows = [[NSMutableArray alloc] init];
-                    NSMutableArray*    reloadRows = [[NSMutableArray alloc] init];
-                    NSMutableArray*    insertRows = [[NSMutableArray alloc] init];
+                    UITableViewUpdates* updates = [[UITableViewUpdates alloc] init];
 
-                    NSInteger oldIndex = 0;
-                    NSInteger newIndex = 0;
-                    NSObject* oldObj, *newObj;
-                    NSObject<NSCopying>* oldKey, *newKey;
-
-                    // Optimize redundant object retrieval
-                    BOOL repeatOld = NO;
-                    BOOL repeatNew = NO;
-                    BOOL delegateHasEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousObject:equalToObject:)];
-
-                    while (true)
-                    {
-                        if (!repeatOld)
-                            oldObj = oldKey = nil;
-                        if (!repeatNew)
-                            newObj = newKey = nil;
-                        if (!oldObj && oldIndex < oldSectionCount)
-                            oldObj = [updatingDataSource tableView:self objectForPreviousSection:oldIndex];
-                        if (!newObj && newIndex < newSectionCount)
-                            newObj = [updatingDataSource tableView:self objectForSection:newIndex];
-                        if (!oldKey && oldObj)
-                            oldKey = [updatingDataSource tableView:self keyForSectionObject:oldObj];
-                        if (!newKey && newObj)
-                            newKey = [updatingDataSource tableView:self keyForSectionObject:newObj];
-                        
-                        repeatOld = repeatNew = NO;
-                        
-                        if (!oldKey && !newKey)
-                            break;
-                        
-                        if (oldKey)
-                        {
-                            NSNumber* newIndexToMatchOldId = [newSectionMap objectForKey:oldKey];
-                            if (!newIndexToMatchOldId)
-                            {
-                                [deleteSections addIndex:oldIndex];
-                                oldIndex++;
-                                repeatNew = YES;
-                                continue;
-                            }
-                        }
-                        
-                        if (newKey)
-                        {
-                            NSNumber* oldIndexToMatchNewId = [oldSectionMap objectForKey:newKey];
-                            if (!oldIndexToMatchNewId)
-                            {
-                                [insertSections addIndex:newIndex];
-                                newIndex++;
-                                repeatOld = YES;
-                                continue;
-                            }
-                        }
-                        
-                        if (newKey && oldKey)
-                        {
-                            // The order of items was manipulated beyond just additions and removals
-                            // Bail
-                            if (![oldKey isEqual:newKey])
-                            {
-                                reload = YES;
-                                break;
-                            }
-
-                            BOOL didChange = NO;
-                            if (delegateHasEqualSelector)
-                            {
-                                didChange = ![updatingDataSource tableView:self
-                                                   isPreviousSectionObject:oldObj
-                                                      equalToSectionObject:newObj];
-                            }
-                            else
-                            {
-                                didChange = ![oldObj isEqual:newObj];
-                            }
-
-                            if (didChange)
-                            {
-                                [reloadSections addIndex:oldIndex];
-                            }
-                            else
-                            {
-                                // check row changes
-                                if ([self _updateRowDataWithDataSource:updatingDataSource
-                                                    forPreviousSection:oldIndex
-                                                               section:newIndex
-                                                           deleteArray:deleteRows
-                                                           reloadArray:reloadRows
-                                                           insertArray:insertRows])
-                                {
-                                    [reloadSections addIndex:oldIndex];
-                                }
-                            }
-                        }
-                        
-                        oldIndex++;
-                        newIndex++;
-                    }
+                    reload = [self _detectSectionUpdates:updates
+                                  withUpdatingDataSource:updatingDataSource
+                                           oldSectionMap:oldSectionMap
+                                           newSectionMap:newSectionMap];
 
                     if (!reload)
                     {
                         @try
                         {
-                            [self beginUpdates];
-                            if (deleteSections.count > 0)
-                            {
-                                [self deleteSections:deleteSections
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            if (deleteRows.count > 0)
-                            {
-                                [self deleteRowsAtIndexPaths:deleteRows
-                                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            if (reloadSections.count > 0)
-                            {
-                                [self reloadSections:reloadSections
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            if (reloadRows.count > 0)
-                            {
-                                [self reloadRowsAtIndexPaths:reloadRows
-                                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            if (insertSections.count > 0)
-                            {
-                                [self insertSections:insertSections
-                                    withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            if (insertRows.count > 0)
-                            {
-                                [self insertRowsAtIndexPaths:insertRows
-                                            withRowAnimation:UITableViewRowAnimationAutomatic];
-                            }
-                            [self endUpdates];
+                            // NSLog(@"%@", updates);
+                            [self _applyUpdates:updates];
                         }
                         @catch (NSException *exception)
                         {
@@ -242,12 +152,158 @@
     }
 }
 
-- (BOOL) _updateRowDataWithDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
-                   forPreviousSection:(NSInteger)oldSection
-                              section:(NSInteger)newSection
-                          deleteArray:(NSMutableArray*)deleteRows
-                          reloadArray:(NSMutableArray*)reloadRows
-                          insertArray:(NSMutableArray*)insertRows
+- (BOOL) _detectSectionUpdates:(UITableViewUpdates*)updates
+        withUpdatingDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
+                 oldSectionMap:(NSDictionary*)oldSectionMap
+                 newSectionMap:(NSDictionary*)newSectionMap
+{
+    NSPAssert(oldSectionMap);
+    NSPAssert(newSectionMap);
+    NSPAssert(updates);
+    NSPAssert(updatingDataSource);
+
+    BOOL reload = NO;
+    NSUInteger oldSectionCount = oldSectionMap.count;
+    NSUInteger newSectionCount = newSectionMap.count;
+    NSInteger oldIndex = 0;
+    NSInteger newIndex = 0;
+    NSObject* oldObj, *newObj;
+    NSObject<NSCopying>* oldKey, *newKey;
+    
+    // Optimize redundant object retrieval
+    BOOL repeatOld = NO;
+    BOOL repeatNew = NO;
+    BOOL delegateHasEqualSelector = [updatingDataSource respondsToSelector:@selector(tableView:isPreviousObject:equalToObject:)];
+    
+    while (true)
+    {
+        if (!repeatOld)
+            oldObj = oldKey = nil;
+        if (!repeatNew)
+            newObj = newKey = nil;
+        if (!oldObj && oldIndex < oldSectionCount)
+            oldObj = [updatingDataSource tableView:self objectForPreviousSection:oldIndex];
+        if (!newObj && newIndex < newSectionCount)
+            newObj = [updatingDataSource tableView:self objectForSection:newIndex];
+        if (!oldKey && oldObj)
+            oldKey = [updatingDataSource tableView:self keyForSectionObject:oldObj];
+        if (!newKey && newObj)
+            newKey = [updatingDataSource tableView:self keyForSectionObject:newObj];
+        
+        repeatOld = repeatNew = NO;
+        
+        if (!oldKey && !newKey)
+            break;
+        
+        if (oldKey)
+        {
+            NSNumber* newIndexToMatchOldId = [newSectionMap objectForKey:oldKey];
+            if (!newIndexToMatchOldId)
+            {
+                [updates.deleteSections addIndex:oldIndex];
+                oldIndex++;
+                repeatNew = YES;
+                continue;
+            }
+        }
+        
+        if (newKey)
+        {
+            NSNumber* oldIndexToMatchNewId = [oldSectionMap objectForKey:newKey];
+            if (!oldIndexToMatchNewId)
+            {
+                [updates.insertSections addIndex:newIndex];
+                newIndex++;
+                repeatOld = YES;
+                continue;
+            }
+        }
+        
+        if (newKey && oldKey)
+        {
+            // The order of items was manipulated beyond just additions and removals
+            // Bail
+            if (![oldKey isEqual:newKey])
+            {
+                reload = YES;
+                break;
+            }
+            
+            BOOL didChange = NO;
+            if (delegateHasEqualSelector)
+            {
+                didChange = ![updatingDataSource tableView:self
+                                   isPreviousSectionObject:oldObj
+                                      equalToSectionObject:newObj];
+            }
+            else
+            {
+                didChange = ![oldObj isEqual:newObj];
+            }
+            
+            if (didChange)
+            {
+                [updates.reloadSections addIndex:oldIndex];
+            }
+            else
+            {
+                // check row changes
+                if ([self _detectRowUpdates:updates
+                             withDataSource:updatingDataSource
+                         forPreviousSection:oldIndex
+                                    section:newIndex])
+                {
+                    [updates.reloadSections addIndex:oldIndex];
+                }
+            }
+        }
+        
+        oldIndex++;
+        newIndex++;
+    }
+    return reload;
+}
+
+- (void) _applyUpdates:(UITableViewUpdates*)updates
+{
+    [self beginUpdates];
+    if (updates.deleteSections.count > 0)
+    {
+        [self deleteSections:updates.deleteSections
+            withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    if (updates.deleteRows.count > 0)
+    {
+        [self deleteRowsAtIndexPaths:updates.deleteRows
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    if (updates.reloadSections.count > 0)
+    {
+        [self reloadSections:updates.reloadSections
+            withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    if (updates.reloadRows.count > 0)
+    {
+        [self reloadRowsAtIndexPaths:updates.reloadRows
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    if (updates.insertSections.count > 0)
+    {
+        [self insertSections:updates.insertSections
+            withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    if (updates.insertRows.count > 0)
+    {
+        [self insertRowsAtIndexPaths:updates.insertRows
+                    withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    [self endUpdates];
+}
+
+- (BOOL) _detectRowUpdates:(UITableViewUpdates*)updates
+            withDataSource:(id<UITableViewUpdatingDataSource>)updatingDataSource
+        forPreviousSection:(NSInteger)oldSection
+                   section:(NSInteger)newSection
 {
     BOOL reload = NO;
     NSInteger deletes = 0;
@@ -284,9 +340,7 @@
 
             if (!reload)
             {
-                NSPAssert(deleteRows);
-                NSPAssert(reloadRows);
-                NSPAssert(insertRows);
+                NSPAssert(updates);
 
                 NSInteger oldIndex = 0;
                 NSInteger newIndex = 0;
@@ -323,7 +377,7 @@
                         NSNumber* newIndexToMatchOldId = [newRowMap objectForKey:oldKey];
                         if (!newIndexToMatchOldId)
                         {
-                            [deleteRows addObject:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
+                            [updates.deleteRows addObject:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
                             oldIndex++;
                             deletes++;
                             repeatNew = YES;
@@ -336,7 +390,7 @@
                         NSNumber* oldIndexToMatchNewId = [oldRowMap objectForKey:newKey];
                         if (!oldIndexToMatchNewId)
                         {
-                            [insertRows addObject:[NSIndexPath indexPathForRow:newIndex inSection:newSection]];
+                            [updates.insertRows addObject:[NSIndexPath indexPathForRow:newIndex inSection:newSection]];
                             newIndex++;
                             inserts++;
                             repeatOld = YES;
@@ -368,7 +422,7 @@
 
                         if (didChange)
                         {
-                            [reloadRows addObject:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
+                            [updates.reloadRows addObject:[NSIndexPath indexPathForRow:oldIndex inSection:oldSection]];
                             reloads++;
                         }
                     }
@@ -385,15 +439,15 @@
         // Cleanup our modified lists of changes
         if (deletes)
         {
-            [deleteRows removeObjectsInRange:NSMakeRange(deleteRows.count - deletes, deletes)];
+            [updates.deleteRows removeObjectsInRange:NSMakeRange(updates.deleteRows.count - deletes, deletes)];
         }
         if (inserts)
         {
-            [insertRows removeObjectsInRange:NSMakeRange(insertRows.count - inserts, inserts)];
+            [updates.insertRows removeObjectsInRange:NSMakeRange(updates.insertRows.count - inserts, inserts)];
         }
         if (reloads)
         {
-            [reloadRows removeObjectsInRange:NSMakeRange(reloadRows.count - reloads, reloads)];
+            [updates.reloadRows removeObjectsInRange:NSMakeRange(updates.reloadRows.count - reloads, reloads)];
         }
     }
 

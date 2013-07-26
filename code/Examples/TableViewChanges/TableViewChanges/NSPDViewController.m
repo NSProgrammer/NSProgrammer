@@ -427,7 +427,7 @@ static volatile int32_t s_total = 0;
         }
         if (5 == row)
         {
-            return @"Random w/ None";
+            return @"Rnd w/ None";
         }
 
         NSPDDataEntryChangeLocation loc = row;
