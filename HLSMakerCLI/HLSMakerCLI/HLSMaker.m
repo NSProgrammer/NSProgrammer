@@ -24,6 +24,8 @@
 
 @interface HLSMaker ()
 @property (nonatomic, retain) HMArgs* args;
+@property (nonatomic, assign) CGSize  originalSize;
+@property (nonatomic, assign) double  aspectRatio;
 
 - (int) createMasterManifest:(NSArray*)settingsList;
 - (int) createHLSFiles:(HLSSettings*)settings;
@@ -110,23 +112,6 @@ break; \
                         }
                         break;
                     }
-                    case 'r':
-                    {
-                        if (!args.widescreen)
-                        {
-                            if ([value.lowercaseString isEqualToString:@"widescreen"])
-                                args.widescreen = @YES;
-                            else if ([value.lowercaseString isEqualToString:@"normal"])
-                                args.widescreen = @NO;
-                            else
-                                flag = 0;
-                        }
-                        else
-                        {
-                            dupe = YES;
-                        }
-                        break;
-                    }
                     default:
                     {
                         flag = 0;
@@ -162,14 +147,13 @@ break; \
 
 - (void) printUsage
 {
-    printf("\n%s -i INPUT_FILE [-o OUTPUT_DIRECTORY] [-b OUTPUT_BASE_NAME] [-t HLS_TYPES] [-h HANDBRAKE_CLI_PATH] [-m MEDIAFILESEGMENTER_PATH] [-r WIDESCREEN_OR_STANDARD]\n\n"\
+    printf("\n%s -i INPUT_FILE [-o OUTPUT_DIRECTORY] [-b OUTPUT_BASE_NAME] [-t HLS_TYPES] [-h HANDBRAKE_CLI_PATH] [-m MEDIAFILESEGMENTER_PATH]\n\n"\
            "\t-i\tThe input video file, preferrably 720p or better\n\n"\
            "\t-o\tThe output directory where the output files will live\n\n"\
            "\t-b\tThe base name for files created in the output directory, default is the output directory's name\n\n"\
            "\t-t\tA comma separated string of the desired HTTP Live Streams based on their speed in kilobits per second\n\t\t(possible values: 150,320,640,1280,1920,2560  - default is ALL)\n\n"\
            "\t-h\tThe location on disk of the HandBrakeCLI executable - default will check the current directory then the /usr/bin directory\n\n"\
-           "\t-m\tThe location on disk of the mediafilesegmenter executable - default will check the current directory then the /usr/bin directory\n\n"\
-           "\t-r\tThe ratio of the video, default is autodetect.  Options are \"widescreen\" (16:9) and \"standard\" (4:3)\n\n", self.args.executablePath.lastPathComponent.UTF8String);
+           "\t-m\tThe location on disk of the mediafilesegmenter executable - default will check the current directory then the /usr/bin directory\n\n", self.args.executablePath.lastPathComponent.UTF8String);
 }
 
 + (int) execute:(const char**)argv count:(int)argc
@@ -218,7 +202,7 @@ break; \
         [str appendString:@"#EXTM3U\n"];
         for (HLSSettings* settings in settingsList)
         {
-            [str appendFormat:@"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=%li\n", settings.kbps * 1200];
+            [str appendFormat:@"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=%li\n", settings.kbps * 1000];
             [str appendFormat:@"%li/prog_index.m3u8\n", settings.kbps];
         }
         NSString* m3u8 = [self.args.outputDirectory stringByAppendingPathComponent:self.args.baseName];
@@ -257,18 +241,28 @@ break; \
 - (int) convertVideo:(HLSSettings*)settings
 {
     @autoreleasepool {
+        NSMutableArray* args = [@[
+                                 @"-O", @"-e", @"x264", @"-2", @"-B", @"40", @"-R", @"22.05", @"--custom-anamorphic", @"--keep-display-aspect", @"--modulus", @"2",
+                                 @"--display-width", [NSString stringWithFormat:@"%f.2", (settings.height * self.aspectRatio)],
+                                 @"--width", [NSString stringWithFormat:@"%li", (NSUInteger)(settings.height * self.aspectRatio)],
+                                 @"--height", [NSString stringWithFormat:@"%li", settings.height],
+                                 @"-b", [NSString stringWithFormat:@"%li", settings.videoKbps],
+                                 @"-i", settings.sourceFile,
+                                 @"-o", settings.outputFile
+                                ] mutableCopy];
+        if (settings.kbps - settings.videoKbps < 60)
+        {
+            [args addObject:@"-a"];
+            [args addObject:@"none"];
+        }
+        else
+        {
+            [args addObject:@"-6"];
+            [args addObject:(settings.stereo ? @"stereo" : @"mono")];
+        }
         [[NSFileManager defaultManager] removeItemAtPath:settings.outputFile error:NULL];
         [NSTask executeAndReturnStdOut:self.args.handbrakePath
-                             arguments:@[
-         @"-O", @"-e", @"x264", @"-2", @"-B", @"40", @"-R", @"22.05", @"--custom-anamorphic", @"--keep-display-aspect", @"--modulus", @"2",
-         @"-6", (settings.stereo ? @"stereo" : @"mono"),
-         @"--display-width", [NSString stringWithFormat:@"%f.2", (float)settings.width],
-         @"--width", [NSString stringWithFormat:@"%li", settings.width],
-         @"--height", [NSString stringWithFormat:@"%li", settings.height],
-         @"-b", [NSString stringWithFormat:@"%li", settings.videoKbps],
-         @"-i", settings.sourceFile,
-         @"-o", settings.outputFile
-         ]];
+                             arguments:args];
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:settings.outputFile])
         {
@@ -284,8 +278,10 @@ break; \
 - (int) execute
 {
     int retVal = 0;
-    
-    CGSize originalSize = { 0, 0 };
+
+    printf("Detecting Aspect Ratio of %s...\n", self.args.sourceFile.UTF8String);
+
+    CGSize originalSize = { 960, 720 };
     MDItemRef vidItem = MDItemCreate(NULL, (__bridge CFStringRef)self.args.sourceFile);
     if (vidItem)
     {
@@ -298,31 +294,12 @@ break; \
         CFRelease(names);
         CFRelease(vidItem);
     }
+    printf("Failed to detect video dimensions, using fallback");
 
-    // TODO: improve this tool to instead of mandate that the aspect ratio be 16:9 or 4:3, it merely will preserve the aspect ratio by calculating ratio and applying.
-    if (!self.args.widescreen)
-    {
-        printf("Detecting Aspect Ratio of %s...\n", self.args.sourceFile.UTF8String);
-        printf("%lix%li == %f:1\n", (NSUInteger)originalSize.width, (NSUInteger)originalSize.height, originalSize.width / originalSize.height);
-        if ((NSUInteger)(originalSize.height * 16.0f / 9.0f) == (NSUInteger)originalSize.width)
-        {
-            printf("widescreen (16:9) detected!\n");
-            self.args.widescreen = @YES;
-        }
-        else if ((NSUInteger)(originalSize.height * 4.0f / 3.0f) == (NSUInteger)originalSize.width)
-        {
-            printf("standard (4:3) detected!\n");
-            self.args.widescreen = @NO;
-        }
-        else
-        {
-            BOOL widescreen = NO;
-            if (originalSize.width / originalSize.height >= 1.6f)
-                widescreen = YES;
-            printf("Aspect Ratio Doesn't Matched Preset!  Closest to %s.\n", widescreen ? "widescreen" : "standard");
-            self.args.widescreen = @(widescreen);
-        }
-    }
+    self.originalSize = originalSize;
+    self.aspectRatio  = originalSize.width / originalSize.height;
+
+    printf("%lix%li == %f:1\n", (NSUInteger)originalSize.width, (NSUInteger)originalSize.height, self.aspectRatio);
 
     NSMutableArray* settingsList = [[NSMutableArray alloc] init];
     for (NSNumber* typeNum in self.args.hlsTypes)
@@ -330,8 +307,7 @@ break; \
         HLSType type = typeNum.unsignedIntegerValue;
         HLSSettings* settings = [HLSSettings settingsForHLSType:type
                                                      sourceFile:self.args.sourceFile
-                                                outputDirectory:self.args.outputDirectory
-                                                     widescreen:self.args.widescreen.boolValue];
+                                                outputDirectory:self.args.outputDirectory];
         if (0 == (retVal = [self convertVideo:settings]))
         {
             retVal = [self createHLSFiles:settings];

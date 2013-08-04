@@ -29,7 +29,6 @@
 @property (nonatomic, copy) NSArray* hlsTypes;          // -t NSArray<NSNumber<HLSType>> ; default is ALL HLSTypes
 @property (nonatomic, copy) NSString* handbrakePath;    // -h default tries current execution directory, then /usr/bin
 @property (nonatomic, copy) NSString* mediafilesegmenterPath; // -m default tries current execution directory, then /usr/bin
-@property (nonatomic, copy) NSNumber* widescreen; // -r @"widescreen" or @"standard" ; maintained as NSNumber<BOOL>; default is auto-detect
 
 - (NSArray*) validate; // returns an array of errors
 

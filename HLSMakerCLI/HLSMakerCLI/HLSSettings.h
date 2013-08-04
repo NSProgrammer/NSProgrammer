@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, HLSType) {
+    HLSType_CellularMini, // no audio
     HLSType_CellularSlow,
     HLSType_CellularFast,
     HLSType_WifiSlow,
@@ -40,12 +41,11 @@ NSArray* GetAllHLSTypes(void);
 @property (nonatomic, copy) NSString* outputFile;
 @property (nonatomic, copy) NSString* outputDirectory;
 @property (nonatomic, assign) BOOL stereo; // NO == mono
-@property (nonatomic, assign) NSUInteger width;
 @property (nonatomic, assign) NSUInteger height;
 @property (nonatomic, assign) NSUInteger kbps;
 @property (nonatomic, assign) NSUInteger videoKbps;
 
-+ (NSArray*) allDefaultHLSSettings:(NSString*)sourceFile outputDirectory:(NSString*)outputDir widescreen:(BOOL)widescreen;
-+ (HLSSettings*) settingsForHLSType:(HLSType)type sourceFile:(NSString*)sourceFile outputDirectory:(NSString*)outputDir widescreen:(BOOL)widescreen;
++ (NSArray*) allDefaultHLSSettings:(NSString*)sourceFile outputDirectory:(NSString*)outputDir;
++ (HLSSettings*) settingsForHLSType:(HLSType)type sourceFile:(NSString*)sourceFile outputDirectory:(NSString*)outputDir;
 
 @end

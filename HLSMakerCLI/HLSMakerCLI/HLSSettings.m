@@ -22,35 +22,26 @@
 
 typedef struct {
     BOOL stereo;
-    NSUInteger width;
     NSUInteger height;
     NSUInteger kbps;
     NSUInteger videoKbps;
 } HLSConfig;
 
-static const HLSConfig s_wideScreenConfigs[] = {
-    { NO, 320, 180, 150, 90 },
-    { NO, 320, 180, 320, 260 },
-    { NO, 640, 360, 640, 580 },
-    { YES, 640, 360, 1280, 1200 },
-    { YES, 960, 540, 1920, 1800 },
-    { YES, 1280, 720, 2560, 2400 }
-};
-
-static const HLSConfig s_standardConfigs[] = {
-    { NO, 240, 180, 150, 90 },
-    { NO, 240, 180, 320, 260 },
-    { NO, 480, 360, 640, 580 },
-    { YES, 480, 360, 1280, 1200 },
-    { YES, 720, 540, 1920, 1800 },
-    { YES, 960, 720, 2560, 2400 }
+static const HLSConfig s_configs[] = {
+    { NO, 180, 64, 40 },
+    { NO, 180, 150, 70 },
+    { NO, 180, 320, 210 },
+    { NO, 360, 640, 450 },
+    { YES, 360, 1280, 1000 },
+    { YES, 540, 1920, 1500 },
+    { YES, 720, 2560, 2000 }
 };
 
 HLSType KBPS2HLSType(NSInteger kbps)
 {
     for (HLSType type = 0; type < HLSTypeCount; type++)
     {
-        if (s_wideScreenConfigs[type].kbps == kbps)
+        if (s_configs[type].kbps == kbps)
         {
             return type;
         }
@@ -70,20 +61,19 @@ NSArray* GetAllHLSTypes(void)
 
 @implementation HLSSettings
 
-+ (NSArray*) allDefaultHLSSettings:(NSString*)sourceFile outputDirectory:(NSString*)outputDir widescreen:(BOOL)widescreen
++ (NSArray*) allDefaultHLSSettings:(NSString*)sourceFile outputDirectory:(NSString*)outputDir
 {
     NSMutableArray* settingsList = [[NSMutableArray alloc] init];
     for (HLSType type = 0; type < HLSTypeCount; type++)
     {
-        [settingsList addObject:[HLSSettings settingsForHLSType:type sourceFile:sourceFile outputDirectory:outputDir widescreen:widescreen]];
+        [settingsList addObject:[HLSSettings settingsForHLSType:type sourceFile:sourceFile outputDirectory:outputDir]];
     }
     return [settingsList copy];
 }
 
-+ (HLSSettings*) settingsForHLSType:(HLSType)type sourceFile:(NSString *)sourceFile outputDirectory:(NSString*)outputDir widescreen:(BOOL)widescreen
++ (HLSSettings*) settingsForHLSType:(HLSType)type sourceFile:(NSString *)sourceFile outputDirectory:(NSString*)outputDir
 {
-    const HLSConfig* configs = (widescreen ? s_wideScreenConfigs : s_standardConfigs);
-    HLSConfig config = configs[type];
+    HLSConfig config = s_configs[type];
     return [[HLSSettings alloc] initWithConfig:config sourceFile:sourceFile outputDirectory:outputDir];
 }
 
@@ -93,7 +83,6 @@ NSArray* GetAllHLSTypes(void)
     {
         self.sourceFile = sourceFile;
         self.stereo = config.stereo;
-        self.width  = config.width;
         self.height = config.height;
         self.kbps   = config.kbps;
         self.videoKbps = config.videoKbps;
@@ -116,7 +105,6 @@ NSArray* GetAllHLSTypes(void)
     if (self.outputFile)
         [d setObject:self.outputFile forKey:@"outputFile"];
     [d setObject:@(self.stereo) forKey:@"stereo"];
-    [d setObject:@(self.width) forKey:@"width"];
     [d setObject:@(self.height) forKey:@"height"];
     [d setObject:@(self.kbps) forKey:@"kbps"];
     [d setObject:@(self.videoKbps) forKey:@"videoKbps"];

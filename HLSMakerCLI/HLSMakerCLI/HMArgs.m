@@ -134,8 +134,6 @@
         [d setObject:self.handbrakePath forKey:@"handbrakePath"];
     if (self.mediafilesegmenterPath)
         [d setObject:self.mediafilesegmenterPath forKey:@"mediafilesegmenterPath"];
-    if (self.widescreen)
-        [d setObject:self.widescreen forKey:@"widescreen"];
     
     return d.description;
 }
