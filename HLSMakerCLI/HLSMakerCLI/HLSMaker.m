@@ -218,8 +218,8 @@ break; \
         [str appendString:@"#EXTM3U\n"];
         for (HLSSettings* settings in settingsList)
         {
-            [str appendFormat:@"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=%li\n", settings.kbps * 1000];
-            [str appendFormat:@"     %li/prog_index.m3u8\n", settings.kbps];
+            [str appendFormat:@"#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=%li\n", settings.kbps * 1200];
+            [str appendFormat:@"%li/prog_index.m3u8\n", settings.kbps];
         }
         NSString* m3u8 = [self.args.outputDirectory stringByAppendingPathComponent:self.args.baseName];
         m3u8 = [m3u8 stringByAppendingPathExtension:@"m3u8"];
