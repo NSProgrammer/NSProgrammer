@@ -104,10 +104,9 @@
             break;
         }
     }
+
     if (hlsFail)
-    {
         [errors addObject:[NSError errorWithDomain:NSArgumentDomain code:EINVAL userInfo:@{ @"argument" : @"-t", @"value" : self.hlsTypes}]];
-    }
     if (![fm fileExistsAtPath:self.handbrakePath isDirectory:&isDir] || isDir)
         [errors addObject:[NSError errorWithDomain:NSArgumentDomain code:EINVAL userInfo:@{ @"argument" : @"-h", @"value" : self.handbrakePath}]];
     if (![fm fileExistsAtPath:self.mediafilesegmenterPath isDirectory:&isDir] || isDir)

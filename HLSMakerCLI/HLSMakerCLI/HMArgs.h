@@ -20,6 +20,11 @@
 
 #import <Foundation/Foundation.h>
 
+/*
+ For HandBrake, see http://handbrake.fr
+ For mediafilesegmenter, see https://developer.apple.com/downloads/index.action?=http%20live%20streaming%20tools
+ */
+
 @interface HMArgs : NSObject
 
 @property (nonatomic, copy) NSString* executablePath;

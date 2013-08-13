@@ -151,9 +151,9 @@ break; \
            "\t-i\tThe input video file, preferrably 720p or better\n\n"\
            "\t-o\tThe output directory where the output files will live\n\n"\
            "\t-b\tThe base name for files created in the output directory, default is the output directory's name\n\n"\
-           "\t-t\tA comma separated string of the desired HTTP Live Streams based on their speed in kilobits per second\n\t\t(possible values: 150,320,640,1280,1920,2560  - default is ALL)\n\n"\
-           "\t-h\tThe location on disk of the HandBrakeCLI executable - default will check the current directory then the /usr/bin directory\n\n"\
-           "\t-m\tThe location on disk of the mediafilesegmenter executable - default will check the current directory then the /usr/bin directory\n\n", self.args.executablePath.lastPathComponent.UTF8String);
+           "\t-t\tA comma separated string of the desired HTTP Live Streams based on their speed in kilobits per second\n\t\t(possible values: 64,150,320,640,1280,1920,2560  - default is ALL)\n\n"\
+           "\t-h\tThe location on disk of the HandBrakeCLI executable - default will check the current directory then the /usr/bin directory.  See http://handbrake.fr\n\n"\
+           "\t-m\tThe location on disk of the mediafilesegmenter executable - default will check the current directory then the /usr/bin directory.  See https://developer.apple.com/downloads/index.action?=http%%20live%%20streaming%%20tools\n\n", self.args.executablePath.lastPathComponent.UTF8String);
 }
 
 + (int) execute:(const char**)argv count:(int)argc
@@ -242,7 +242,7 @@ break; \
 {
     @autoreleasepool {
         NSMutableArray* args = [@[
-                                 @"-O", @"-e", @"x264", @"-2", @"-B", @"40", @"-R", @"22.05", @"--custom-anamorphic", @"--keep-display-aspect", @"--modulus", @"2",
+                                 @"-O", @"-e", @"x264", @"-2", @"-R", @"22.05", @"--custom-anamorphic", @"--keep-display-aspect", @"--modulus", @"2",
                                  @"--display-width", [NSString stringWithFormat:@"%f.2", (settings.height * self.aspectRatio)],
                                  @"--width", [NSString stringWithFormat:@"%li", (NSUInteger)(settings.height * self.aspectRatio)],
                                  @"--height", [NSString stringWithFormat:@"%li", settings.height],
@@ -259,6 +259,8 @@ break; \
         {
             [args addObject:@"-6"];
             [args addObject:(settings.stereo ? @"stereo" : @"mono")];
+            [args addObject:@"-B"];
+            [args addObject:(settings.stereo ? @"40" : @"32")];
         }
         [[NSFileManager defaultManager] removeItemAtPath:settings.outputFile error:NULL];
         [NSTask executeAndReturnStdOut:self.args.handbrakePath
