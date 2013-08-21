@@ -18,15 +18,4 @@
  
  */
 
-#ifndef _NSPUILib_h
-#define _NSPUILib_h
 
-#import "NSPUICommon.h"
-#import "NSPRuntime.h"
-
-// Categories
-#import "UIImage+ASyncRendering.h"
-#import "UITableView+Updating.h"
-#import "UIView+Extensions.h"
-
-#endif

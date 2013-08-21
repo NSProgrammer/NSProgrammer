@@ -18,15 +18,32 @@
  
  */
 
-#ifndef _NSPUILib_h
-#define _NSPUILib_h
+/**
+ @def STACK_CLEANUP_CGTYPE(type)
+ Simple macro for using the stack to cleanup a Core Graphics object
+ @par Example:
+ @code
+ STACK_CLEANUP_CGTYPE(CGColorRef) tmp = CGColorRetain(otherCGColor);
+ @endcode
+ */
+#define STACK_CLEANUP_CGTYPE(type) __attribute__((cleanup(Cleanup_##type))) type
 
-#import "NSPUICommon.h"
-#import "NSPRuntime.h"
+#define STACK_CLEANUP_CGTYPE_FUNCTION(name) \
+__attribute__((unused)) NS_INLINE void Cleanup_##name##Ref(name##Ref* ptr) \
+{ \
+    if (*(name##Ref*)ptr) { name##Release(*(name##Ref*)ptr); } \
+}
 
-// Categories
-#import "UIImage+ASyncRendering.h"
-#import "UITableView+Updating.h"
-#import "UIView+Extensions.h"
-
-#endif
+STACK_CLEANUP_CGTYPE_FUNCTION(CGColor)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGColorSpace)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGContext)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGDataConsumer)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGDataProvider)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGFont)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGFunction)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGGradient)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGImage)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGLayer)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGPath)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGPattern)
+STACK_CLEANUP_CGTYPE_FUNCTION(CGShading)

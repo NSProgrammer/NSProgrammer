@@ -18,15 +18,27 @@
  
  */
 
-#ifndef _NSPUILib_h
-#define _NSPUILib_h
+#import <UIKit/UIKit.h>
 
-#import "NSPUICommon.h"
-#import "NSPRuntime.h"
+typedef void(^UIImageASyncRenderingCompletionBlock)(UIImage*);
 
-// Categories
-#import "UIImage+ASyncRendering.h"
-#import "UITableView+Updating.h"
-#import "UIView+Extensions.h"
+typedef NS_ENUM(NSInteger, NSPUIImageType)
+{
+    NSPUIImageType_JPEG,
+    NSPUIImageType_PNG
+};
 
-#endif
+@interface UIImage (ASyncRendering)
+
+/**
+    Renders the provided image data asynchronously so as to not block the main thread.  Very useful when desiring to 
+    keep the UI responsive while still generating UI from downloaded and compressed images.
+    @param imageData the data to render as a UIImage.
+    @param imageType the image type decode the \a imageData as.  Can be \c NSPUIImageType_JPEG or \c NSPUIImageType_PNG.
+    @param block the completion block to be called once the \a imageData is rendered as a \c UIImage.
+ */
++ (void) imageByRenderingData:(NSData*)imageData
+                  ofImageType:(NSPUIImageType)imageType
+                   completion:(UIImageASyncRenderingCompletionBlock)block;
+
+@end

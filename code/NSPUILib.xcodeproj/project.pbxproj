@@ -11,6 +11,8 @@
 		1C09B84E175DBA3000316FE9 /* NSPUILib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1C09B84D175DBA3000316FE9 /* NSPUILib.h */; };
 		1C09B858175DBAB800316FE9 /* NSPUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C09B857175DBAB800316FE9 /* NSPUICommon.m */; };
 		1C09B85F175DBB7A00316FE9 /* libNSPLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B85E175DBB1B00316FE9 /* libNSPLib.a */; };
+		1C1DDB6917C5723200F587DD /* UIImage+ASyncRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */; };
+		1C1DDB6C17C5753300F587DD /* NSPUIRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1DDB6B17C5753300F587DD /* NSPUIRuntime.m */; };
 		1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D60531789F77300680663 /* UITableView+Updating.m */; };
 		1C557DA51777F66D0012B90F /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C557DA41777F66D0012B90F /* UIView+Extensions.m */; };
 		1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C557DA61777F6CE0012B90F /* UIKit.framework */; };
@@ -54,6 +56,10 @@
 		1C09B856175DBAB800316FE9 /* NSPUICommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPUICommon.h; sourceTree = "<group>"; };
 		1C09B857175DBAB800316FE9 /* NSPUICommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPUICommon.m; sourceTree = "<group>"; };
 		1C09B859175DBB1A00316FE9 /* NSPLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NSPLib.xcodeproj; sourceTree = "<group>"; };
+		1C1DDB6717C5723100F587DD /* UIImage+ASyncRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ASyncRendering.h"; sourceTree = "<group>"; };
+		1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ASyncRendering.m"; sourceTree = "<group>"; };
+		1C1DDB6A17C5753300F587DD /* NSPUIRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPUIRuntime.h; sourceTree = "<group>"; };
+		1C1DDB6B17C5753300F587DD /* NSPUIRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPUIRuntime.m; sourceTree = "<group>"; };
 		1C2D60521789F77300680663 /* UITableView+Updating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Updating.h"; sourceTree = "<group>"; };
 		1C2D60531789F77300680663 /* UITableView+Updating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Updating.m"; sourceTree = "<group>"; };
 		1C557DA31777F66D0012B90F /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
@@ -132,6 +138,8 @@
 		1C99BF291767A6E5007CE48F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				1C1DDB6717C5723100F587DD /* UIImage+ASyncRendering.h */,
+				1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */,
 				1C2D60521789F77300680663 /* UITableView+Updating.h */,
 				1C2D60531789F77300680663 /* UITableView+Updating.m */,
 				1C557DA31777F66D0012B90F /* UIView+Extensions.h */,
@@ -145,6 +153,8 @@
 			children = (
 				1C09B856175DBAB800316FE9 /* NSPUICommon.h */,
 				1C09B857175DBAB800316FE9 /* NSPUICommon.m */,
+				1C1DDB6A17C5753300F587DD /* NSPUIRuntime.h */,
+				1C1DDB6B17C5753300F587DD /* NSPUIRuntime.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -220,6 +230,8 @@
 				1C09B858175DBAB800316FE9 /* NSPUICommon.m in Sources */,
 				1C557DA51777F66D0012B90F /* UIView+Extensions.m in Sources */,
 				1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */,
+				1C1DDB6917C5723200F587DD /* UIImage+ASyncRendering.m in Sources */,
+				1C1DDB6C17C5753300F587DD /* NSPUIRuntime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

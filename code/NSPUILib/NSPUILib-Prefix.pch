@@ -10,4 +10,5 @@
 
     #import "NSPLib.h"
     #import "NSPUICommon.h"
+    #import "NSPUIRuntime.h"
 #endif
