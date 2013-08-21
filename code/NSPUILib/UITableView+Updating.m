@@ -18,8 +18,6 @@
  
  */
 
-#if !UITABLEVIEW_UPDATING_WITH_BLOCK_ABSTRACTION
-
 #import "UITableView+Updating.h"
 #include <objc/message.h>
 
@@ -605,5 +603,3 @@ typedef struct _NSMutableDictionaryRuntimeInfo {
 }
 
 @end
-
-#endif // !UITABLEVIEW_UPDATING_WITH_BLOCK_ABSTRACTION
