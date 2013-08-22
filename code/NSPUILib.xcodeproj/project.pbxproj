@@ -11,6 +11,7 @@
 		1C09B84E175DBA3000316FE9 /* NSPUILib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1C09B84D175DBA3000316FE9 /* NSPUILib.h */; };
 		1C09B858175DBAB800316FE9 /* NSPUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C09B857175DBAB800316FE9 /* NSPUICommon.m */; };
 		1C09B85F175DBB7A00316FE9 /* libNSPLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B85E175DBB1B00316FE9 /* libNSPLib.a */; };
+		1C1413DF17C65F8D009DF1FC /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1413DE17C65F8D009DF1FC /* UIColor+Extensions.m */; };
 		1C1DDB6917C5723200F587DD /* UIImage+ASyncRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */; };
 		1C1DDB6C17C5753300F587DD /* NSPUIRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1DDB6B17C5753300F587DD /* NSPUIRuntime.m */; };
 		1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D60531789F77300680663 /* UITableView+Updating.m */; };
@@ -57,6 +58,8 @@
 		1C09B856175DBAB800316FE9 /* NSPUICommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPUICommon.h; sourceTree = "<group>"; };
 		1C09B857175DBAB800316FE9 /* NSPUICommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPUICommon.m; sourceTree = "<group>"; };
 		1C09B859175DBB1A00316FE9 /* NSPLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NSPLib.xcodeproj; sourceTree = "<group>"; };
+		1C1413DD17C65F8D009DF1FC /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
+		1C1413DE17C65F8D009DF1FC /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		1C1DDB6717C5723100F587DD /* UIImage+ASyncRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ASyncRendering.h"; sourceTree = "<group>"; };
 		1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ASyncRendering.m"; sourceTree = "<group>"; };
 		1C1DDB6A17C5753300F587DD /* NSPUIRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPUIRuntime.h; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 			children = (
 				1CFC3D8417C5C54C0016CE18 /* UIAlertView+Extensions.h */,
 				1CFC3D8517C5C54C0016CE18 /* UIAlertView+Extensions.m */,
+				1C1413DD17C65F8D009DF1FC /* UIColor+Extensions.h */,
+				1C1413DE17C65F8D009DF1FC /* UIColor+Extensions.m */,
 				1C1DDB6717C5723100F587DD /* UIImage+ASyncRendering.h */,
 				1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */,
 				1C2D60521789F77300680663 /* UITableView+Updating.h */,
@@ -238,6 +243,7 @@
 				1C1DDB6917C5723200F587DD /* UIImage+ASyncRendering.m in Sources */,
 				1C1DDB6C17C5753300F587DD /* NSPUIRuntime.m in Sources */,
 				1CFC3D8617C5C54C0016CE18 /* UIAlertView+Extensions.m in Sources */,
+				1C1413DF17C65F8D009DF1FC /* UIColor+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

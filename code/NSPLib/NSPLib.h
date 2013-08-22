@@ -31,7 +31,10 @@
 #import "NSPVersion.h"
 
 // Classes
+#import "NSCharacterSet+Extensions.h"
 #import "NSData+Description.h"
 #import "NSData+Serialize.h"
+#import "NSFileManager+Extensions.h"
+#import "NSString+Extensions.h"
 
 #endif

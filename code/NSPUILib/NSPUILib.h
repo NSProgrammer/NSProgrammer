@@ -26,6 +26,7 @@
 
 // Categories
 #import "UIAlertView+Extensions.h"
+#import "UIColor+Extensions.h"
 #import "UIImage+ASyncRendering.h"
 #import "UITableView+Updating.h"
 #import "UIView+Extensions.h"
