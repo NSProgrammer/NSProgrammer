@@ -39,7 +39,7 @@
             STACK_CLEANUP_CGTYPE(CGDataProviderRef) dataProvider = CGDataProviderCreateWithCFData((__bridge CFDataRef)imageData);
             if (dataProvider)
             {
-                STACK_CLEANUP_CGTYPE(CGImageRef)image = NULL;
+                STACK_CLEANUP_CGTYPE(CGImageRef) image = NULL;
                 if (NSPUIImageType_PNG == imageType)
                     image = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
                 else
@@ -49,22 +49,21 @@
                 {
                     size_t width = CGImageGetWidth(image);
                     size_t height = CGImageGetHeight(image);
-                    STACK_CLEANUP_CMEMORY(unsigned char*)imageBuffer = (unsigned char*)malloc(width*height*4);
+                    STACK_CLEANUP_CMEMORY(unsigned char*) imageBuffer = (unsigned char*)malloc(width*height*4);
                     
-                    STACK_CLEANUP_CGTYPE(CGColorSpaceRef)colorSpace = CGColorSpaceCreateDeviceRGB();
-                    STACK_CLEANUP_CGTYPE(CGContextRef)imageContext =
-                    CGBitmapContextCreate(imageBuffer,
-                                          width,
-                                          height,
-                                          8,
-                                          width*4,
-                                          colorSpace,
-                                          (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little));
+                    STACK_CLEANUP_CGTYPE(CGColorSpaceRef) colorSpace = CGColorSpaceCreateDeviceRGB();
+                    STACK_CLEANUP_CGTYPE(CGContextRef) imageContext = CGBitmapContextCreate(imageBuffer,
+                                                                                           width,
+                                                                                           height,
+                                                                                           8,
+                                                                                           width*4,
+                                                                                           colorSpace,
+                                                                                           (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Little));
                     
                     if (imageContext)
                     {
                         CGContextDrawImage(imageContext, CGRectMake(0, 0, width, height), image);
-                        STACK_CLEANUP_CGTYPE(CGImageRef)outputImage = CGBitmapContextCreateImage(imageContext);
+                        STACK_CLEANUP_CGTYPE(CGImageRef) outputImage = CGBitmapContextCreateImage(imageContext);
                         if (outputImage)
                         {
                             imageObj = [UIImage imageWithCGImage:outputImage
