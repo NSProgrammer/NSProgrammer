@@ -16,6 +16,7 @@
 		1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C2D60531789F77300680663 /* UITableView+Updating.m */; };
 		1C557DA51777F66D0012B90F /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C557DA41777F66D0012B90F /* UIView+Extensions.m */; };
 		1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C557DA61777F6CE0012B90F /* UIKit.framework */; };
+		1CFC3D8617C5C54C0016CE18 /* UIAlertView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFC3D8517C5C54C0016CE18 /* UIAlertView+Extensions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		1C557DA31777F66D0012B90F /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extensions.h"; sourceTree = "<group>"; };
 		1C557DA41777F66D0012B90F /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extensions.m"; sourceTree = "<group>"; };
 		1C557DA61777F6CE0012B90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1CFC3D8417C5C54C0016CE18 /* UIAlertView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Extensions.h"; sourceTree = "<group>"; };
+		1CFC3D8517C5C54C0016CE18 /* UIAlertView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Extensions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 		1C99BF291767A6E5007CE48F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				1CFC3D8417C5C54C0016CE18 /* UIAlertView+Extensions.h */,
+				1CFC3D8517C5C54C0016CE18 /* UIAlertView+Extensions.m */,
 				1C1DDB6717C5723100F587DD /* UIImage+ASyncRendering.h */,
 				1C1DDB6817C5723100F587DD /* UIImage+ASyncRendering.m */,
 				1C2D60521789F77300680663 /* UITableView+Updating.h */,
@@ -232,6 +237,7 @@
 				1C2D60541789F77300680663 /* UITableView+Updating.m in Sources */,
 				1C1DDB6917C5723200F587DD /* UIImage+ASyncRendering.m in Sources */,
 				1C1DDB6C17C5753300F587DD /* NSPUIRuntime.m in Sources */,
+				1CFC3D8617C5C54C0016CE18 /* UIAlertView+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
