@@ -24,6 +24,7 @@
 #import "NSPCommon.h"
 
 #import "NSPConversion.h"
+#import "NSPDictionary.h"
 #import "NSPLibraryLoader.h"
 #import "NSPLogger.h"
 #import "NSPStringUtils.h"
