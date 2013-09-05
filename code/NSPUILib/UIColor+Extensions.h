@@ -39,4 +39,10 @@ typedef uint32_t UIColorRGB;
  */
 + (UIColor*) colorWithRGB:(UIColorRGB)color32Bits;
 
+/**
+     Get the UIColorRGB value of the target color.
+     @return The UIColorRGB representation of the color.
+ */
+- (UIColorRGB) rgbValue;
+
 @end
