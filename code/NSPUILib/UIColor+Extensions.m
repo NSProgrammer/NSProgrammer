@@ -77,4 +77,20 @@
                            alpha:(((float)(hexChars[3])) / 255.0f)];
 }
 
+- (UIColorRGB) rgbValue
+{
+    CGFloat r, g, b, a;
+    UIColorRGB rgb;
+    unsigned char* rgbChars = (unsigned char*)&rgb;
+
+    [self getRed:&r green:&g blue:&b alpha:&a];
+
+    rgbChars[2] = (unsigned char)MIN(MAX(r * 255.0f, 255.0f), 0);
+    rgbChars[1] = (unsigned char)MIN(MAX(g * 255.0f, 255.0f), 0);
+    rgbChars[0] = (unsigned char)MIN(MAX(b * 255.0f, 255.0f), 0);
+    rgbChars[3] = (unsigned char)MIN(MAX(a * 255.0f, 255.0f), 0);
+
+    return rgb;
+}
+
 @end
