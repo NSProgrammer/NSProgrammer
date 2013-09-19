@@ -24,13 +24,13 @@
 
 @interface NSPVersion (Hidden)
 // components MUST be NSNumbers
-- (id) initWithComponentsPure:(NSArray *)components;
-+ (NSPVersion*) versionWithComponentsPure:(NSArray*)components;
+- (instancetype) initWithComponentsPure:(NSArray *)components;
++ (instancetype) versionWithComponentsPure:(NSArray*)components;
 @end
 
 @implementation NSPVersion
 
-- (id) init
+- (instancetype) init
 {
     if (self = [super init])
     {
@@ -39,7 +39,7 @@
     return self;
 }
 
-- (id) initWithComponents:(NSArray*)components
+- (instancetype) initWithComponents:(NSArray*)components
 {
     if (!components)
         return [self init];
@@ -68,17 +68,17 @@
     return [self initWithComponentsPure:mutComponents];
 }
 
-- (id) initWithString:(NSString*)versionStr
+- (instancetype) initWithString:(NSString*)versionStr
 {
     return [self initWithComponents:[versionStr componentsSeparatedByString:@"."]];
 }
 
-- (id) initWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
+- (instancetype) initWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
 {
     return [self initWithComponentsPure:@[@(major), @(minor), @(revision), @(build)]];
 }
 
-- (id) initWithComponentsPure:(NSArray*)components
+- (instancetype) initWithComponentsPure:(NSArray*)components
 {
     if (self = [super init])
     {
@@ -87,24 +87,24 @@
     return self;
 }
 
-+ (NSPVersion*) versionWithComponentsPure:(NSArray*)components
++ (instancetype) versionWithComponentsPure:(NSArray*)components
 {
-    return [[NSPVersion alloc] initWithComponentsPure:components];
+    return [[self alloc] initWithComponentsPure:components];
 }
 
-+ (NSPVersion*) versionWithString:(NSString*)versionStr
++ (instancetype) versionWithString:(NSString*)versionStr
 {
-    return [[NSPVersion alloc] initWithString:versionStr];
+    return [[self alloc] initWithString:versionStr];
 }
 
-+ (NSPVersion*) versionWithComponents:(NSArray*)components
++ (instancetype) versionWithComponents:(NSArray*)components
 {
-    return [[NSPVersion alloc] initWithComponents:components];
+    return [[self alloc] initWithComponents:components];
 }
 
-+ (NSPVersion*) versionWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
++ (instancetype) versionWithMajorVersion:(NSUInteger)major minorVersion:(NSUInteger)minor revisionVersion:(NSUInteger)revision buildVersion:(NSUInteger)build
 {
-    return [[NSPVersion alloc] initWithMajorVersion:major minorVersion:minor revisionVersion:revision buildVersion:build];
+    return [[self alloc] initWithMajorVersion:major minorVersion:minor revisionVersion:revision buildVersion:build];
 }
 
 + (NSPVersion*) appVersion

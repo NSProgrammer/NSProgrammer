@@ -51,6 +51,6 @@
     Initialize an \c NSData object with a hex string.
     @see dataWithHexString:
  */
-- (id) initWithHexString:(NSString*)hexString;
+- (instancetype) initWithHexString:(NSString*)hexString;
 
 @end

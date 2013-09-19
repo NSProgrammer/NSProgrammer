@@ -36,21 +36,21 @@
     Load a Framework by name.
     @param frameworkName the name of the Framework to load, example: \@"UIKit"
  */
-- (id) initWithFramework:(NSString*)frameworkName;
+- (instancetype) initWithFramework:(NSString*)frameworkName;
 /**
     @see initWithFramework:
  */
-+ (id) loaderWithFramework:(NSString*)frameworkName;
++ (instancetype) loaderWithFramework:(NSString*)frameworkName;
 
 /**
     Load a dynamic library by name.
     @param dylibName the name of the library to load.  Example: to load libxml2, the string could be any of \@"libxml2.dylib", \@"libxml2" or \@"xml2"
  */
-- (id) initWithDynamicLibrary:(NSString*)dylibName;
+- (instancetype) initWithDynamicLibrary:(NSString*)dylibName;
 /**
     @see initWithDynamicLibrary:
  */
-+ (id) loaderWithDynamicLibrary:(NSString*)dylibName;
++ (instancetype) loaderWithDynamicLibrary:(NSString*)dylibName;
 
 /**
     Get a symbol via its name.

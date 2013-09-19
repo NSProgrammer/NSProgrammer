@@ -102,7 +102,7 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
     return [[NSData alloc] initWithHexString:hexString];
 }
 
-- (id) initWithHexString:(NSString*)hexString
+- (instancetype) initWithHexString:(NSString*)hexString
 {
     size_t dataBytesLength = hexString.length;
     dataBytesLength = (dataBytesLength / 2) + (dataBytesLength % 2); // max possible bytes

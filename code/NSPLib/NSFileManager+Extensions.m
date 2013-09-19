@@ -63,4 +63,36 @@
     return size;
 }
 
++ (NSString*) documentsDirectoryPath
+{
+#if !TARGET_OS_IPHONE
+    NS_UNRECOGNIZED_SELECTOR;
+// #warning TODO: implement Mac OS X pathing
+#endif
+
+    static __strong NSString* s_path = nil;
+    if (!s_path)
+    {
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        s_path = [paths objectAtIndex:0];
+    }
+    return s_path;
+}
+
++ (NSString*) cachesDirectoryPath
+{
+#if !TARGET_OS_IPHONE
+    NS_UNRECOGNIZED_SELECTOR;
+// #warning TODO: implement Mac OS X pathing
+#endif
+
+    static __strong NSString* s_path = nil;
+    if (!s_path)
+    {
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        s_path = [paths objectAtIndex:0];
+    }
+    return s_path;
+}
+
 @end

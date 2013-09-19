@@ -92,7 +92,7 @@ NSTimeInterval ExecuteTimedBlock(GenericBlock block)
 
 @implementation NSPTimingObject
 
-- (id) initWithTimingId:(NSString *)timingId
+- (instancetype) initWithTimingId:(NSString *)timingId
 {
     if (self = [super init])
     {

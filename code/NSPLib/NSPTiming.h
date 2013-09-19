@@ -32,9 +32,9 @@ NSTimeInterval ExecuteTimedBlock(GenericBlock block);
 #define LogBlock(logLevel, name, block)   do { NSTimeInterval ti__ = ExecuteTimedBlock(block); LOG(logLevel, @"FINISHED %@: %.4f seconds", name, ti__); } while (0)
 
 #ifndef RELEASE
-#define LogStartDebug(timingId)           LogStart(NSPLogLevel_LowLevel, timingId)
-#define LogFinishDebug(timingId)          LogFinish(NSPLogLevel_LowLevel, timingId)
-#define LogBlockDebug(name, block)        LogBlock(NSPLogLevel_LowLevel, name, block)
+#define LogStartDebug(timingId)           LogStart(NSPLogLevel_Low, timingId)
+#define LogFinishDebug(timingId)          LogFinish(NSPLogLevel_Low, timingId)
+#define LogBlockDebug(name, block)        LogBlock(NSPLogLevel_Low, name, block)
 #else
 #define LogStartDebug(timingId)           ((void)0)
 #define LogFinishDebug(timingId)          ((void)0)
@@ -46,6 +46,6 @@ NSTimeInterval ExecuteTimedBlock(GenericBlock block);
 
 @interface NSPTimingObject : NSObject
 @property (nonatomic, readonly) NSString* timingId;
-- (id) initWithTimingId:(NSString*)timingId;
+- (instancetype) initWithTimingId:(NSString*)timingId;
 - (NSTimeInterval) timeElapsed;
 @end

@@ -38,19 +38,19 @@
 
 /**
     @def LOG_HI(format, ...)
-    Log using \c NSPLogLevel_HighLevel. Provide a format string followed by any format arguments.
+    Log using \c NSPLogLevel_High. Provide a format string followed by any format arguments.
  */
-#define LOG_HI(format, ...)  LOG(NSPLogLevel_HighLevel, format,##__VA_ARGS__)
+#define LOG_HI(format, ...)  LOG(NSPLogLevel_High, format,##__VA_ARGS__)
 /**
     @def LOG_MID(format, ...)
-    Log using \c NSPLogLevel_MidLevel. Provide a format string followed by any format arguments.
+    Log using \c NSPLogLevel_Mid. Provide a format string followed by any format arguments.
  */
-#define LOG_MID(format, ...) LOG(NSPLogLevel_MidLevel, format,##__VA_ARGS__)
+#define LOG_MID(format, ...) LOG(NSPLogLevel_Mid, format,##__VA_ARGS__)
 /**
     @def LOG_LO(format, ...)
-    Log using \c NSPLogLevel_LowLevel. Provide a format string followed by any format arguments.
+    Log using \c NSPLogLevel_Low. Provide a format string followed by any format arguments.
  */
-#define LOG_LO(format, ...)  LOG(NSPLogLevel_LowLevel, format,##__VA_ARGS__)
+#define LOG_LO(format, ...)  LOG(NSPLogLevel_Low, format,##__VA_ARGS__)
 
 /**
     @def LOG_DBG(format, ...)
@@ -59,7 +59,7 @@
 #ifdef DEBUG
 #define LOG_DBG(format, ...) ((void)0)
 #else
-#define LOG_DBG(format, ...) LOG(NSPLogLevel_LowLevel, format,##__VA_ARGS__)
+#define LOG_DBG(format, ...) LOG(NSPLogLevel_Low, format,##__VA_ARGS__)
 #endif
 
 /**
@@ -87,9 +87,9 @@ FOUNDATION_EXPORT NSString*  const kNSPLoggerDefaultFilePrefix;       /*!< \c \@
 typedef NS_ENUM(NSUInteger, NSPLogLevel)
 {
     NSPLogLevel_Off = 0,    /**< level to indicate logging is off */
-    NSPLogLevel_HighLevel,  /**< level for important logs (errors, warnings) */
-    NSPLogLevel_MidLevel,   /**< level for un-important logs (status, state changes, information) */
-    NSPLogLevel_LowLevel    /**< level for verbose logs that released builds will likely not log (debug logs) */
+    NSPLogLevel_High,       /**< level for important logs (errors, warnings) */
+    NSPLogLevel_Mid,        /**< level for un-important logs (status, state changes, information) */
+    NSPLogLevel_Low         /**< level for verbose logs that released builds will likely not log (debug logs) */
 };
 
 /**
@@ -119,8 +119,8 @@ typedef NS_ENUM(NSUInteger, NSPLogLevel)
     @see kNSPLoggerDefault Value Contants
     @see initWithDirectory:filePrefix:logLevel:writesBeforeRollover:maxFileCount:
  */
-- (id) initWithDirectory:(NSString*)logsDirectory
-                logLevel:(NSPLogLevel)level;
+- (instancetype) initWithDirectory:(NSString*)logsDirectory
+                          logLevel:(NSPLogLevel)level;
 /**
     Initialize the \c NSPLogger
     @param logsDirectory the directory on disk to put the logs as they are generated.  It is recommended that this directory be dedicated for the logs and that no other files be in it.
@@ -129,11 +129,17 @@ typedef NS_ENUM(NSUInteger, NSPLogLevel)
     @warning throws \c NSObjectInaccessibleException when a log file cannot be opened
     @see NSPLogger Defaults
  */
-- (id) initWithDirectory:(NSString*)logsDirectory
-              filePrefix:(NSString*)prefix
-                logLevel:(NSPLogLevel)level
-    writesBeforeRollover:(NSUInteger)writesBeforeRollover  // UINT32_MAX for unlimited
-            maxFileCount:(NSUInteger)fileCount;
+- (instancetype) initWithDirectory:(NSString*)logsDirectory
+                        filePrefix:(NSString*)prefix
+                          logLevel:(NSPLogLevel)level
+              writesBeforeRollover:(NSUInteger)writesBeforeRollover  // UINT32_MAX for unlimited
+                      maxFileCount:(NSUInteger)fileCount;
+
+/**
+   Initialize the \c NSPLogger with a default \a path and the \a level set to \c NSPLogLevel_Low if \c DEBUG and NSPLogLevel_High otherwise.
+   @see initWithDirectory:logLevel:
+ */
++ (instancetype) logWithDefaultConfig;
 
 /**
     The current operating log level.  Changing the \c logLevel will change what gets logged to the logs.  Duh!

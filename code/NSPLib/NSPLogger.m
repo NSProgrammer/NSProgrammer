@@ -119,7 +119,20 @@ static dispatch_queue_t    s_logQ        = 0;
 	}
 }
 
-- (id) initWithDirectory:(NSString*)logsDirectory
++ (instancetype) logWithDefaultConfig
+{
+    return [[self alloc] initWithDirectory:[[NSFileManager cachesDirectoryPath] stringByAppendingPathComponent:@"logs"]
+                                        filePrefix:nil
+#ifdef DEBUG
+                                          logLevel:NSPLogLevel_Low
+#else
+                                          logLevel:NSPLogLevel_High
+#endif
+                              writesBeforeRollover:0 /*default*/
+                                      maxFileCount:0 /*default*/];
+}
+
+- (instancetype) initWithDirectory:(NSString*)logsDirectory
                 logLevel:(NSPLogLevel)level
 {
     return [self initWithDirectory:logsDirectory
@@ -129,11 +142,11 @@ static dispatch_queue_t    s_logQ        = 0;
                       maxFileCount:0 /*default*/];
 }
 
-- (id) initWithDirectory:(NSString*)root
-              filePrefix:(NSString*)prefix
-                logLevel:(NSPLogLevel)level
-    writesBeforeRollover:(NSUInteger)writesBeforeRollover
-            maxFileCount:(NSUInteger)fileCount
+- (instancetype) initWithDirectory:(NSString*)root
+                        filePrefix:(NSString*)prefix
+                          logLevel:(NSPLogLevel)level
+              writesBeforeRollover:(NSUInteger)writesBeforeRollover
+                      maxFileCount:(NSUInteger)fileCount
 {
     if (self = [super init])
     {
@@ -657,8 +670,8 @@ static dispatch_queue_t    s_logQ        = 0;
     fclose(_logFile);
 }
 
-- (id) initWithDirectory:(NSString*)logsDirectory
-                logLevel:(NSPLogLevel)level
+- (instancetype) initWithDirectory:(NSString*)logsDirectory
+                          logLevel:(NSPLogLevel)level
 {
     return [self initWithDirectory:logsDirectory
                         filePrefix:nil
@@ -667,14 +680,14 @@ static dispatch_queue_t    s_logQ        = 0;
                       maxFileCount:0 /*default*/];
 }
 
-- (id) init
+- (instancetype) init
 {
     if (self = [super init])
     {
 #ifndef RELEASE
-        self.logLevel = NSPLogLevel_LowLevel;
+        self.logLevel = NSPLogLevel_Low;
 #else
-        self.logLevel = NSPLogLevel_HighLevel;
+        self.logLevel = NSPLogLevel_High;
 #endif
 
         _logFile         = 0;

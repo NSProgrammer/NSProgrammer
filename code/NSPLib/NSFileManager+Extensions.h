@@ -39,4 +39,8 @@
     @warning this method can be EXTREMELY slow when run recursively if there a great deal of depth within the directory.  If you pass \@"/" you'll be waiting forever.
  */
 - (unsigned long long) directorySize:(NSString*)directoryPath recursive:(BOOL)recursive;
+
++ (NSString*) documentsDirectoryPath;
++ (NSString*) cachesDirectoryPath;
+
 @end

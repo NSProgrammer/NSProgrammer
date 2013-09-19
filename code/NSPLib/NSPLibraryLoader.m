@@ -35,10 +35,9 @@ static __strong NSArray* s_frameworksPaths = nil;
                           [[NSBundle mainBundle] privateFrameworksPath]];
 }
 
-- (id) init
+- (instancetype) init
 {
-    self = [super init];
-    if (self)
+    if (self = [super init])
     {
         // Initialization code here.
         _handle = NULL;
@@ -55,12 +54,12 @@ static __strong NSArray* s_frameworksPaths = nil;
     }
 }
 
-+ (id) loaderWithFramework:(NSString*)frameworkName
++ (instancetype) loaderWithFramework:(NSString*)frameworkName
 {
-    return [[NSPLibraryLoader alloc] initWithFramework:frameworkName];
+    return [[self alloc] initWithFramework:frameworkName];
 }
 
-- (id) initWithFramework:(NSString*)frameworkName
+- (instancetype) initWithFramework:(NSString*)frameworkName
 {
     if (self = [self init])
     {
@@ -85,12 +84,12 @@ static __strong NSArray* s_frameworksPaths = nil;
     return self;
 }
 
-+ (id) loaderWithDynamicLibrary:(NSString*)dylibName
++ (instancetype) loaderWithDynamicLibrary:(NSString*)dylibName
 {
-    return [[NSPLibraryLoader alloc] initWithDynamicLibrary:(NSString*)dylibName];
+    return [[self alloc] initWithDynamicLibrary:(NSString*)dylibName];
 }
 
-- (id) initWithDynamicLibrary:(NSString*)dylibName
+- (instancetype) initWithDynamicLibrary:(NSString*)dylibName
 {
     if (self = [self init])
     {

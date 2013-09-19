@@ -110,7 +110,7 @@ typedef struct _NSMutableDictionaryRuntimeInfo {
 
 @implementation UITableViewUpdates
 
-- (id) init
+- (instancetype) init
 {
     if (self = [super init])
     {
