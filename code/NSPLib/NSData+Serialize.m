@@ -31,17 +31,11 @@ NS_INLINE void byteToHexComponents(unsigned char byte, unichar* pBig, unichar* p
 {
     assert(pBig && pLil);
     unsigned char c = byte / 16;
-    if (c < 10)
-        c += '0';
-    else
-        c += HEX_ALPHA_BASE_CHAR - 10;
+    c += (c < 10) ? '0' : (HEX_ALPHA_BASE_CHAR - 10);
 
     *pBig = c;
     c     = byte % 16;
-    if (c < 10)
-        c += '0';
-    else
-        c += HEX_ALPHA_BASE_CHAR - 10;
+    c += (c < 10) ? '0' : (HEX_ALPHA_BASE_CHAR - 10);
 
     *pLil = c;
 }
