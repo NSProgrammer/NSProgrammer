@@ -24,6 +24,8 @@ typedef void(^UIImageASyncRenderingCompletionBlock)(UIImage*);
 
 typedef NS_ENUM(NSInteger, NSPUIImageType)
 {
+    NSPUIImageType_Unknown = -1, //<-- Don't use
+    NSPUIImageType_Auto = 0,
     NSPUIImageType_JPEG,
     NSPUIImageType_PNG
 };
@@ -34,11 +36,18 @@ typedef NS_ENUM(NSInteger, NSPUIImageType)
     Renders the provided image data asynchronously so as to not block the main thread.  Very useful when desiring to 
     keep the UI responsive while still generating UI from downloaded and compressed images.
     @param imageData the data to render as a UIImage.
-    @param imageType the image type decode the \a imageData as.  Can be \c NSPUIImageType_JPEG or \c NSPUIImageType_PNG.
+    @param imageType the image type decode the \a imageData as.  Can be \c NSPUIImageType_JPEG, \c NSPUIImageType_PNG or \c NSPUIImageType_Auto.  Don't use \c NSPUIImageType_Unknown.
     @param block the completion block to be called once the \a imageData is rendered as a \c UIImage.
  */
 + (void) imageByRenderingData:(NSData*)imageData
                   ofImageType:(NSPUIImageType)imageType
+                   completion:(UIImageASyncRenderingCompletionBlock)block;
+
+/**
+    @see imageByRenderingData:ofImageType:completion
+    @note uses \c NSPUIImageType_Auto
+ */
++ (void) imageByRenderingData:(NSData*)imageData
                    completion:(UIImageASyncRenderingCompletionBlock)block;
 
 @end
