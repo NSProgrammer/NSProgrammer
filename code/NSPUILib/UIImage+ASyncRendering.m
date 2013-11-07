@@ -20,7 +20,37 @@
 
 #import "UIImage+ASyncRendering.h"
 
+NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData);
+
+NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData)
+{
+    if (imageData.length > 4)
+    {
+        const char* bytes = imageData.bytes;
+
+        if (bytes[0]==0xff && 
+            bytes[1]==0xd8 && 
+            bytes[2]==0xff &&
+            bytes[3]==0xe0)
+            return NSPUIImageType_JPEG;
+
+        if (bytes[0]==0x89 &&
+            bytes[1]==0x50 &&
+            bytes[2]==0x4e &&
+            bytes[3]==0x47)
+            return NSPUIImageType_PNG;
+    }
+
+    return NSPUIImageType_Unknown;
+}
+
 @implementation UIImage (ASyncRendering)
+
++ (void) imageByRenderingData:(NSData*)imageData
+                   completion:(UIImageASyncRenderingCompletionBlock)block
+{
+    return [self imageByRenderingData:imageData ofImageType:NSPUIImageType_Auto completion:block];
+}
 
 + (void) imageByRenderingData:(NSData*)imageData
                   ofImageType:(NSPUIImageType)imageType
@@ -40,6 +70,9 @@
             if (dataProvider)
             {
                 STACK_CLEANUP_CGTYPE(CGImageRef) image = NULL;
+                if (NSPUIImageType_Auto == imageType)
+                    imageType = _DetectDataImageType(imageData);
+                
                 if (NSPUIImageType_PNG == imageType)
                     image = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
                 else
