@@ -30,8 +30,7 @@ NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData)
 
         if (bytes[0]==0xff && 
             bytes[1]==0xd8 && 
-            bytes[2]==0xff &&
-            bytes[3]==0xe0)
+            bytes[2]==0xff /* && bytes[3]==0xe0 the last byte of JPEG type can have numerous values, just accept anything for detection at this point.*/)
             return NSPUIImageType_JPEG;
 
         if (bytes[0]==0x89 &&
