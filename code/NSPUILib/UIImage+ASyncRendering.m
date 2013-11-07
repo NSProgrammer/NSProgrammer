@@ -26,7 +26,7 @@ NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData)
 {
     if (imageData.length > 4)
     {
-        const char* bytes = imageData.bytes;
+        const unsigned char* bytes = imageData.bytes;
 
         if (bytes[0]==0xff && 
             bytes[1]==0xd8 && 
@@ -52,7 +52,7 @@ NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData)
 }
 
 + (void) imageByRenderingData:(NSData*)imageData
-                  ofImageType:(NSPUIImageType)imageType
+                  ofImageType:(NSPUIImageType)type
                    completion:(UIImageASyncRenderingCompletionBlock)block
 {
     static dispatch_queue_t s_imageRenderQ;
@@ -69,12 +69,13 @@ NS_INLINE NSPUIImageType _DetectDataImageType(NSData* imageData)
             if (dataProvider)
             {
                 STACK_CLEANUP_CGTYPE(CGImageRef) image = NULL;
+                NSPUIImageType imageType = type;
                 if (NSPUIImageType_Auto == imageType)
                     imageType = _DetectDataImageType(imageData);
                 
                 if (NSPUIImageType_PNG == imageType)
                     image = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
-                else
+                else if (NSPUIImageType_JPEG == imageType)
                     image = CGImageCreateWithJPEGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
                 
                 if (image)
