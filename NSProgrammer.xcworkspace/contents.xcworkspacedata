@@ -7,6 +7,9 @@
       <FileRef
          location = "group:code/Examples/TableViewChanges/TableViewChanges.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:code/Examples/TableViewOptimizations/TableViewOptimizations.xcodeproj">
+      </FileRef>
    </Group>
    <FileRef
       location = "container:code/NSPUILib.xcodeproj">

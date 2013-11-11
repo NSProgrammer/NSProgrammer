@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>628193A7-2601-44E6-90D6-47373A70CFDC</string>
 	<key>IDESourceControlProjectName</key>
@@ -10,6 +12,8 @@
 	<dict>
 		<key>89A88DEB-82AF-4EB4-AD54-5B7ABB874D49</key>
 		<string>https://github.com/NSProgrammer/NSProgrammer.git</string>
+		<key>EE44F937-9F02-45F9-8508-AD43DC5A1538</key>
+		<string>https://github.com/AFNetworking/AFNetworking.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>NSProgrammer.xcworkspace</string>
@@ -17,6 +21,8 @@
 	<dict>
 		<key>89A88DEB-82AF-4EB4-AD54-5B7ABB874D49</key>
 		<string>..</string>
+		<key>EE44F937-9F02-45F9-8508-AD43DC5A1538</key>
+		<string>../../AFNetworking</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/NSProgrammer/NSProgrammer.git</string>
@@ -26,6 +32,14 @@
 	<string>89A88DEB-82AF-4EB4-AD54-5B7ABB874D49</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EE44F937-9F02-45F9-8508-AD43DC5A1538</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AFNetworking</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

@@ -20,6 +20,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NSPDViewController : UIViewController
+@interface NSPDTableViewOptimizationsNavigationController : UIViewController
 
 @end

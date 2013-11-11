@@ -18,7 +18,7 @@
  
  */
 
-#import "NSPDViewController.h"
+#import "NSPDTableViewOptimizationsNavigationController.h"
 #include <libkern/OSAtomic.h>
 
 typedef NS_ENUM(NSInteger, NSPDDataEntryChangeLocation) {
@@ -228,7 +228,7 @@ static volatile int32_t s_total = 0;
 
 @end
 
-@interface NSPDViewController () <UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewUpdatingDataSource>
+@interface NSPDTableViewOptimizationsNavigationController () <UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewUpdatingDataSource>
 {
     IBOutlet UIPickerView* _editTypePicker;
     IBOutlet UIPickerView* _locationPicker;
@@ -253,7 +253,7 @@ static volatile int32_t s_total = 0;
 
 @end
 
-@implementation NSPDViewController
+@implementation NSPDTableViewOptimizationsNavigationController
 {
     NSMutableArray* _dataSource; // NSPDateSection objects
     NSMutableArray* _oldDataSource;

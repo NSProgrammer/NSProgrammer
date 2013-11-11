@@ -20,12 +20,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class NSPDViewController;
+@class NSPDTableViewOptimizationsNavigationController;
 
 @interface NSPDAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) NSPDViewController *viewController;
+@property (strong, nonatomic) NSPDTableViewOptimizationsNavigationController *viewController;
 
 @end
