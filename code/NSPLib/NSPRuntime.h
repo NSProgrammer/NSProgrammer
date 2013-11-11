@@ -36,26 +36,26 @@ typedef void(^GenericBlock)(void);
 void dispatch_sync_on_main_queue(void (^block)(void));
 
 /**
-    The type for the token used in the \c trans_dispatch_once function
+    The type for the token used in the \c dispatch_once_transient function
  */
-typedef volatile int32_t trans_dispatch_once_t;
+typedef volatile int32_t dispatch_once_transient_t;
 
 #define SHRT_DPTCH_PRFX DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
 /**
-    the OS provided \c dispatch_once requires it's predicate token to be static or global.  \c trans_dispatch_once offers a way to use a token in transient memory for dispatch once within the context of that transient memory's scope.  This is highly effective for dispatching once per object instance vs once globally.
+    the OS provided \c dispatch_once requires it's predicate token to be static or global.  \c dispatch_once_transient offers a way to use a token in transient memory for dispatch once within the context of that transient memory's scope.  This is highly effective for dispatching once per object instance vs once globally.
     @code
     - (void) viewWillAppear:(BOOL)animated
     {
         [super viewWillAppear:animated];
-        trans_dispatch_once(&_memberTransDispatchOnceToken, ^() {
+        dispatch_once_transient(&_memberTransDispatchOnceToken, ^() {
             // ... dispatch once on first appearance code ...
         });
     }
     @endcode
-    @param pPredicate a reference to the predicate token for single use dispatch.  Initialize this value to 0 before using \c trans_dispatch_once.
+    @param pPredicate a reference to the predicate token for single use dispatch.  Initialize this value to 0 before using \c dispatch_once_transient.
     @param block the block to execute only once for the instance of \a pPredicate
  */
-SHRT_DPTCH_PRFX void trans_dispatch_once(trans_dispatch_once_t* pPredicate, GenericBlock block)
+SHRT_DPTCH_PRFX void dispatch_once_transient(dispatch_once_transient_t* pPredicate, GenericBlock block)
 {
     if (OSAtomicCompareAndSwap32(0, 1, pPredicate)) {
         block();

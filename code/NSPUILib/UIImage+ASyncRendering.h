@@ -24,7 +24,7 @@ typedef void(^UIImageASyncRenderingCompletionBlock)(UIImage*);
 
 typedef NS_ENUM(NSInteger, NSPUIImageType)
 {
-    NSPUIImageType_Unknown = -1, //<-- Don't use
+    NSPUIImageType_Unknown = -1,
     NSPUIImageType_Auto = 0,
     NSPUIImageType_JPEG,
     NSPUIImageType_PNG
