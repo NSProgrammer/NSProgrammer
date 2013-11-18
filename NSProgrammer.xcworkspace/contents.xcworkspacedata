@@ -12,9 +12,9 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "container:code/NSPUILib.xcodeproj">
+      location = "container:code/NOBUILib.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:code/NSPLib.xcodeproj">
+      location = "group:code/NOBLib.xcodeproj">
    </FileRef>
 </Workspace>

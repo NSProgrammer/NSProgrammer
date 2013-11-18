@@ -1,8 +1,0 @@
-//
-// Prefix header for all source files of the 'code' target in the 'code' project
-//
-
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
-    #import "NSPCommon.h"
-#endif

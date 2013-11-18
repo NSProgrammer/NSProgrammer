@@ -12,10 +12,9 @@
 		1C52172F182E0D3700E09AE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C52172E182E0D3700E09AE7 /* UIKit.framework */; };
 		1C521735182E0D3700E09AE7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1C521733182E0D3700E09AE7 /* InfoPlist.strings */; };
 		1C521737182E0D3700E09AE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521736182E0D3700E09AE7 /* main.m */; };
-		1C52173B182E0D3700E09AE7 /* NSPDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52173A182E0D3700E09AE7 /* NSPDAppDelegate.m */; };
-		1C521741182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521740182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.m */; };
+		1C52173B182E0D3700E09AE7 /* NOBDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52173A182E0D3700E09AE7 /* NOBDAppDelegate.m */; };
+		1C521741182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521740182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.m */; };
 		1C521743182E0D3700E09AE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C521742182E0D3700E09AE7 /* Images.xcassets */; };
-		1C521767182E109C00E09AE7 /* libNSPUILib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C521765182E106100E09AE7 /* libNSPUILib.a */; };
 		1C52177F182E13AA00E09AE7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52176D182E13AA00E09AE7 /* AFHTTPRequestOperation.m */; };
 		1C521780182E13AA00E09AE7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C52176F182E13AA00E09AE7 /* AFHTTPRequestOperationManager.m */; };
 		1C521781182E13AA00E09AE7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521771182E13AA00E09AE7 /* AFHTTPSessionManager.m */; };
@@ -32,19 +31,28 @@
 		1C52179C182E13B400E09AE7 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521792182E13B400E09AE7 /* UIImageView+AFNetworking.m */; };
 		1C52179D182E13B400E09AE7 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521795182E13B400E09AE7 /* UIProgressView+AFNetworking.m */; };
 		1C52179E182E13B400E09AE7 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C521797182E13B400E09AE7 /* UIWebView+AFNetworking.m */; };
-		1C5217A1183045E900E09AE7 /* NSPDNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5217A0183045E900E09AE7 /* NSPDNetworkOperationQueue.m */; };
-		1C5217A41830473400E09AE7 /* NSPDGlobalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5217A31830473400E09AE7 /* NSPDGlobalDataSource.m */; };
-		1CFF23A318309299000F8C58 /* NSPDDebugSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFF23A118309299000F8C58 /* NSPDDebugSettingsViewController.m */; };
-		1CFF23A418309299000F8C58 /* NSPDDebugSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CFF23A218309299000F8C58 /* NSPDDebugSettingsViewController.xib */; };
+		1C5217A1183045E900E09AE7 /* NOBDNetworkOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5217A0183045E900E09AE7 /* NOBDNetworkOperationQueue.m */; };
+		1C5217A41830473400E09AE7 /* NOBDGlobalDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C5217A31830473400E09AE7 /* NOBDGlobalDataSource.m */; };
+		1C8073241839CE6C00F00C94 /* libNOBUILib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C80731C1839CDEE00F00C94 /* libNOBUILib.a */; };
+		1C8073261839CE7000F00C94 /* libNOBLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8073251839CE7000F00C94 /* libNOBLib.a */; };
+		1CFF23A318309299000F8C58 /* NOBDDebugSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CFF23A118309299000F8C58 /* NOBDDebugSettingsViewController.m */; };
+		1CFF23A418309299000F8C58 /* NOBDDebugSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CFF23A218309299000F8C58 /* NOBDDebugSettingsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1CFF239E18307DD5000F8C58 /* PBXContainerItemProxy */ = {
+		1C80731B1839CDEE00F00C94 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1C52175F182E0FB200E09AE7 /* NSPUILib.xcodeproj */;
+			containerPortal = 1C8073171839CDED00F00C94 /* NOBUILib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1C09B845175DBA3000316FE9;
-			remoteInfo = NSPUILib;
+			remoteInfo = NOBUILib;
+		};
+		1C8073221839CE6600F00C94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C8073171839CDED00F00C94 /* NOBUILib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C09B844175DBA3000316FE9;
+			remoteInfo = NOBUILib;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,14 +65,12 @@
 		1C521734182E0D3700E09AE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1C521736182E0D3700E09AE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1C521738182E0D3700E09AE7 /* TableViewOptimizations-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TableViewOptimizations-Prefix.pch"; sourceTree = "<group>"; };
-		1C521739182E0D3700E09AE7 /* NSPDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPDAppDelegate.h; sourceTree = "<group>"; };
-		1C52173A182E0D3700E09AE7 /* NSPDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSPDAppDelegate.m; sourceTree = "<group>"; };
-		1C52173F182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPDTableViewOptimizationsNavigationController.h; sourceTree = "<group>"; };
-		1C521740182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSPDTableViewOptimizationsNavigationController.m; sourceTree = "<group>"; };
+		1C521739182E0D3700E09AE7 /* NOBDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NOBDAppDelegate.h; sourceTree = "<group>"; };
+		1C52173A182E0D3700E09AE7 /* NOBDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NOBDAppDelegate.m; sourceTree = "<group>"; };
+		1C52173F182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NOBDTableViewOptimizationsNavigationController.h; sourceTree = "<group>"; };
+		1C521740182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NOBDTableViewOptimizationsNavigationController.m; sourceTree = "<group>"; };
 		1C521742182E0D3700E09AE7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1C521749182E0D3700E09AE7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		1C52175F182E0FB200E09AE7 /* NSPUILib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NSPUILib.xcodeproj; path = ../../NSPUILib.xcodeproj; sourceTree = "<group>"; };
-		1C521765182E106100E09AE7 /* libNSPUILib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libNSPUILib.a; path = "../../../../../Library/Developer/Xcode/DerivedData/NSProgrammer-fkiktbntovvngfdwxaofehkyruuo/Build/Products/Debug-iphoneos/libNSPUILib.a"; sourceTree = "<group>"; };
 		1C52176C182E13AA00E09AE7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		1C52176D182E13AA00E09AE7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		1C52176E182E13AA00E09AE7 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -99,13 +105,15 @@
 		1C521795182E13B400E09AE7 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		1C521796182E13B400E09AE7 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		1C521797182E13B400E09AE7 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		1C52179F183045E900E09AE7 /* NSPDNetworkOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPDNetworkOperationQueue.h; sourceTree = "<group>"; };
-		1C5217A0183045E900E09AE7 /* NSPDNetworkOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPDNetworkOperationQueue.m; sourceTree = "<group>"; };
-		1C5217A21830473400E09AE7 /* NSPDGlobalDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPDGlobalDataSource.h; sourceTree = "<group>"; };
-		1C5217A31830473400E09AE7 /* NSPDGlobalDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPDGlobalDataSource.m; sourceTree = "<group>"; };
-		1CFF23A018309299000F8C58 /* NSPDDebugSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSPDDebugSettingsViewController.h; sourceTree = "<group>"; };
-		1CFF23A118309299000F8C58 /* NSPDDebugSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSPDDebugSettingsViewController.m; sourceTree = "<group>"; };
-		1CFF23A218309299000F8C58 /* NSPDDebugSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSPDDebugSettingsViewController.xib; sourceTree = "<group>"; };
+		1C52179F183045E900E09AE7 /* NOBDNetworkOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOBDNetworkOperationQueue.h; sourceTree = "<group>"; };
+		1C5217A0183045E900E09AE7 /* NOBDNetworkOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOBDNetworkOperationQueue.m; sourceTree = "<group>"; };
+		1C5217A21830473400E09AE7 /* NOBDGlobalDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOBDGlobalDataSource.h; sourceTree = "<group>"; };
+		1C5217A31830473400E09AE7 /* NOBDGlobalDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOBDGlobalDataSource.m; sourceTree = "<group>"; };
+		1C8073171839CDED00F00C94 /* NOBUILib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NOBUILib.xcodeproj; path = ../../NOBUILib.xcodeproj; sourceTree = "<group>"; };
+		1C8073251839CE7000F00C94 /* libNOBLib.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libNOBLib.a; path = "../../build/Debug-iphoneos/libNOBLib.a"; sourceTree = "<group>"; };
+		1CFF23A018309299000F8C58 /* NOBDDebugSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NOBDDebugSettingsViewController.h; sourceTree = "<group>"; };
+		1CFF23A118309299000F8C58 /* NOBDDebugSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NOBDDebugSettingsViewController.m; sourceTree = "<group>"; };
+		1CFF23A218309299000F8C58 /* NOBDDebugSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NOBDDebugSettingsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +121,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C521767182E109C00E09AE7 /* libNSPUILib.a in Frameworks */,
+				1C8073261839CE7000F00C94 /* libNOBLib.a in Frameworks */,
+				1C8073241839CE6C00F00C94 /* libNOBUILib.a in Frameworks */,
 				1C52172D182E0D3700E09AE7 /* CoreGraphics.framework in Frameworks */,
 				1C52172F182E0D3700E09AE7 /* UIKit.framework in Frameworks */,
 				1C52172B182E0D3700E09AE7 /* Foundation.framework in Frameworks */,
@@ -126,8 +135,8 @@
 		1C52171E182E0D3700E09AE7 = {
 			isa = PBXGroup;
 			children = (
+				1C8073171839CDED00F00C94 /* NOBUILib.xcodeproj */,
 				1C52176A182E139A00E09AE7 /* AFNetworking */,
-				1C52175F182E0FB200E09AE7 /* NSPUILib.xcodeproj */,
 				1C521730182E0D3700E09AE7 /* TableViewOptimizations */,
 				1C521729182E0D3700E09AE7 /* Frameworks */,
 				1C521728182E0D3700E09AE7 /* Products */,
@@ -145,7 +154,7 @@
 		1C521729182E0D3700E09AE7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1C521765182E106100E09AE7 /* libNSPUILib.a */,
+				1C8073251839CE7000F00C94 /* libNOBLib.a */,
 				1C52172A182E0D3700E09AE7 /* Foundation.framework */,
 				1C52172C182E0D3700E09AE7 /* CoreGraphics.framework */,
 				1C52172E182E0D3700E09AE7 /* UIKit.framework */,
@@ -157,19 +166,19 @@
 		1C521730182E0D3700E09AE7 /* TableViewOptimizations */ = {
 			isa = PBXGroup;
 			children = (
-				1C521739182E0D3700E09AE7 /* NSPDAppDelegate.h */,
-				1C52173A182E0D3700E09AE7 /* NSPDAppDelegate.m */,
-				1C52173F182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.h */,
-				1C521740182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.m */,
+				1C521739182E0D3700E09AE7 /* NOBDAppDelegate.h */,
+				1C52173A182E0D3700E09AE7 /* NOBDAppDelegate.m */,
+				1C52173F182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.h */,
+				1C521740182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.m */,
 				1C521742182E0D3700E09AE7 /* Images.xcassets */,
 				1C521731182E0D3700E09AE7 /* Supporting Files */,
-				1C52179F183045E900E09AE7 /* NSPDNetworkOperationQueue.h */,
-				1C5217A0183045E900E09AE7 /* NSPDNetworkOperationQueue.m */,
-				1C5217A21830473400E09AE7 /* NSPDGlobalDataSource.h */,
-				1C5217A31830473400E09AE7 /* NSPDGlobalDataSource.m */,
-				1CFF23A018309299000F8C58 /* NSPDDebugSettingsViewController.h */,
-				1CFF23A118309299000F8C58 /* NSPDDebugSettingsViewController.m */,
-				1CFF23A218309299000F8C58 /* NSPDDebugSettingsViewController.xib */,
+				1C52179F183045E900E09AE7 /* NOBDNetworkOperationQueue.h */,
+				1C5217A0183045E900E09AE7 /* NOBDNetworkOperationQueue.m */,
+				1C5217A21830473400E09AE7 /* NOBDGlobalDataSource.h */,
+				1C5217A31830473400E09AE7 /* NOBDGlobalDataSource.m */,
+				1CFF23A018309299000F8C58 /* NOBDDebugSettingsViewController.h */,
+				1CFF23A118309299000F8C58 /* NOBDDebugSettingsViewController.m */,
+				1CFF23A218309299000F8C58 /* NOBDDebugSettingsViewController.xib */,
 			);
 			path = TableViewOptimizations;
 			sourceTree = "<group>";
@@ -244,10 +253,10 @@
 			path = "../../../../AFNetworking/UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
-		1CFF239B18307DD5000F8C58 /* Products */ = {
+		1C8073181839CDED00F00C94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1CFF239F18307DD5000F8C58 /* libNSPUILib.a */,
+				1C80731C1839CDEE00F00C94 /* libNOBUILib.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,6 +275,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1C8073231839CE6600F00C94 /* PBXTargetDependency */,
 			);
 			name = TableViewOptimizations;
 			productName = TableViewOptimizations;
@@ -295,8 +305,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 1CFF239B18307DD5000F8C58 /* Products */;
-					ProjectRef = 1C52175F182E0FB200E09AE7 /* NSPUILib.xcodeproj */;
+					ProductGroup = 1C8073181839CDED00F00C94 /* Products */;
+					ProjectRef = 1C8073171839CDED00F00C94 /* NOBUILib.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -307,11 +317,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		1CFF239F18307DD5000F8C58 /* libNSPUILib.a */ = {
+		1C80731C1839CDEE00F00C94 /* libNOBUILib.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libNSPUILib.a;
-			remoteRef = 1CFF239E18307DD5000F8C58 /* PBXContainerItemProxy */;
+			path = libNOBUILib.a;
+			remoteRef = 1C80731B1839CDEE00F00C94 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -321,7 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CFF23A418309299000F8C58 /* NSPDDebugSettingsViewController.xib in Resources */,
+				1CFF23A418309299000F8C58 /* NOBDDebugSettingsViewController.xib in Resources */,
 				1C521743182E0D3700E09AE7 /* Images.xcassets in Resources */,
 				1C521735182E0D3700E09AE7 /* InfoPlist.strings in Resources */,
 			);
@@ -337,7 +347,7 @@
 				1C52177F182E13AA00E09AE7 /* AFHTTPRequestOperation.m in Sources */,
 				1C52179C182E13B400E09AE7 /* UIImageView+AFNetworking.m in Sources */,
 				1C521737182E0D3700E09AE7 /* main.m in Sources */,
-				1C5217A1183045E900E09AE7 /* NSPDNetworkOperationQueue.m in Sources */,
+				1C5217A1183045E900E09AE7 /* NOBDNetworkOperationQueue.m in Sources */,
 				1C521780182E13AA00E09AE7 /* AFHTTPRequestOperationManager.m in Sources */,
 				1C52179D182E13B400E09AE7 /* UIProgressView+AFNetworking.m in Sources */,
 				1C521782182E13AA00E09AE7 /* AFNetworkReachabilityManager.m in Sources */,
@@ -348,18 +358,26 @@
 				1C521783182E13AA00E09AE7 /* AFSecurityPolicy.m in Sources */,
 				1C521781182E13AA00E09AE7 /* AFHTTPSessionManager.m in Sources */,
 				1C52179A182E13B400E09AE7 /* UIAlertView+AFNetworking.m in Sources */,
-				1C5217A41830473400E09AE7 /* NSPDGlobalDataSource.m in Sources */,
+				1C5217A41830473400E09AE7 /* NOBDGlobalDataSource.m in Sources */,
 				1C521785182E13AA00E09AE7 /* AFURLRequestSerialization.m in Sources */,
 				1C521798182E13B400E09AE7 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1C52179E182E13B400E09AE7 /* UIWebView+AFNetworking.m in Sources */,
 				1C521787182E13AA00E09AE7 /* AFURLSessionManager.m in Sources */,
-				1C52173B182E0D3700E09AE7 /* NSPDAppDelegate.m in Sources */,
-				1CFF23A318309299000F8C58 /* NSPDDebugSettingsViewController.m in Sources */,
-				1C521741182E0D3700E09AE7 /* NSPDTableViewOptimizationsNavigationController.m in Sources */,
+				1C52173B182E0D3700E09AE7 /* NOBDAppDelegate.m in Sources */,
+				1CFF23A318309299000F8C58 /* NOBDDebugSettingsViewController.m in Sources */,
+				1C521741182E0D3700E09AE7 /* NOBDTableViewOptimizationsNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1C8073231839CE6600F00C94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NOBUILib;
+			targetProxy = 1C8073221839CE6600F00C94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1C521733182E0D3700E09AE7 /* InfoPlist.strings */ = {
@@ -408,8 +426,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../../NSPLib",
-					"$(PROJECT_DIR)/../../NSPUILib",
+					"$(PROJECT_DIR)/../../NOBLib",
+					"$(PROJECT_DIR)/../../NOBUILib",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -447,8 +465,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../../NSPLib",
-					"$(PROJECT_DIR)/../../NSPUILib",
+					"$(PROJECT_DIR)/../../NOBLib",
+					"$(PROJECT_DIR)/../../NOBUILib",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;

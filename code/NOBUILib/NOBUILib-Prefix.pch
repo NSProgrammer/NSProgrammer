@@ -1,0 +1,14 @@
+//
+// Prefix header for all source files of the 'NOBUILib' target in the 'NOBUILib' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+#define UITABLEVIEW_UPDATING_WITH_BLOCK_ABSTRACTION 0
+
+    #import "NOBLib.h"
+    #import "NOBUICommon.h"
+    #import "NOBUIRuntime.h"
+#endif

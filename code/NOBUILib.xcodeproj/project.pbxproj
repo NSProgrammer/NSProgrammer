@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C09B849175DBA3000316FE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B848175DBA3000316FE9 /* Foundation.framework */; };
+		1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C557DA61777F6CE0012B90F /* UIKit.framework */; };
+		1C8073041839CC7C00F00C94 /* UIAlertView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8072FB1839CC7C00F00C94 /* UIAlertView+Extensions.m */; };
+		1C8073051839CC7C00F00C94 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8072FD1839CC7C00F00C94 /* UIColor+Extensions.m */; };
+		1C8073061839CC7C00F00C94 /* UIImage+ASyncRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8072FF1839CC7C00F00C94 /* UIImage+ASyncRendering.m */; };
+		1C8073071839CC7C00F00C94 /* UITableView+Updating.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8073011839CC7C00F00C94 /* UITableView+Updating.m */; };
+		1C8073081839CC7C00F00C94 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8073031839CC7C00F00C94 /* UIView+Extensions.m */; };
+		1C80730D1839CC9500F00C94 /* NOBUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C80730A1839CC9500F00C94 /* NOBUICommon.m */; };
+		1C80730E1839CC9500F00C94 /* NOBUIRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C80730C1839CC9500F00C94 /* NOBUIRuntime.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1C8072CC1839CB7A00F00C94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CD8CB68174A6A2B00AD0B7A;
+			remoteInfo = NOBLib;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1C09B843175DBA3000316FE9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1C09B845175DBA3000316FE9 /* libNOBUILib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNOBUILib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C09B848175DBA3000316FE9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = NOBLib.xcodeproj; sourceTree = "<group>"; };
+		1C557DA61777F6CE0012B90F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1C8072FA1839CC7C00F00C94 /* UIAlertView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+Extensions.h"; path = "NOBUILib/UIAlertView+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		1C8072FB1839CC7C00F00C94 /* UIAlertView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+Extensions.m"; path = "NOBUILib/UIAlertView+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		1C8072FC1839CC7C00F00C94 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Extensions.h"; path = "NOBUILib/UIColor+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		1C8072FD1839CC7C00F00C94 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Extensions.m"; path = "NOBUILib/UIColor+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		1C8072FE1839CC7C00F00C94 /* UIImage+ASyncRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ASyncRendering.h"; path = "NOBUILib/UIImage+ASyncRendering.h"; sourceTree = SOURCE_ROOT; };
+		1C8072FF1839CC7C00F00C94 /* UIImage+ASyncRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ASyncRendering.m"; path = "NOBUILib/UIImage+ASyncRendering.m"; sourceTree = SOURCE_ROOT; };
+		1C8073001839CC7C00F00C94 /* UITableView+Updating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Updating.h"; path = "NOBUILib/UITableView+Updating.h"; sourceTree = SOURCE_ROOT; };
+		1C8073011839CC7C00F00C94 /* UITableView+Updating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Updating.m"; path = "NOBUILib/UITableView+Updating.m"; sourceTree = SOURCE_ROOT; };
+		1C8073021839CC7C00F00C94 /* UIView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extensions.h"; path = "NOBUILib/UIView+Extensions.h"; sourceTree = SOURCE_ROOT; };
+		1C8073031839CC7C00F00C94 /* UIView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extensions.m"; path = "NOBUILib/UIView+Extensions.m"; sourceTree = SOURCE_ROOT; };
+		1C8073091839CC9500F00C94 /* NOBUICommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOBUICommon.h; path = NOBUILib/NOBUICommon.h; sourceTree = SOURCE_ROOT; };
+		1C80730A1839CC9500F00C94 /* NOBUICommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOBUICommon.m; path = NOBUILib/NOBUICommon.m; sourceTree = SOURCE_ROOT; };
+		1C80730B1839CC9500F00C94 /* NOBUIRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOBUIRuntime.h; path = NOBUILib/NOBUIRuntime.h; sourceTree = SOURCE_ROOT; };
+		1C80730C1839CC9500F00C94 /* NOBUIRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOBUIRuntime.m; path = NOBUILib/NOBUIRuntime.m; sourceTree = SOURCE_ROOT; };
+		1C80730F1839CCA300F00C94 /* NOBUILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOBUILib.h; path = NOBUILib/NOBUILib.h; sourceTree = SOURCE_ROOT; };
+		1C8073101839CCB000F00C94 /* NOBUILib-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NOBUILib-Prefix.pch"; path = "NOBUILib/NOBUILib-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1C09B842175DBA3000316FE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C557DA71777F6CE0012B90F /* UIKit.framework in Frameworks */,
+				1C09B849175DBA3000316FE9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1C09B83C175DBA3000316FE9 = {
+			isa = PBXGroup;
+			children = (
+				1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */,
+				1C09B84A175DBA3000316FE9 /* NSPUILib */,
+				1C09B847175DBA3000316FE9 /* Frameworks */,
+				1C09B846175DBA3000316FE9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1C09B846175DBA3000316FE9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1C09B845175DBA3000316FE9 /* libNOBUILib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1C09B847175DBA3000316FE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1C09B848175DBA3000316FE9 /* Foundation.framework */,
+				1C557DA61777F6CE0012B90F /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1C09B84A175DBA3000316FE9 /* NSPUILib */ = {
+			isa = PBXGroup;
+			children = (
+				1C99BF291767A6E5007CE48F /* Categories */,
+				1C99BF2A1767A6EC007CE48F /* Common */,
+				1C80730F1839CCA300F00C94 /* NOBUILib.h */,
+				1C09B84B175DBA3000316FE9 /* Supporting Files */,
+			);
+			path = NSPUILib;
+			sourceTree = "<group>";
+		};
+		1C09B84B175DBA3000316FE9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1C8073101839CCB000F00C94 /* NOBUILib-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1C8072C91839CB7900F00C94 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1C8072CD1839CB7A00F00C94 /* libNOBLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1C99BF291767A6E5007CE48F /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1C8072FA1839CC7C00F00C94 /* UIAlertView+Extensions.h */,
+				1C8072FB1839CC7C00F00C94 /* UIAlertView+Extensions.m */,
+				1C8072FC1839CC7C00F00C94 /* UIColor+Extensions.h */,
+				1C8072FD1839CC7C00F00C94 /* UIColor+Extensions.m */,
+				1C8072FE1839CC7C00F00C94 /* UIImage+ASyncRendering.h */,
+				1C8072FF1839CC7C00F00C94 /* UIImage+ASyncRendering.m */,
+				1C8073001839CC7C00F00C94 /* UITableView+Updating.h */,
+				1C8073011839CC7C00F00C94 /* UITableView+Updating.m */,
+				1C8073021839CC7C00F00C94 /* UIView+Extensions.h */,
+				1C8073031839CC7C00F00C94 /* UIView+Extensions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		1C99BF2A1767A6EC007CE48F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1C8073091839CC9500F00C94 /* NOBUICommon.h */,
+				1C80730A1839CC9500F00C94 /* NOBUICommon.m */,
+				1C80730B1839CC9500F00C94 /* NOBUIRuntime.h */,
+				1C80730C1839CC9500F00C94 /* NOBUIRuntime.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C09B844175DBA3000316FE9 /* NOBUILib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1C09B853175DBA3000316FE9 /* Build configuration list for PBXNativeTarget "NOBUILib" */;
+			buildPhases = (
+				1C09B841175DBA3000316FE9 /* Sources */,
+				1C09B842175DBA3000316FE9 /* Frameworks */,
+				1C09B843175DBA3000316FE9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NOBUILib;
+			productName = NSPUILib;
+			productReference = 1C09B845175DBA3000316FE9 /* libNOBUILib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1C09B83D175DBA3000316FE9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = NOBUI;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = NSProgrammer.com;
+			};
+			buildConfigurationList = 1C09B840175DBA3000316FE9 /* Build configuration list for PBXProject "NOBUILib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1C09B83C175DBA3000316FE9;
+			productRefGroup = 1C09B846175DBA3000316FE9 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1C8072C91839CB7900F00C94 /* Products */;
+					ProjectRef = 1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1C09B844175DBA3000316FE9 /* NOBUILib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1C8072CD1839CB7A00F00C94 /* libNOBLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libNOBLib.a;
+			remoteRef = 1C8072CC1839CB7A00F00C94 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1C09B841175DBA3000316FE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C8073061839CC7C00F00C94 /* UIImage+ASyncRendering.m in Sources */,
+				1C8073051839CC7C00F00C94 /* UIColor+Extensions.m in Sources */,
+				1C80730E1839CC9500F00C94 /* NOBUIRuntime.m in Sources */,
+				1C8073071839CC7C00F00C94 /* UITableView+Updating.m in Sources */,
+				1C8073081839CC7C00F00C94 /* UIView+Extensions.m in Sources */,
+				1C80730D1839CC9500F00C94 /* NOBUICommon.m in Sources */,
+				1C8073041839CC7C00F00C94 /* UIAlertView+Extensions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1C09B851175DBA3000316FE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1C09B852175DBA3000316FE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1C09B854175DBA3000316FE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/NOBUILib.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NOBUILib/NOBUILib-Prefix.pch";
+				HEADER_SEARCH_PATHS = NOBLib;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = NOBUILib;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		1C09B855175DBA3000316FE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/NOBUILib.dst;
+				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NOBUILib/NOBUILib-Prefix.pch";
+				HEADER_SEARCH_PATHS = NOBLib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = NOBUILib;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1C09B840175DBA3000316FE9 /* Build configuration list for PBXProject "NOBUILib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C09B851175DBA3000316FE9 /* Debug */,
+				1C09B852175DBA3000316FE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1C09B853175DBA3000316FE9 /* Build configuration list for PBXNativeTarget "NOBUILib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1C09B854175DBA3000316FE9 /* Debug */,
+				1C09B855175DBA3000316FE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1C09B83D175DBA3000316FE9 /* Project object */;
+}
