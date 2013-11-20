@@ -32,14 +32,15 @@ NS_INLINE BOOL isDecimalCharacter(unichar c)
 
 NS_INLINE BOOL isAlphaCharacter(unichar c)
 {
-    return ('a' <= c && c <= 'f') ||
-           ('A' <= c && c <= 'F');
+    return ('a' <= c && c <= 'z') ||
+           ('A' <= c && c <= 'Z');
 }
 
 NS_INLINE BOOL isHexCharacter(unichar c)
 {
     return isDecimalCharacter(c) ||
-           isAlphaCharacter(c);
+           ('a' <= c && c <= 'f') ||
+           ('A' <= c && c <= 'F');
 }
 
 NS_INLINE BOOL isWhitespaceCharacter(unichar c)
