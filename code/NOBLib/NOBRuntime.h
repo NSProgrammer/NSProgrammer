@@ -138,6 +138,7 @@ BOOL NOBSwizzleStaticMethods(Class class, SEL dstSel, SEL srcSel);
     @endcode
     @par Example:
     @code
+    #include <objc/message.h>
     \@implementation NSString (Example)
     - (NSUInteger) badExampleOfFindIndexOfCharacter:(unichar)c
     {

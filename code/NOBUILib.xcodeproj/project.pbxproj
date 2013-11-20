@@ -16,6 +16,13 @@
 		1C8073081839CC7C00F00C94 /* UIView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C8073031839CC7C00F00C94 /* UIView+Extensions.m */; };
 		1C80730D1839CC9500F00C94 /* NOBUICommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C80730A1839CC9500F00C94 /* NOBUICommon.m */; };
 		1C80730E1839CC9500F00C94 /* NOBUIRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C80730C1839CC9500F00C94 /* NOBUIRuntime.m */; };
+		1CB27591183C812000D76E98 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CB27590183C812000D76E98 /* XCTest.framework */; };
+		1CB27592183C812000D76E98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B848175DBA3000316FE9 /* Foundation.framework */; };
+		1CB27593183C812000D76E98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C557DA61777F6CE0012B90F /* UIKit.framework */; };
+		1CB27599183C812000D76E98 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1CB27597183C812000D76E98 /* InfoPlist.strings */; };
+		1CB2759B183C812000D76E98 /* NOBUILibTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CB2759A183C812000D76E98 /* NOBUILibTests.m */; };
+		1CB275A3183C83FF00D76E98 /* libNOBUILib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C09B845175DBA3000316FE9 /* libNOBUILib.a */; };
+		1CB275A6183C841400D76E98 /* libNOBLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C8072CD1839CB7A00F00C94 /* libNOBLib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +31,20 @@
 			containerPortal = 1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1CD8CB68174A6A2B00AD0B7A;
+			remoteInfo = NOBLib;
+		};
+		1CB2759D183C812000D76E98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C09B83D175DBA3000316FE9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1C09B844175DBA3000316FE9;
+			remoteInfo = NOBUILib;
+		};
+		1CB275A4183C841000D76E98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CD8CB67174A6A2B00AD0B7A;
 			remoteInfo = NOBLib;
 		};
 /* End PBXContainerItemProxy section */
@@ -61,6 +82,12 @@
 		1C80730C1839CC9500F00C94 /* NOBUIRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NOBUIRuntime.m; path = NOBUILib/NOBUIRuntime.m; sourceTree = SOURCE_ROOT; };
 		1C80730F1839CCA300F00C94 /* NOBUILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NOBUILib.h; path = NOBUILib/NOBUILib.h; sourceTree = SOURCE_ROOT; };
 		1C8073101839CCB000F00C94 /* NOBUILib-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NOBUILib-Prefix.pch"; path = "NOBUILib/NOBUILib-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		1CB2758F183C812000D76E98 /* NOBUILibTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NOBUILibTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CB27590183C812000D76E98 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1CB27596183C812000D76E98 /* NOBUILibTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NOBUILibTests-Info.plist"; sourceTree = "<group>"; };
+		1CB27598183C812000D76E98 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1CB2759A183C812000D76E98 /* NOBUILibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NOBUILibTests.m; sourceTree = "<group>"; };
+		1CB2759C183C812000D76E98 /* NOBUILibTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NOBUILibTests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +100,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1CB2758C183C812000D76E98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CB275A6183C841400D76E98 /* libNOBLib.a in Frameworks */,
+				1CB275A3183C83FF00D76E98 /* libNOBUILib.a in Frameworks */,
+				1CB27591183C812000D76E98 /* XCTest.framework in Frameworks */,
+				1CB27593183C812000D76E98 /* UIKit.framework in Frameworks */,
+				1CB27592183C812000D76E98 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -81,6 +120,7 @@
 			children = (
 				1C09B859175DBB1A00316FE9 /* NOBLib.xcodeproj */,
 				1C09B84A175DBA3000316FE9 /* NSPUILib */,
+				1CB27594183C812000D76E98 /* NOBUILibTests */,
 				1C09B847175DBA3000316FE9 /* Frameworks */,
 				1C09B846175DBA3000316FE9 /* Products */,
 			);
@@ -90,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				1C09B845175DBA3000316FE9 /* libNOBUILib.a */,
+				1CB2758F183C812000D76E98 /* NOBUILibTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +140,7 @@
 			children = (
 				1C09B848175DBA3000316FE9 /* Foundation.framework */,
 				1C557DA61777F6CE0012B90F /* UIKit.framework */,
+				1CB27590183C812000D76E98 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -158,6 +200,25 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
+		1CB27594183C812000D76E98 /* NOBUILibTests */ = {
+			isa = PBXGroup;
+			children = (
+				1CB2759A183C812000D76E98 /* NOBUILibTests.m */,
+				1CB27595183C812000D76E98 /* Supporting Files */,
+			);
+			path = NOBUILibTests;
+			sourceTree = "<group>";
+		};
+		1CB27595183C812000D76E98 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CB27596183C812000D76E98 /* NOBUILibTests-Info.plist */,
+				1CB27597183C812000D76E98 /* InfoPlist.strings */,
+				1CB2759C183C812000D76E98 /* NOBUILibTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -178,6 +239,25 @@
 			productReference = 1C09B845175DBA3000316FE9 /* libNOBUILib.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		1CB2758E183C812000D76E98 /* NOBUILibTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1CB275A2183C812000D76E98 /* Build configuration list for PBXNativeTarget "NOBUILibTests" */;
+			buildPhases = (
+				1CB2758B183C812000D76E98 /* Sources */,
+				1CB2758C183C812000D76E98 /* Frameworks */,
+				1CB2758D183C812000D76E98 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1CB275A5183C841000D76E98 /* PBXTargetDependency */,
+				1CB2759E183C812000D76E98 /* PBXTargetDependency */,
+			);
+			name = NOBUILibTests;
+			productName = NOBUILibTests;
+			productReference = 1CB2758F183C812000D76E98 /* NOBUILibTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -187,6 +267,11 @@
 				CLASSPREFIX = NOBUI;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = NSProgrammer.com;
+				TargetAttributes = {
+					1CB2758E183C812000D76E98 = {
+						TestTargetID = 1C09B844175DBA3000316FE9;
+					};
+				};
 			};
 			buildConfigurationList = 1C09B840175DBA3000316FE9 /* Build configuration list for PBXProject "NOBUILib" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -207,6 +292,7 @@
 			projectRoot = "";
 			targets = (
 				1C09B844175DBA3000316FE9 /* NOBUILib */,
+				1CB2758E183C812000D76E98 /* NOBUILibTests */,
 			);
 		};
 /* End PBXProject section */
@@ -220,6 +306,17 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1CB2758D183C812000D76E98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CB27599183C812000D76E98 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1C09B841175DBA3000316FE9 /* Sources */ = {
@@ -236,7 +333,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1CB2758B183C812000D76E98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1CB2759B183C812000D76E98 /* NOBUILibTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1CB2759E183C812000D76E98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1C09B844175DBA3000316FE9 /* NOBUILib */;
+			targetProxy = 1CB2759D183C812000D76E98 /* PBXContainerItemProxy */;
+		};
+		1CB275A5183C841000D76E98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NOBLib;
+			targetProxy = 1CB275A4183C841000D76E98 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1CB27597183C812000D76E98 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1CB27598183C812000D76E98 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1C09B851175DBA3000316FE9 /* Debug */ = {
@@ -326,6 +455,77 @@
 			};
 			name = Release;
 		};
+		1CB2759F183C812000D76E98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NOBUILibTests/NOBUILibTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "NOBUILibTests/NOBUILibTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		1CB275A0183C812000D76E98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NOBUILibTests/NOBUILibTests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "NOBUILibTests/NOBUILibTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -346,6 +546,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		1CB275A2183C812000D76E98 /* Build configuration list for PBXNativeTarget "NOBUILibTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CB2759F183C812000D76E98 /* Debug */,
+				1CB275A0183C812000D76E98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
