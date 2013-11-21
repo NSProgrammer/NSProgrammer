@@ -20,6 +20,8 @@
 
 #import "UIColor+Extensions.h"
 
+// #define SLOW_BUT_EASY 1
+
 #ifndef SLOW_BUT_EASY
 #include <objc/message.h>
 #endif
@@ -28,7 +30,7 @@
 
 + (UIColor*) colorWithRGBString:(NSString*)hex
 {
-    UIColorRGB rgb = 0x00000000;
+    UIColorARGB argb = 0x00000000;
     NSUInteger length = hex.length;
     if (0 == length)
         return nil;
@@ -58,20 +60,20 @@
     {
         hex = [hex substringFromIndex:index];
         NSScanner* scanner = [NSScanner scannerWithString:hex];
-        NSString*  rgbHex  = nil;
+        NSString*  argbHex  = nil;
         [scanner scanCharactersFromSet:[NSCharacterSet hexadecimalDigitCharacterSet]
-                            intoString:&rgbHex];
+                            intoString:&argbHex];
 
-        if (![rgbHex isEqualToString:hex])
+        if (![argbHex isEqualToString:hex])
             return nil;
 
         [scanner setScanLocation:0]; // reset the scanner to the beginning
-        [scanner scanHexInt:&rgb];
+        [scanner scanHexInt:&argb];
     }
 
     if (length == 6)
     {
-        rgb |= 0xff000000; // no alpha provide, force opaque
+        argb |= 0xff000000; // no alpha provide, force opaque
     }
 
 #else // OPTIMIZED
@@ -79,20 +81,20 @@
     [hex getCharacters:buffer range:NSMakeRange(index, length)];
     if (6 == length)
     {
-        rgb = 0xff; // no alpha, force opaque (will be bitshifted over to be 0xffXXXXXX)
+        argb = 0xff; // no alpha, force opaque (will be bitshifted over to be 0xffXXXXXX)
     }
     index = 0;
     for (; index < length;)
     {
-        rgb <<= 4;
+        argb <<= 4;
         unichar c = buffer[index++];
         if (!isHexCharacter(c))
             return nil;
-        rgb += decimalDigitValueForCharacter(c);
+        argb += decimalDigitValueForCharacter(c);
     }
 #endif
 
-    return [self colorWithRGB:rgb];
+    return [self colorWithARGB:argb];
 }
 
 #if (BYTE_ORDER == LITTLE_ENDIAN)
@@ -110,7 +112,7 @@
 #endif
 
 
-+ (UIColor*) colorWithRGB:(UIColorRGB)hex
++ (UIColor*) colorWithARGB:(UIColorARGB)hex
 {
     unsigned char* hexChars = (unsigned char*)&hex;
     return [UIColor colorWithRed:(((float)(ACCESS_BYTE(hexChars, 1))) / 255.0f)
@@ -119,20 +121,30 @@
                            alpha:(((float)(ACCESS_BYTE(hexChars, 0))) / 255.0f)];
 }
 
-- (UIColorRGB) rgbValue
++ (UIColor*) colorWithRGB:(UIColorRGB)color32Bit
+{
+    return [self colorWithARGB:(0xff000000 | color32Bit)];
+}
+
+- (UIColorARGB) argbValue
 {
     CGFloat r, g, b, a;
-    UIColorRGB rgb;
-    unsigned char* rgbChars = (unsigned char*)&rgb;
+    UIColorARGB argb;
+    unsigned char* argbChars = (unsigned char*)&argb;
 
     [self getRed:&r green:&g blue:&b alpha:&a];
 
-    ACCESS_BYTE(rgbChars, 1) = (unsigned char)MAX(MIN(r * 255.0f, 255.0f), 0);
-    ACCESS_BYTE(rgbChars, 2) = (unsigned char)MAX(MIN(g * 255.0f, 255.0f), 0);
-    ACCESS_BYTE(rgbChars, 3) = (unsigned char)MAX(MIN(b * 255.0f, 255.0f), 0);
-    ACCESS_BYTE(rgbChars, 0) = (unsigned char)MAX(MIN(a * 255.0f, 255.0f), 0);
+    ACCESS_BYTE(argbChars, 0) = (unsigned char)MAX(MIN(a * 255.0f, 255.0f), 0);
+    ACCESS_BYTE(argbChars, 1) = (unsigned char)MAX(MIN(r * 255.0f, 255.0f), 0);
+    ACCESS_BYTE(argbChars, 2) = (unsigned char)MAX(MIN(g * 255.0f, 255.0f), 0);
+    ACCESS_BYTE(argbChars, 3) = (unsigned char)MAX(MIN(b * 255.0f, 255.0f), 0);
 
-    return rgb;
+    return argb;
+}
+
+- (UIColorRGB) rgbValue
+{
+    return (0xff000000 | self.argbValue);
 }
 
 #undef EXTRACT_BYTE

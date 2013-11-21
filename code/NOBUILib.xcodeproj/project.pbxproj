@@ -554,6 +554,7 @@
 				1CB275A0183C812000D76E98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

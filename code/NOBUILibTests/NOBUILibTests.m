@@ -17,7 +17,7 @@
 
 - (void) testUIColor
 {
-    UIColor* color1 = [UIColor colorWithRGB:0xABCD0123];
+    UIColor* color1 = [UIColor colorWithARGB:0xABCD0123];
     UIColor* color2 = [UIColor colorWithRGBString:@"ABCD0123"];
     XCTAssertEqualObjects(color1, color2, @"");
     color2 = [UIColor colorWithRGBString:@"abcd0123"];
@@ -31,9 +31,16 @@
     color2 = [UIColor colorWithRGBString:@"abcd 0123"];
     XCTAssertNotEqualObjects(color1, color2, @"");
     
-    XCTAssertEqual(color1.rgbValue, 0xABCD0123, @"");
+    XCTAssertEqual(color1.argbValue, 0xABCD0123, @"");
+    XCTAssertNotEqual(color1.rgbValue, color1.argbValue, @"");
+
+    color2 = [UIColor colorWithRGBString:@""];
+    XCTAssertNil(color2, @"");
+    color2 = [UIColor colorWithRGBString:nil];
+    XCTAssertNil(color2, @"");
+    color2 = [UIColor colorWithRGBString:@"0xabcd0123abcd0123"];
     
-    color1 = [UIColor colorWithRGB:0xffCD0123];
+    color1 = [UIColor colorWithARGB:0xffCD0123];
     color2 = [UIColor colorWithRGBString:@"ffcd0123"];
     XCTAssertEqualObjects(color1, color2, @"");
     color2 = [UIColor colorWithRGBString:@"cd0123"];
@@ -51,7 +58,8 @@
     color2 = [UIColor colorWithRGBString:@"abcd0123"];
     XCTAssertNotEqualObjects(color1, color2, @"");
 
-    XCTAssertEqual(color1.rgbValue, 0xffCD0123, @"");
+    XCTAssertEqual(color1.argbValue, 0xffCD0123, @"");
+    XCTAssertEqual(color1.rgbValue, color1.argbValue, @"");
 }
 
 @end

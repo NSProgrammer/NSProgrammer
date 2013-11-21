@@ -21,7 +21,12 @@
 #import <UIKit/UIKit.h>
 
 /**
-    A 32-bit representation of an RGB color.  The hex representation of color is \c 0xAARRGGBB where A is alpha, R is red, G is green and B is blue.
+    A 32-bit representation of an ARGB color.  The hex representation of color is \c 0xAARRGGBB where A is alpha, R is red, G is green and B is blue.
+ */
+typedef uint32_t UIColorARGB;
+
+/**
+    A 32-bit type that uses it's last 24 bits to represent RGB color.  The first byte is ignored and the remaining bytes represent color in the form \c 0xRRGGBB where R is red, G is green and B is blue.
  */
 typedef uint32_t UIColorRGB;
 
@@ -35,13 +40,25 @@ typedef uint32_t UIColorRGB;
 
 /**
     Create a color with a 32-bit value.
-    @param hex a 32-bit value for creating the color with.  The first 8 bits will be for alpha (use \c 0xFF for fully opaque), the next 3 bytes are red, green and blue respectively.  Example: \c 0xFF123456 is Alpha at full opacity, Red at 0x12, Green at 0x34 and Blue at 0x56.
+    @param color32Bits a 32-bit value for creating the color with.  The first 8 bits will be for alpha (use \c 0xFF for fully opaque), the next 3 bytes are red, green and blue respectively.  Example: \c 0xFF123456 is Alpha at full opacity, Red at 0x12, Green at 0x34 and Blue at 0x56.
  */
-+ (UIColor*) colorWithRGB:(UIColorRGB)color32Bits;
++ (UIColor*) colorWithARGB:(UIColorARGB)color32Bits;
 
 /**
-     Get the UIColorRGB value of the target color.
-     @return The UIColorRGB representation of the color.
+    Create a color with the last 24 bits of a 32-bit value.
+    @param color32Bits a 32-bit value for creating the color with.  The first 8 bits are ignored and the next 3 bytes are red, green and blue respectively.
+ */
++ (UIColor*) colorWithRGB:(UIColorRGB)color32Bit;
+
+/**
+     Get the UIColorARGB value of the target color.
+     @return The UIColorARGB representation of the color.
+ */
+- (UIColorARGB) argbValue;
+
+/**
+    Get the UIColorRGB value of the target color.
+    @return The UIColorRGB representation of the color with the first byte set to 0xff and the following 3 bytes representing red, green and blue.
  */
 - (UIColorRGB) rgbValue;
 
