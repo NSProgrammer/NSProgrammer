@@ -56,6 +56,7 @@
         return nil;
 
 #ifdef SLOW_BUT_EASY
+
     @autoreleasepool
     {
         hex = [hex substringFromIndex:index];
@@ -77,6 +78,7 @@
     }
 
 #else // OPTIMIZED
+
     unichar buffer[8]; // we need either 6 or 8 characters so use the upper bound for our buffer
     [hex getCharacters:buffer range:NSMakeRange(index, length)];
     if (6 == length)
@@ -92,6 +94,7 @@
             return nil;
         argb += decimalDigitValueForCharacter(c);
     }
+
 #endif
 
     return [self colorWithARGB:argb];
@@ -148,5 +151,10 @@
 }
 
 #undef EXTRACT_BYTE
+
+- (NSString*) rgbStringValue
+{
+    return [NSString stringWithFormat:@"#%X", self.argbValue];
+}
 
 @end

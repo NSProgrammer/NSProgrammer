@@ -33,6 +33,7 @@
     
     XCTAssertEqual(color1.argbValue, 0xABCD0123, @"");
     XCTAssertNotEqual(color1.rgbValue, color1.argbValue, @"");
+    XCTAssertEqualObjects(color1.rgbStringValue, @"#ABCD0123", @"");
 
     color2 = [UIColor colorWithRGBString:@""];
     XCTAssertNil(color2, @"");
@@ -60,6 +61,7 @@
 
     XCTAssertEqual(color1.argbValue, 0xffCD0123, @"");
     XCTAssertEqual(color1.rgbValue, color1.argbValue, @"");
+    XCTAssertEqualObjects(color1.rgbStringValue, @"#FFCD0123", @"");
 }
 
 @end

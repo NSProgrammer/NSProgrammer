@@ -51,15 +51,21 @@ typedef uint32_t UIColorRGB;
 + (UIColor*) colorWithRGB:(UIColorRGB)color32Bit;
 
 /**
-     Get the UIColorARGB value of the target color.
-     @return The UIColorARGB representation of the color.
+     Get the \c UIColorARGB value of the target color.
+     @return The \c UIColorARGB representation of the color.
  */
 - (UIColorARGB) argbValue;
 
 /**
-    Get the UIColorRGB value of the target color.
-    @return The UIColorRGB representation of the color with the first byte set to 0xff and the following 3 bytes representing red, green and blue.
+    Get the \c UIColorRGB value of the target color.
+    @return The \c UIColorRGB representation of the color with the first byte set to 0xff and the following 3 bytes representing red, green and blue.
  */
 - (UIColorRGB) rgbValue;
+
+/**
+    Get the color as an \c NSString.
+    @return An \c NSString in the form of @"#AARRGGBB", where AA is the alpha component in hex, RR is the red, GG is the green and BB is the blue.
+*/
+- (NSString*) rgbStringValue;
 
 @end
