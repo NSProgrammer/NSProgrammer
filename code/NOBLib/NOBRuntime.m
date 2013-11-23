@@ -52,7 +52,8 @@ BOOL NOBSwizzleInstanceMethods(Class class, SEL dstSel, SEL srcSel)
                                      userInfo:nil];
     }
 
-    if (class_addMethod(class, dstSel, method_getImplementation(srcMethod), method_getTypeEncoding(srcMethod)))
+    IMP srcIMP = method_getImplementation(srcMethod);
+    if (class_addMethod(class, dstSel, srcIMP, method_getTypeEncoding(srcMethod)))
     {
         class_replaceMethod(class, dstSel, method_getImplementation(dstMethod), method_getTypeEncoding(dstMethod));
     }
@@ -60,7 +61,7 @@ BOOL NOBSwizzleInstanceMethods(Class class, SEL dstSel, SEL srcSel)
     {
         method_exchangeImplementations(dstMethod, srcMethod);
     }
-    return (srcMethod == class_getInstanceMethod(class, dstSel));
+    return (srcIMP == method_getImplementation(class_getInstanceMethod(class, dstSel)));
 }
 
 BOOL NOBSwizzleStaticMethods(Class class, SEL dstSel, SEL srcSel)
