@@ -150,8 +150,6 @@
     return (0xff000000 | self.argbValue);
 }
 
-#undef EXTRACT_BYTE
-
 - (NSString*) rgbStringValue
 {
     return [NSString stringWithFormat:@"#%X", self.argbValue];
