@@ -21,18 +21,6 @@
 #import "NOBRuntime.h"
 #include <objc/runtime.h>
 
-void dispatch_sync_on_main_queue(void (^block)(void))
-{
-    if ([NSThread isMainThread])
-    {
-        block();
-    }
-    else
-    {
-        dispatch_sync(dispatch_get_main_queue(), block);
-    }
-}
-
 BOOL NOBSwizzleInstanceMethods(Class class, SEL dstSel, SEL srcSel)
 {
     if (!class || !dstSel || !srcSel)

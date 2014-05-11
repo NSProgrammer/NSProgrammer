@@ -31,34 +31,19 @@ typedef void(^GenericBlock)(void);
 #pragma mark - syncronization
 
 /**
-    Run a block synchronously on the main queue.
+    Run a block on the main queue.
+    Run sync if already on main,
+    run async if not on main.
  */
-void dispatch_sync_on_main_queue(void (^block)(void));
-
-/**
-    The type for the token used in the \c dispatch_once_transient function
- */
-typedef volatile int32_t dispatch_once_transient_t;
-
-#define SHRT_DPTCH_PRFX DISPATCH_INLINE DISPATCH_ALWAYS_INLINE DISPATCH_NONNULL_ALL DISPATCH_NOTHROW
-/**
-    the OS provided \c dispatch_once requires it's predicate token to be static or global.  \c dispatch_once_transient offers a way to use a token in transient memory for dispatch once within the context of that transient memory's scope.  This is highly effective for dispatching once per object instance vs once globally.
-    @code
-    - (void) viewWillAppear:(BOOL)animated
-    {
-        [super viewWillAppear:animated];
-        dispatch_once_transient(&_memberTransDispatchOnceToken, ^() {
-            // ... dispatch once on first appearance code ...
-        });
-    }
-    @endcode
-    @param pPredicate a reference to the predicate token for single use dispatch.  Initialize this value to 0 before using \c dispatch_once_transient.
-    @param block the block to execute only once for the instance of \a pPredicate
- */
-SHRT_DPTCH_PRFX void dispatch_once_transient(dispatch_once_transient_t* pPredicate, GenericBlock block)
+NS_INLINE void dispatch_on_main_if_not_main(void (^block)(void))
 {
-    if (OSAtomicCompareAndSwap32(0, 1, pPredicate)) {
+    if ([NSThread isMainThread])
+    {
         block();
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), block);
     }
 }
 
